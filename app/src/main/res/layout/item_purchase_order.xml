@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/date"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/reference_no"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/location"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/supplier"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/action"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/status"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/quantity_remaining"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/shipping_status"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/added"
+            android:textColor="@color/fontColor2"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

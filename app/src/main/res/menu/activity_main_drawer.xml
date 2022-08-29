@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_24pxblack"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_pos"
+            android:icon="@drawable/ic_description_24pxblack"
+            android:title="@string/pos" />
+        <item
+            android:id="@+id/nav_product"
+            android:icon="@drawable/ic_dashboard_24pxblack"
+            android:title="@string/product" />
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/ic_view_module_24pxblack"
+            android:title="@string/category" />
+        <item
+            android:id="@+id/nav_brand"
+            android:icon="@drawable/ic_language_24pxblack"
+            android:title="@string/brand" />
+        <item
+            android:id="@+id/nav_purchase_order"
+            android:icon="@drawable/ic_shopping_basket_24px_black"
+            android:title="@string/purchase_order" />
+        <item
+            android:id="@+id/nav_all_sale"
+            android:icon="@drawable/ic_insert_chart_24pxblack"
+            android:title="@string/all_sale" />
+        <item
+            android:id="@+id/nav_subscription"
+            android:icon="@drawable/ic_assignment_ind_24px"
+            android:title="@string/subscription" />
+        <item
+            android:id="@+id/nav_stock_transfer"
+            android:icon="@drawable/ic_swap_vert_24px"
+            android:title="@string/stock_transfer" />
+    </group>
+</menu>

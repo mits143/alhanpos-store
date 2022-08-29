@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.alhanpos.store.fragment.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_pos"
+        android:name="com.alhanpos.store.fragment.PosFragment"
+        android:label="@string/pos"
+        tools:layout="@layout/fragment_pos">
+        <action
+            android:id="@+id/action_nav_pos_to_nav_pos_payment"
+            app:destination="@id/nav_pos_payment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pos_payment"
+        android:name="com.alhanpos.store.fragment.PosPaymentFragment"
+        android:label="@string/pos_payment"
+        tools:layout="@layout/fragment_pos_payment" />
+
+    <fragment
+        android:id="@+id/nav_product"
+        android:name="com.alhanpos.store.fragment.ProductFragment"
+        android:label="@string/product"
+        tools:layout="@layout/fragment_product">
+
+        <action
+            android:id="@+id/action_nav_category_to_nav_add_category"
+            app:destination="@id/nav_add_category" />
+
+        <action
+            android:id="@+id/action_nav_brand_to_nav_add_brand"
+            app:destination="@id/nav_add_brand" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_category"
+        android:name="com.alhanpos.store.fragment.CategoryFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_category">
+
+        <action
+            android:id="@+id/action_nav_category_to_nav_add_category"
+            app:destination="@id/nav_add_category" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_category"
+        android:name="com.alhanpos.store.fragment.AddCategoryFragment"
+        android:label="@string/add_category"
+        tools:layout="@layout/fragment_add_category" />
+
+    <fragment
+        android:id="@+id/nav_brand"
+        android:name="com.alhanpos.store.fragment.BrandFragment"
+        android:label="@string/brand"
+        tools:layout="@layout/fragment_brand">
+
+        <action
+            android:id="@+id/action_nav_brand_to_nav_add_brand"
+            app:destination="@id/nav_add_brand" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_brand"
+        android:name="com.alhanpos.store.fragment.AddBrandFragment"
+        android:label="@string/add_brand"
+        tools:layout="@layout/fragment_add_brand" />
+
+    <fragment
+        android:id="@+id/nav_purchase_order"
+        android:name="com.alhanpos.store.fragment.PurchaseOrderFragment"
+        android:label="@string/purchase_order"
+        tools:layout="@layout/fragment_purchase_order">
+
+        <action
+            android:id="@+id/action_nav_purchase_order_to_nav_add_purchase_order"
+            app:destination="@id/nav_add_purchase_order" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_purchase_order"
+        android:name="com.alhanpos.store.fragment.AddPurchaseOrderFragment"
+        android:label="@string/add_purchase_order"
+        tools:layout="@layout/fragment_add_purchase_order" />
+
+    <fragment
+        android:id="@+id/nav_all_sale"
+        android:name="com.alhanpos.store.fragment.AllSaleFragment"
+        android:label="@string/all_sale"
+        tools:layout="@layout/fragment_all_sale">
+
+        <action
+            android:id="@+id/action_nav_all_sale_to_nav_add_sale"
+            app:destination="@id/nav_add_sale" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_sale"
+        android:name="com.alhanpos.store.fragment.AddSaleFragment"
+        android:label="@string/add_sale"
+        tools:layout="@layout/fragment_add_sale" />
+
+    <fragment
+        android:id="@+id/nav_subscription"
+        android:name="com.alhanpos.store.fragment.SubscriptionFragment"
+        android:label="@string/subscription"
+        tools:layout="@layout/fragment_subscription" />
+
+    <fragment
+        android:id="@+id/nav_stock_transfer"
+        android:name="com.alhanpos.store.fragment.StockTransferFragment"
+        android:label="@string/stock_transfer"
+        tools:layout="@layout/fragment_stock_transfer">
+
+        <action
+            android:id="@+id/action_nav_stock_transfer_to_nav_add_stock_transfer"
+            app:destination="@id/nav_add_stock_transfer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_stock_transfer"
+        android:name="com.alhanpos.store.fragment.AddStockTransferFragment"
+        android:label="@string/add_stock_transfer"
+        tools:layout="@layout/fragment_add_stock_transfer" />
+
+    <fragment
+        android:id="@+id/nav_reports"
+        android:name="com.alhanpos.store.fragment.ReportsFragment"
+        android:label="@string/reports"
+        tools:layout="@layout/fragment_reports" />
+
+    <fragment
+        android:id="@+id/nav_today"
+        android:name="com.alhanpos.store.fragment.TodayFragment"
+        android:label="@string/today"
+        tools:layout="@layout/fragment_today" />
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/nav_counter"-->
+    <!--        android:name="com.alhanpos.store.fragment.CounterFragment"-->
+    <!--        android:label="@string/counter"-->
+    <!--        tools:layout="@layout/fragment_counter" />-->
+
+    <fragment
+        android:id="@+id/nav_items"
+        android:name="com.alhanpos.store.fragment.ItemsFragment"
+        android:label="@string/items"
+        tools:layout="@layout/fragment_items" />
+
+    <fragment
+        android:id="@+id/nav_more"
+        android:name="com.alhanpos.store.fragment.MoreFragment"
+        android:label="@string/more"
+        tools:layout="@layout/fragment_more" />
+
+    <fragment
+        android:id="@+id/nav_all_fragment"
+        android:name="com.alhanpos.store.fragment.AllFragment"
+        android:label="@string/all"
+        tools:layout="@layout/fragment_all_product" />
+
+    <fragment
+        android:id="@+id/nav_manage_users_fragment"
+        android:name="com.alhanpos.store.fragment.ManageUserFragment"
+        android:label="@string/manage_users"
+        tools:layout="@layout/fragment_manage_users" />
+
+    <fragment
+        android:id="@+id/nav_roles_fragment"
+        android:name="com.alhanpos.store.fragment.RolesFragment"
+        android:label="@string/roles"
+        tools:layout="@layout/fragment_roles" />
+
+    <fragment
+        android:id="@+id/nav_contact_fragment"
+        android:name="com.alhanpos.store.fragment.ContactFragment"
+        android:label="@string/roles"
+        tools:layout="@layout/fragment_contact" />
+
+</navigation>

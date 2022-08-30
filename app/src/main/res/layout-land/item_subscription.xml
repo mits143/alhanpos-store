@@ -12,35 +12,38 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/brand"
-            
+
             android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/subscription_no"
-            
+
             android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/customer_name"
-            
+
             android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
     </LinearLayout>

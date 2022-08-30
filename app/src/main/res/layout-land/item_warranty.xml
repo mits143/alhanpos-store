@@ -12,8 +12,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
@@ -23,8 +24,9 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
@@ -33,8 +35,9 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
@@ -44,18 +47,26 @@
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
-        <com.alhanpos.store.util.TextViewDrawableSize
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/editColor"
-            android:drawableLeft="@drawable/ic_mode_edit_24px"
-            android:drawablePadding="@dimen/_5sdp"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text="@string/edit"
+            android:layout_weight="1"
+            android:background="@color/editColor">
 
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp" />
+            <com.alhanpos.store.util.TextViewDrawableSize
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_mode_edit_24px"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text="@string/edit"
+
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+
+        </FrameLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

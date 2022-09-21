@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_20sdp"
-        android:adjustViewBounds="true"
         android:contentDescription="@string/image"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"

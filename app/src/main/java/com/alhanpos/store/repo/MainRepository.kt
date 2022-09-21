@@ -12,4 +12,15 @@ class MainRepository(private val apiHelper: ApiHelper) {
         password: String
     ) = apiHelper.login(grant_type, client_id, client_secret, username, password)
 
+    suspend fun location(
+        token: String
+    ) = apiHelper.location(token)
+
+    suspend fun contactList(
+        token: String
+    ) = apiHelper.contactList(token)
+
+    suspend fun productList(
+        token: String
+    ) = apiHelper.productList(token)
 }

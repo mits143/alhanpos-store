@@ -99,6 +99,7 @@ class MainAdapter(
         users.clear()
         users.add(0, "Add")
         users.addAll(list)
+//        notifyItemInserted(list.size - itemCount - 1);
         notifyDataSetChanged()
     }
 }

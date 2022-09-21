@@ -1,6 +1,9 @@
 package com.alhanpos.store.networking
 
-import com.alhanpos.store.model.LoginResponse
+import com.alhanpos.store.model.response.contact.ContactListResponse
+import com.alhanpos.store.model.response.location.LocationResponse
+import com.alhanpos.store.model.response.login.LoginResponse
+import com.alhanpos.store.model.response.product.ProductListResponse
 import retrofit2.Response
 
 interface ApiHelper {
@@ -12,4 +15,16 @@ interface ApiHelper {
         username: String,
         password: String
     ): Response<LoginResponse>
+
+    suspend fun location(
+        token: String
+    ): Response<LocationResponse>
+
+    suspend fun contactList(
+        token: String
+    ): Response<ContactListResponse>
+
+    suspend fun productList(
+        token: String
+    ): Response<ProductListResponse>
 }

@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home_24pxblack"
             android:title="@string/menu_home" />
         <item
+            android:id="@+id/nav_contact_fragment"
+            android:icon="@drawable/ic_description_24pxblack"
+            android:title="@string/contact" />
+        <item
             android:id="@+id/nav_pos"
             android:icon="@drawable/ic_description_24pxblack"
             android:title="@string/pos" />
@@ -40,5 +44,13 @@
             android:id="@+id/nav_stock_transfer"
             android:icon="@drawable/ic_swap_vert_24px"
             android:title="@string/stock_transfer" />
+        <item
+            android:id="@+id/nav_stock_adjustment"
+            android:icon="@drawable/ic_swap_vert_24px"
+            android:title="@string/stock_adjustment" />
+        <item
+            android:id="@+id/nav_expenses"
+            android:icon="@drawable/ic_swap_vert_24px"
+            android:title="@string/expenses" />
     </group>
 </menu>

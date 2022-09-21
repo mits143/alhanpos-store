@@ -2,7 +2,7 @@ package com.alhanpos.store.activities
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.annotation.CallSuper
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +29,14 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(),
 
     open fun onViewBindingCreated(savedInstanceState: Bundle?) {}
 
-    @CallSuper
+    fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showToast(msg: Int) {
+        Toast.makeText(this, getString(msg), Toast.LENGTH_SHORT).show()
+    }
+
     override fun onDestroy() {
         coroutineContext[Job]?.cancel()
         super.onDestroy()

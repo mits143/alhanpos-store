@@ -1,5 +1,6 @@
 package com.alhanpos.store.di
 
+import com.alhanpos.store.viewmodel.ContactViewModel
 import com.alhanpos.store.viewmodel.LoginViewModel
 import com.alhanpos.store.viewmodel.PosViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -11,5 +12,8 @@ val viewModelModule = module {
     }
     viewModel {
         PosViewModel(get(), get())
+    }
+    viewModel {
+        ContactViewModel(get(), get())
     }
 }

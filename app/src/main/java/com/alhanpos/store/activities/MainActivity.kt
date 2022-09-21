@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -47,6 +46,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
                 R.id.nav_today,
                 R.id.nav_items,
                 R.id.nav_more,
+                R.id.nav_contact_fragment,
+                R.id.nav_stock_adjustment,
+                R.id.nav_expenses,
             ), binding.drawerLayout
         )
 
@@ -88,38 +90,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             R.id.nav_add_purchase_order -> hideBottomNavigation()
             R.id.nav_add_sale -> hideBottomNavigation()
             R.id.nav_add_stock_transfer -> hideBottomNavigation()
+            R.id.nav_contact_fragment -> hideBottomNavigation()
+            R.id.nav_stock_adjustment -> hideBottomNavigation()
+            R.id.nav_expenses -> hideBottomNavigation()
             else -> showBottomNavigationView()
         }
-    }
-
-    private fun hideNavigationView() { //Hide both drawer and bottom navigation bar
-        binding.navView.visibility = View.GONE
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED) //To lock navigation drawer so that it don't respond to swipe gesture
     }
 
     private fun hideBottomNavigation() { //Hide bottom navigation
         binding.bottomNavView.visibility = View.GONE
     }
 
-    private fun hideBothNavigation() { //Hide both drawer and bottom navigation bar
-        binding.bottomNavView.visibility = View.GONE
-        binding.navView.visibility = View.GONE
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED) //To lock navigation drawer so that it don't respond to swipe gesture
-    }
-
-    private fun showNavigationView() {
-        binding.navView.visibility = View.VISIBLE
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-    }
-
     private fun showBottomNavigationView() {
         binding.bottomNavView.visibility = View.VISIBLE
-    }
-
-    private fun showBothNavigation() {
-        binding.bottomNavView.visibility = View.VISIBLE
-        binding.navView.visibility = View.VISIBLE
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
     override fun onBackPressed() {

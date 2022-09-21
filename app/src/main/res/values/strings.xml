@@ -164,4 +164,7 @@
     <string name="start_at">Start At</string>
     <string name="ends_at">Ends At</string>
     <string name="discount_amount">Discount Amount</string>
+    <string name="other_details">Other Details</string>
+    <string name="contact">Contact</string>
+    <string name="stock_adjustment">Stock Adjustment</string>
 </resources>

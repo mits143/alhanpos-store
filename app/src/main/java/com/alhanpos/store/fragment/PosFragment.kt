@@ -192,26 +192,15 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
         }
     }
 
-    override fun decrease(data: ProductData) {
-        data.quantity = if (data.quantity > 1) data.quantity - 1 else 1
-//        binding.txtQty.setText(quantity.toString())
-//        data.price =
-//            (data.quantity.toFloat() * data.product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
-//        binding.txtPrice.text = price
-    }
-
-    override fun increase(data: ProductData) {
-        data.quantity += 1
-//        binding.txtQty.setText(quantity.toString())
-//        data.price =
-//            (data.quantity.toFloat() * data.product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
-//        binding.txtPrice.text = price
-    }
-
-    override fun quantity(data: ProductData, value: Int) {
-        data.quantity = value
-        data.price =
-            (data.quantity.toFloat() * data.product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
-//        binding.txtPrice.text = price
+    override fun onClick(data: ProductData) {
+        var price = ""
+        var tax = ""
+        for (data in posList) {
+            price = data.price
+            tax = data.price
+        }
+        binding.txtSubTotal.text = price
+        binding.txtTax.text = tax
+        binding.txtTotal.text = (price.toFloat() + tax.toFloat()).toString()
     }
 }

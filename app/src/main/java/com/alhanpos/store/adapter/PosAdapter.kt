@@ -24,43 +24,50 @@ class PosAdapter(
         with(holder) {
             with(dataList[position]) {
                 binding.txtName.text = "$name $sku"
+                quantity = if (quantity == 0) 1 else quantity
+                binding.txtQty.setText(quantity.toString())
                 price =
                     (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
                 binding.txtPrice.text = price
-                binding.txtQty.setText(quantity.toString() ?: "1")
 
-                binding.txtQty.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        buttonClick.quantity(
-                            this@with,
-                            if (s.toString().toInt() == 0) 1 else s.toString().toInt()
-                        )
-                        notifyItemChanged(position)
-                    }
-
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                    }
-                })
+//                binding.txtQty.addTextChangedListener(object : TextWatcher {
+//                    override fun afterTextChanged(s: Editable?) {
+//                        if (s.toString().isEmpty())
+//                            return
+//                        quantity = s.toString().toInt()
+////                        price =
+////                            (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
+//
+//                        notifyItemChanged(absoluteAdapterPosition)
+//                    }
+//
+//                    override fun beforeTextChanged(
+//                        s: CharSequence?,
+//                        start: Int,
+//                        count: Int,
+//                        after: Int
+//                    ) {
+//                    }
+//
+//                    override fun onTextChanged(
+//                        s: CharSequence?,
+//                        start: Int,
+//                        before: Int,
+//                        count: Int
+//                    ) {
+//                    }
+//                })
                 binding.imgDecrease.setOnClickListener {
-                    buttonClick.decrease(this@with)
-                    notifyItemChanged(position)
+                    if (quantity == 1)
+                        return@setOnClickListener
+                    quantity = (quantity.minus(1))
+                    notifyItemChanged(absoluteAdapterPosition)
+                    buttonClick.onClick(this@with)
                 }
                 binding.imgIncrease.setOnClickListener {
-                    buttonClick.increase(this@with)
-                    notifyItemChanged(position)
+                    quantity = (quantity.plus(1))
+                    notifyItemChanged(absoluteAdapterPosition)
+                    buttonClick.onClick(this@with)
                 }
             }
         }
@@ -74,9 +81,11 @@ class PosAdapter(
         return position.toLong()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     interface ButtonClick {
-        fun decrease(data: ProductData)
-        fun increase(data: ProductData)
-        fun quantity(data: ProductData, value: Int)
+        fun onClick(data: ProductData)
     }
 }

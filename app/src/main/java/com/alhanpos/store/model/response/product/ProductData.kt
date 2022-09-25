@@ -1,8 +1,8 @@
 package com.alhanpos.store.model.response.product
 
 data class ProductData(
-    var price: String ,
-    var quantity: Int = 0,
+    var price: String,
+    var quantity: Int,
     val alert_quantity: String,
     val barcode_type: String,
     val brand: Brand,

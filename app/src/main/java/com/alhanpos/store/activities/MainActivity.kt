@@ -69,7 +69,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-
     override fun onDestinationChanged(
         controller: NavController,
         destination: NavDestination,

@@ -1,6 +1,8 @@
 package com.alhanpos.store.repo
 
+import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.networking.ApiHelper
+import retrofit2.Response
 
 class MainRepository(private val apiHelper: ApiHelper) {
 
@@ -11,6 +13,14 @@ class MainRepository(private val apiHelper: ApiHelper) {
         username: String,
         password: String
     ) = apiHelper.login(grant_type, client_id, client_secret, username, password)
+
+
+    suspend fun dashboard(
+        token: String,
+        start: String,
+        end: String,
+        location_id: String
+    ): Response<DashboardResponse> = apiHelper.dashboard(token, start, end, location_id)
 
     suspend fun location(
         token: String

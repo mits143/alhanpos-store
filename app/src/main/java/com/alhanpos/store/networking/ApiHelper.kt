@@ -1,6 +1,7 @@
 package com.alhanpos.store.networking
 
 import com.alhanpos.store.model.response.contact.ContactListResponse
+import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
@@ -15,6 +16,13 @@ interface ApiHelper {
         username: String,
         password: String
     ): Response<LoginResponse>
+
+    suspend fun dashboard(
+        token: String,
+        start: String,
+        end: String,
+        location_id: String
+    ): Response<DashboardResponse>
 
     suspend fun location(
         token: String

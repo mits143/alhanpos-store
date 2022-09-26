@@ -53,34 +53,76 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_3306" />
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/group_3306" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/total_purchase"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="ج.م 0.00"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
 
-                                <TextView
+                                <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="@string/total_purchase"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_12ssp" />
+                                    android:src="@drawable/group_3307" />
 
-                                <TextView
-                                    android:id="@+id/txtTotalPurchase"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="ج.م 0.00"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_14ssp" />
+                                    android:orientation="vertical">
 
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/total_sales"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="ج.م 0.00"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                </LinearLayout>
                             </LinearLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -88,34 +130,76 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_3307" />
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/group_3308" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/purchase_due"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="ج.م 0.00"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
 
-                                <TextView
+                                <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="@string/total_sales"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_12ssp" />
+                                    android:src="@drawable/group_3309" />
 
-                                <TextView
-                                    android:id="@+id/txtTotalSales"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="ج.م 0.00"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_14ssp" />
+                                    android:orientation="vertical">
 
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/invoice_due"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="ج.م 0.00"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                </LinearLayout>
                             </LinearLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -123,139 +207,76 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_3308" />
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/group_3311" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/total_purchase_return"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="ج.م 0.00"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
 
-                                <TextView
+                                <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="@string/purchase_due"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_12ssp" />
+                                    android:src="@drawable/group_3312" />
 
-                                <TextView
-                                    android:id="@+id/txtPurchaseDue"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="ج.م 0.00"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_14ssp" />
+                                    android:orientation="vertical">
 
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/total_sell_return"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="ج.م 0.00"
+                                        android:textColor="@color/fontColor2"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                </LinearLayout>
                             </LinearLayout>
-                        </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/group_3309" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="@string/invoice_due"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_12ssp" />
-
-                                <TextView
-                                    android:id="@+id/txtInvoiceDue"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="ج.م 0.00"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_14ssp" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/group_3311" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="@string/total_purchase_return"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_12ssp" />
-
-                                <TextView
-                                    android:id="@+id/txtTotalPurchaseReturn"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="ج.م 0.00"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_14ssp" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/group_3312" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="@string/total_sell_return"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_12ssp" />
-
-                                <TextView
-                                    android:id="@+id/txtTotalSellReturn"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
-                                    android:text="ج.م 0.00"
-                                    android:textColor="@color/fontColor2"
-                                    android:textSize="@dimen/_14ssp" />
-
-                            </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
@@ -282,7 +303,6 @@
                                     android:textSize="@dimen/_12ssp" />
 
                                 <TextView
-                                    android:id="@+id/txtExpense"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/montserrat_medium"

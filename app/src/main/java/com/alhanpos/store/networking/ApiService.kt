@@ -1,10 +1,12 @@
 package com.alhanpos.store.networking
 
 import com.alhanpos.store.model.response.contact.ContactListResponse
+import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
 import com.alhanpos.store.util.Constants.CONTACTLIST
+import com.alhanpos.store.util.Constants.DASHBOARD
 import com.alhanpos.store.util.Constants.LOCATION
 import com.alhanpos.store.util.Constants.LOGIN
 import com.alhanpos.store.util.Constants.PRODUCTLIST
@@ -37,6 +39,14 @@ interface ApiService {
             encoded = false
         ) password: String
     ): Response<LoginResponse>
+
+    @GET(DASHBOARD)
+    suspend fun dashboard(
+        @Header("Authorization") token: String,
+        @Query("start") start: String,
+        @Query("end") end: String,
+        @Query("location_id") location_id: String
+    ): Response<DashboardResponse>
 
     @GET(LOCATION)
     suspend fun location(

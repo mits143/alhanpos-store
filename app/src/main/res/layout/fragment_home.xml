@@ -326,6 +326,13 @@
                         android:textSize="@dimen/_14sdp"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/txtLastSales" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -335,6 +342,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_minus20sdp"
+                android:visibility="visible"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardElevation="@dimen/_10sdp"
@@ -342,12 +350,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/cvLastSales">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_10sdp">
 
                     <TextView
+                        android:id="@+id/txtLastSales1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
@@ -356,6 +364,13 @@
                         android:textColor="@color/btnColor"
                         android:textSize="@dimen/_14sdp"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/txtLastSales1" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

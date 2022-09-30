@@ -26,8 +26,6 @@
         android:layout_margin="@dimen/_5sdp"
         android:nestedScrollingEnabled="false"
         tools:listitem="@layout/item_product"
-        app:spanCount="6"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtProduct" />

@@ -15,4 +15,11 @@
     <color name="fontColor3">#a8a8a8</color>
     <color name="editColor">#291f92</color>
     <color name="deleteColor">#f15353</color>
+    <color name="grrenColor">#90ED7D</color>
+
+    <string-array name="colors">
+        <item>#887eed</item>
+        <item>#FF000000</item>
+        <item>#90ED7D</item>
+    </string-array>
 </resources>

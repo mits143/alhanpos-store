@@ -1,17 +1,17 @@
 package com.alhanpos.store.adapter
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemPosBinding
 import com.alhanpos.store.model.response.product.ProductData
 
+
 class PosAdapter(
     var dataList: ArrayList<ProductData>,
     var buttonClick: ButtonClick
 ) : RecyclerView.Adapter<PosAdapter.ViewHolder>() {
+    var x = 0f
 
     inner class ViewHolder(val binding: ItemPosBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -27,8 +27,9 @@ class PosAdapter(
                 quantity = if (quantity == 0) 1 else quantity
                 binding.txtQty.setText(quantity.toString())
                 price =
-                    (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
+                    (quantity.toDouble() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
                 binding.txtPrice.text = price
+                buttonClick.onClick(dataList, position)
 
 //                binding.txtQty.addTextChangedListener(object : TextWatcher {
 //                    override fun afterTextChanged(s: Editable?) {
@@ -62,12 +63,10 @@ class PosAdapter(
                         return@setOnClickListener
                     quantity = (quantity.minus(1))
                     notifyItemChanged(absoluteAdapterPosition)
-                    buttonClick.onClick(this@with)
                 }
                 binding.imgIncrease.setOnClickListener {
                     quantity = (quantity.plus(1))
                     notifyItemChanged(absoluteAdapterPosition)
-                    buttonClick.onClick(this@with)
                 }
             }
         }
@@ -86,6 +85,6 @@ class PosAdapter(
     }
 
     interface ButtonClick {
-        fun onClick(data: ProductData)
+        fun onClick(data: ArrayList<ProductData>, position: Int)
     }
 }

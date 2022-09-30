@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.repo.MainRepository
 import com.alhanpos.store.util.NetworkHelper
@@ -26,6 +27,10 @@ class HomeViewModel(
     val getHomeData: LiveData<Resource<DashboardResponse>>
         get() = setHomeData
 
+    private val setGraph = MutableLiveData<Resource<DashboardGraphResponse>>()
+    val getGraph: LiveData<Resource<DashboardGraphResponse>>
+        get() = setGraph
+
     init {
         getLastMonthDate()
     }
@@ -45,6 +50,23 @@ class HomeViewModel(
                     } else setHomeData.postValue(Resource.error(it.errorBody().toString(), null))
                 }
             } else setHomeData.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    fun fetchGraphData(token: String) {
+        viewModelScope.launch {
+            setGraph.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                mainRepository.dashboard_graph(
+                    token,
+                    "1",
+                    "1"
+                ).let {
+                    if (it.isSuccessful) {
+                        setGraph.postValue(Resource.success(it.body()))
+                    } else setGraph.postValue(Resource.error(it.errorBody().toString(), null))
+                }
+            } else setGraph.postValue(Resource.error("No internet connection", null))
         }
     }
 

@@ -33,6 +33,8 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
     private var posList: ArrayList<ProductData> = arrayListOf()
 
     var sku = ""
+    var subTotal = 0.0
+    var tax = 0.0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
@@ -43,77 +45,38 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
 
     private fun setLocationData(locationList: ArrayList<String>) {
         val adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item, locationList)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerLocation.adapter = adapter
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, locationList)
+        binding.spinnerLocation.threshold = 2
+        binding.spinnerLocation.setAdapter(adapter)
+        binding.spinnerLocation.setText(locationList[0])
 
-        binding.spinnerLocation.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
 
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
-                }
-            }
     }
 
     private fun setContactData(contactList: ArrayList<String>) {
         val adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item, contactList)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerType.adapter = adapter
-
-        binding.spinnerType.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
-                }
-            }
+            ArrayAdapter(requireContext(), android.R.layout.select_dialog_item, contactList)
+        binding.spinnerType.threshold = 2
+        binding.spinnerType.setAdapter(adapter)
+        binding.spinnerType.setText(contactList[0])
     }
 
     private fun setProductData(productList: ArrayList<PosViewModel.product>) {
         val adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item, productList)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerProduct.adapter = adapter
-
-        binding.spinnerProduct.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    sku = productList[position].sku
-                    if (productDataList.isNotEmpty() && sku.isNotEmpty()) {
-                        for (i in productDataList.indices) {
-                            if (TextUtils.equals(productDataList[i].sku, sku)) {
-                                posList.add(productDataList[i])
-                            }
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, productList)
+        binding.spinnerProduct.threshold = 2
+        binding.spinnerProduct.setAdapter(adapter)
+        binding.spinnerProduct.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, long ->
+                sku = (adapter.getItem(position) as PosViewModel.product).sku
+                if (productDataList.isNotEmpty() && sku.isNotEmpty()) {
+                    for (i in productDataList.indices) {
+                        if (TextUtils.equals(productDataList[i].sku, sku)) {
+                            posList.add(productDataList[i])
                         }
-                        setPosData(posList)
                     }
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
+                    setPosData(posList)
+                    binding.spinnerProduct.setText("")
                 }
             }
     }
@@ -140,6 +103,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                         }
 //                        locationList.add(0, "Select Location")
                         setLocationData(locationList)
+
                     }
                 }
                 Status.ERROR -> {
@@ -180,8 +144,6 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                         it.data.forEach {
                             productList.add(PosViewModel.product(it.name, it.sku))
                         }
-
-                        productList.add(0, PosViewModel.product("Select Product", ""))
                         setProductData(productList)
                     }
                 }
@@ -192,15 +154,16 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
         }
     }
 
-    override fun onClick(data: ProductData) {
-        var price = ""
-        var tax = ""
-        for (data in posList) {
-            price = data.price
-            tax = data.price
-        }
+    private fun setTotal() {
+//        binding.txtSubTotal.text = price.toString()
+//        binding.txtTax.text = tax.toString()
+//        binding.txtTotal.text = (price.toFloat() + tax.toFloat()).toString()
+    }
+
+    var price = "0"
+    override fun onClick(data: ArrayList<ProductData>, position: Int) {
+        for (i in data.indices)
+            price = data[position].price
         binding.txtSubTotal.text = price
-        binding.txtTax.text = tax
-        binding.txtTotal.text = (price.toFloat() + tax.toFloat()).toString()
     }
 }

@@ -47,10 +47,18 @@
                         android:layout_weight="0.6"
                         android:background="@drawable/border">
 
-                        <Spinner
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/spinnerLocation"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp" />
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="@string/select_location"
+                            android:maxLines="1"
+                            android:padding="@dimen/_8sdp"
+                            android:textColor="@color/fontColor2"
+                            android:textColorHint="@color/fontColor2"
+                            android:textSize="@dimen/_10ssp" />
                     </FrameLayout>
 
                     <TextView
@@ -103,10 +111,18 @@
                             android:layout_weight="1"
                             android:background="@drawable/border">
 
-                            <Spinner
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                 android:id="@+id/spinnerType"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_35sdp" />
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="@string/select_customer"
+                                android:maxLines="1"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/fontColor2"
+                                android:textColorHint="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
                         </FrameLayout>
 
                         <FrameLayout
@@ -152,10 +168,18 @@
                             android:layout_weight="1"
                             android:background="@drawable/border">
 
-                            <Spinner
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                 android:id="@+id/spinnerProduct"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_35sdp" />
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="@string/select_product"
+                                android:maxLines="1"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/fontColor2"
+                                android:textColorHint="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
                         </FrameLayout>
 
                         <FrameLayout

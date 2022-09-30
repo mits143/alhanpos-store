@@ -1,6 +1,7 @@
 package com.alhanpos.store.networking
 
 import com.alhanpos.store.model.response.contact.ContactListResponse
+import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
@@ -24,6 +25,13 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         end: String,
         location_id: String
     ): Response<DashboardResponse> = apiService.dashboard(token, start, end, location_id)
+
+    override suspend fun dashboard_graph(
+        token: String,
+        currency_id: String,
+        business_id: String
+    ): Response<DashboardGraphResponse> =
+        apiService.dashboard_graph(token, currency_id, business_id)
 
     override suspend fun location(
         token: String

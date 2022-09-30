@@ -1,6 +1,7 @@
 package com.alhanpos.store.networking
 
 import com.alhanpos.store.model.response.contact.ContactListResponse
+import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
@@ -23,6 +24,12 @@ interface ApiHelper {
         end: String,
         location_id: String
     ): Response<DashboardResponse>
+
+    suspend fun dashboard_graph(
+        token: String,
+        currency_id: String,
+        business_id: String
+    ): Response<DashboardGraphResponse>
 
     suspend fun location(
         token: String

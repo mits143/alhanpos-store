@@ -38,6 +38,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }

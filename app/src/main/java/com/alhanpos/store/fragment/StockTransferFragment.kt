@@ -43,6 +43,7 @@ class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }

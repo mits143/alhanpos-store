@@ -64,6 +64,7 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtCategoryName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -100,6 +101,7 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtCategoryCode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -136,6 +138,7 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtCategoryDesc"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -157,7 +160,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/btnColor"
-                        android:checked="true"
                         android:fontFamily="@font/poppins_medium"
                         android:text="@string/add_as_sub_taxanomy"
                         android:textAllCaps="true"

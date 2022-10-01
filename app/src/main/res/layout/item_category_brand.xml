@@ -12,6 +12,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/txtCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -22,6 +23,7 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
+            android:id="@+id/txtCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -32,13 +34,13 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
+            android:id="@+id/txtDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/desc"
-
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
             android:visibility="gone" />
@@ -57,6 +59,7 @@
                 android:backgroundTint="@color/editColor">
 
                 <com.alhanpos.store.util.TextViewDrawableSize
+                    android:id="@+id/txtEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -82,6 +85,7 @@
                 android:backgroundTint="@color/deleteColor">
 
                 <com.alhanpos.store.util.TextViewDrawableSize
+                    android:id="@+id/txtDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -90,7 +94,6 @@
                     android:fontFamily="@font/poppins_regular"
                     android:padding="5dp"
                     android:text="@string/delete"
-
                     android:textColor="@color/white"
                     android:textSize="@dimen/_8ssp" />
 

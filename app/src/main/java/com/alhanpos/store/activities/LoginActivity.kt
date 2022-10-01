@@ -63,7 +63,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 }
                 Status.ERROR -> {
                     binding.animationView.visibility = View.GONE
-//                    showToast(it.message.toString())
+                    showToast(it.message)
                 }
             }
         })

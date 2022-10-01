@@ -7,4 +7,7 @@ object Constants {
     const val LOCATION = "connector/api/business-location"
     const val CONTACTLIST = "connector/api/contactapi"
     const val PRODUCTLIST = "connector/api/product"
+    const val CATEGORYLIST = "api/categories"
+    const val ADDUPDATECATEGORY = "api/category/add"
+    const val DELETECATEGORY = "api/category/delete"
 }

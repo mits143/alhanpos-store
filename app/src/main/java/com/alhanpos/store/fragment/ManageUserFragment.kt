@@ -43,6 +43,7 @@ class ManageUserFragment : BaseFragment<FragmentManageUsersBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }

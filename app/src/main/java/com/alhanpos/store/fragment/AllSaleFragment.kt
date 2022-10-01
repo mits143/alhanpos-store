@@ -43,6 +43,7 @@ class AllSaleFragment : BaseFragment<FragmentAllSaleBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }

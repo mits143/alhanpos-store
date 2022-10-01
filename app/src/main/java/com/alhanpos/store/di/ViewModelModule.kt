@@ -20,4 +20,10 @@ val viewModelModule = module {
     viewModel {
         AllProductViewModel(get(), get())
     }
+    viewModel {
+        CategoryViewModel(get(), get())
+    }
+    viewModel {
+        AddCategoryViewModel(get(), get())
+    }
 }

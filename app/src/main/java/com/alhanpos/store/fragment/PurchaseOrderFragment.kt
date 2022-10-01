@@ -43,6 +43,7 @@ class PurchaseOrderFragment : BaseFragment<FragmentPurchaseOrderBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }

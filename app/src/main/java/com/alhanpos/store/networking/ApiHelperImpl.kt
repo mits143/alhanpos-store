@@ -1,12 +1,15 @@
 package com.alhanpos.store.networking
 
+import com.alhanpos.store.model.response.category.CategoryResponse
 import com.alhanpos.store.model.response.contact.ContactListResponse
-import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
+import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.google.gson.JsonObject
 import retrofit2.Response
+import retrofit2.http.Field
 
 class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
 
@@ -47,5 +50,27 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         token: String
     ): Response<ProductListResponse> =
         apiService.productList(token)
+
+    override suspend fun categoryList(
+        token: String
+    ): Response<CategoryResponse> =
+        apiService.categoryList(token)
+
+    override suspend fun addUpdateCategory(
+        token: String,
+        id: String,
+        name: String,
+        short_code: String,
+        category_type: String,
+        description: String,
+        add_as_sub_cat: String
+    ): Response<JsonObject> =
+        apiService.addUpdateCategory(token, id, name, short_code, category_type, description, add_as_sub_cat)
+
+    override suspend fun deleteCategory(
+        token: String,
+        id: String
+    ): Response<JsonObject> =
+        apiService.deleteCategory(token, id)
 
 }

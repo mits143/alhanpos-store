@@ -5,46 +5,80 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.alhanpos.store.R
-import com.alhanpos.store.adapter.MainAdapter
+import com.alhanpos.store.adapter.CategoryAdapter
 import com.alhanpos.store.databinding.FragmentCategoryBinding
+import com.alhanpos.store.model.response.category.CategoryResponseItem
+import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
-import com.alhanpos.store.viewmodel.PosViewModel
+import com.alhanpos.store.viewmodel.CategoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
         FragmentCategoryBinding::inflate
 
-    private val viewModel: PosViewModel by viewModel()
+    private val viewModel: CategoryViewModel by viewModel()
 
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: CategoryAdapter
+    private var pos = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
-        adapter = MainAdapter(arrayListOf(), "TYPE_CATEGORY")
-        binding.rVCategory.adapter = adapter
         binding.flAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_category_to_nav_add_category)
+            val action =
+                CategoryFragmentDirections.actionNavCategoryToNavAddCategory()
+            findNavController().navigate(action)
         }
+    }
 
-        viewModel.fetchData()
+    private fun setCategoryData(dataList: ArrayList<CategoryResponseItem>) {
+        adapter = CategoryAdapter(dataList, this)
+        binding.rVCategory.adapter = adapter
     }
 
     private fun setObserver() {
-        viewModel.getData.observe(this) {
+        viewModel.fetchCategory("Bearer " + prefs.accessToken)
+        viewModel.getCategoryData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                 }
                 Status.SUCCESS -> {
                     it.data?.let {
-                        adapter.addData(it)
+                        setCategoryData(it)
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }
+
+        viewModel.getMsg.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> {
+                    it.data?.let {
+                        showToast(it)
+                        adapter.removeItem(pos)
+                    }
+                }
+                Status.ERROR -> {
+                    showToast(it.message)
+                }
+            }
+        }
+    }
+
+    override fun onEditClick(data: CategoryResponseItem) {
+        val action =
+            CategoryFragmentDirections.actionNavCategoryToNavAddCategory(data)
+        findNavController().navigate(action)
+    }
+
+    override fun onDeleteClick(data: CategoryResponseItem, pos: Int) {
+        this.pos = pos
+        viewModel.deleteCategory("Bearer " + prefs.accessToken, data.id.toString())
     }
 }

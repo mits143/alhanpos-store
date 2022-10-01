@@ -42,6 +42,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }

@@ -44,6 +44,7 @@ class BrandFragment : BaseFragment<FragmentBrandBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    showToast(it.message)
                 }
             }
         }

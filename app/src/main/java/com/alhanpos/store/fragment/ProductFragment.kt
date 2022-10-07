@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.FragmentPagerAdapter
@@ -18,6 +19,8 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(), RadioGroup.OnChe
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductBinding =
         FragmentProductBinding::inflate
+
+    private val args: ProductFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         init()
@@ -33,6 +36,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(), RadioGroup.OnChe
         binding.radioGroup.setOnCheckedChangeListener(this)
         binding.viewPager.adapter = adapter
         binding.viewPager.addOnPageChangeListener (this)
+        binding.viewPager.currentItem = args.currentItem
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {

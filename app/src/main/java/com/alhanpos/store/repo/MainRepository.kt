@@ -1,5 +1,7 @@
 package com.alhanpos.store.repo
 
+import com.alhanpos.store.model.response.PaymentAccountResponse
+import com.alhanpos.store.model.response.PaymentMethodResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.networking.ApiHelper
@@ -60,4 +62,36 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun deleteCategory(
         token: String, id: String
     ) = apiHelper.deleteCategory(token, id)
+
+    suspend fun brandList(
+        token: String
+    ) = apiHelper.brandList(token)
+
+    suspend fun addUpdateBrand(
+        token: String,
+        id: String,
+        name: String,
+        description: String,
+        add_as_sub_cat: String
+    ) = apiHelper.addUpdateBrand(
+        token,
+        id,
+        name,
+        description,
+        add_as_sub_cat
+    )
+
+    suspend fun deleteBrand(
+        token: String, id: String
+    ) = apiHelper.deleteBrand(token, id)
+
+    suspend fun paymentAccounts(
+        token: String,
+    ): Response<PaymentAccountResponse> =
+        apiHelper.paymentAccounts(token)
+
+    suspend fun paymentMethods(
+        token: String,
+    ): Response<PaymentMethodResponse> =
+        apiHelper.paymentMethods(token)
 }

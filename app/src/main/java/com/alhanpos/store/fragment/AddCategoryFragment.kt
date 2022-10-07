@@ -59,8 +59,10 @@ class AddCategoryFragment : BaseFragment<FragmentAddCategoryBinding>() {
         viewModel.getMsg.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
                     it.data?.let {
                         showToast(it)
                         binding.edtCategoryName.setText("")
@@ -70,6 +72,7 @@ class AddCategoryFragment : BaseFragment<FragmentAddCategoryBinding>() {
                     }
                 }
                 Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
                     showToast(it.message)
                 }
             }

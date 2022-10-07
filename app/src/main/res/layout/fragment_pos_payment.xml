@@ -54,6 +54,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
+                            android:id="@+id/txtTotalItems"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
@@ -93,6 +94,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
+                            android:id="@+id/txtTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
@@ -142,6 +144,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
+                            android:id="@+id/txtTotalPaying"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
@@ -180,6 +183,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
+                            android:id="@+id/txtChangeReturn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
@@ -269,6 +273,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
+                            android:id="@+id/txtBalance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
@@ -328,14 +333,14 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <TextView
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtAmount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:padding="@dimen/_10sdp"
-                                android:text="@string/amount"
+                                android:hint="@string/amount"
+                                android:padding="@dimen/_8sdp"
                                 android:textColor="@color/btnColor"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
@@ -358,15 +363,18 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <TextView
+                            <Spinner
+                                android:id="@+id/spinnerPaymentMethod"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_height="@dimen/_30sdp"
                                 android:background="@drawable/border"
-                                android:fontFamily="@font/poppins_medium"
-                                android:padding="@dimen/_10sdp"
-                                android:text="@string/payment_method"
-                                android:textColor="@color/btnColor"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="@string/select_payment_method"
+                                android:maxLines="1"
+                                android:padding="@dimen/_8sdp"
+                                android:singleLine="true"
+                                android:textColor="@color/fontColor2"
+                                android:textColorHint="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
 
@@ -392,15 +400,18 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <TextView
+                            <Spinner
+                                android:id="@+id/spinnerPaymentAccount"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_height="@dimen/_30sdp"
                                 android:background="@drawable/border"
-                                android:fontFamily="@font/poppins_medium"
-                                android:padding="@dimen/_10sdp"
-                                android:text="@string/payment_account"
-                                android:textColor="@color/btnColor"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="@string/select_payment_account"
+                                android:maxLines="1"
+                                android:padding="@dimen/_8sdp"
+                                android:singleLine="true"
+                                android:textColor="@color/fontColor2"
+                                android:textColorHint="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
 
@@ -438,9 +449,10 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <TextView
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtNote"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_75sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
@@ -471,7 +483,8 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <TextView
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtSellNote"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -501,7 +514,8 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <TextView
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtStaffNote"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -534,4 +548,17 @@
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7F000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_100sdp"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="loader.json"
+        app:lottie_loop="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

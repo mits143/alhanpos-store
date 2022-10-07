@@ -1,7 +1,9 @@
 package com.alhanpos.store.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemPosBinding
 import com.alhanpos.store.model.response.product.ProductData
@@ -26,38 +28,38 @@ class PosAdapter(
                 binding.txtName.text = "$name $sku"
                 quantity = if (quantity == 0) 1 else quantity
                 binding.txtQty.setText(quantity.toString())
-                price =
-                    (quantity.toDouble() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
+                price = (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax!!.toFloat()).toString()
                 binding.txtPrice.text = price
                 buttonClick.onClick(dataList, position)
 
-//                binding.txtQty.addTextChangedListener(object : TextWatcher {
-//                    override fun afterTextChanged(s: Editable?) {
-//                        if (s.toString().isEmpty())
-//                            return
-//                        quantity = s.toString().toInt()
-////                        price =
-////                            (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
-//
-//                        notifyItemChanged(absoluteAdapterPosition)
-//                    }
-//
-//                    override fun beforeTextChanged(
-//                        s: CharSequence?,
-//                        start: Int,
-//                        count: Int,
-//                        after: Int
-//                    ) {
-//                    }
-//
-//                    override fun onTextChanged(
-//                        s: CharSequence?,
-//                        start: Int,
-//                        before: Int,
-//                        count: Int
-//                    ) {
-//                    }
-//                })
+                /*binding.txtQty.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        if (s.toString().isEmpty())
+                            return
+                        quantity = s.toString().toInt()
+//                        price =
+//                            (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
+
+                        notifyItemChanged(absoluteAdapterPosition)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                })*/
+
                 binding.imgDecrease.setOnClickListener {
                     if (quantity == 1)
                         return@setOnClickListener
@@ -87,4 +89,6 @@ class PosAdapter(
     interface ButtonClick {
         fun onClick(data: ArrayList<ProductData>, position: Int)
     }
+
+
 }

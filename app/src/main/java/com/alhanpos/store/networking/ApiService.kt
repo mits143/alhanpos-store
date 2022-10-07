@@ -1,5 +1,8 @@
 package com.alhanpos.store.networking
 
+import com.alhanpos.store.model.response.PaymentAccountResponse
+import com.alhanpos.store.model.response.PaymentMethodResponse
+import com.alhanpos.store.model.response.brand.BrandResponse
 import com.alhanpos.store.model.response.category.CategoryResponse
 import com.alhanpos.store.model.response.contact.ContactListResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
@@ -7,14 +10,19 @@ import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.util.Constants.ADDUPDATEBRAND
 import com.alhanpos.store.util.Constants.ADDUPDATECATEGORY
+import com.alhanpos.store.util.Constants.BRANDLIST
 import com.alhanpos.store.util.Constants.CATEGORYLIST
 import com.alhanpos.store.util.Constants.CONTACTLIST
 import com.alhanpos.store.util.Constants.DASHBOARD
 import com.alhanpos.store.util.Constants.DASHBOARD_GRAPH
+import com.alhanpos.store.util.Constants.DELETEBRAND
 import com.alhanpos.store.util.Constants.DELETECATEGORY
 import com.alhanpos.store.util.Constants.LOCATION
 import com.alhanpos.store.util.Constants.LOGIN
+import com.alhanpos.store.util.Constants.PAYMENT_ACCOUNTS
+import com.alhanpos.store.util.Constants.PAYMENT_METHODS
 import com.alhanpos.store.util.Constants.PRODUCTLIST
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -68,6 +76,16 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Response<ProductListResponse>
 
+    @GET(PAYMENT_ACCOUNTS)
+    suspend fun paymentAccounts(
+        @Header("Authorization") token: String
+    ): Response<PaymentAccountResponse>
+
+    @GET(PAYMENT_METHODS)
+    suspend fun paymentMethods(
+        @Header("Authorization") token: String
+    ): Response<PaymentMethodResponse>
+
     @GET(CATEGORYLIST)
     suspend fun categoryList(
         @Header("Authorization") token: String
@@ -88,6 +106,28 @@ interface ApiService {
     @FormUrlEncoded
     @POST(DELETECATEGORY)
     suspend fun deleteCategory(
+        @Header("Authorization") token: String,
+        @Field("id") id: String
+    ): Response<JsonObject>
+
+    @GET(BRANDLIST)
+    suspend fun brandList(
+        @Header("Authorization") token: String
+    ): Response<BrandResponse>
+
+    @FormUrlEncoded
+    @POST(ADDUPDATEBRAND)
+    suspend fun addUpdateBrand(
+        @Header("Authorization") token: String,
+        @Field("id") id: String,
+        @Field("name") name: String,
+        @Field("description") description: String,
+        @Field("use_for_repair") use_for_repair: String
+    ): Response<JsonObject>
+
+    @FormUrlEncoded
+    @POST(DELETEBRAND)
+    suspend fun deleteBrand(
         @Header("Authorization") token: String,
         @Field("id") id: String
     ): Response<JsonObject>

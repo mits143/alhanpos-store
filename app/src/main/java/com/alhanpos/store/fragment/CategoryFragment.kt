@@ -42,13 +42,16 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
         viewModel.getCategoryData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
                     it.data?.let {
                         setCategoryData(it)
                     }
                 }
                 Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
                     showToast(it.message)
                 }
             }
@@ -57,14 +60,17 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
         viewModel.getMsg.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
                     it.data?.let {
                         showToast(it)
                         adapter.removeItem(pos)
                     }
                 }
                 Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
                     showToast(it.message)
                 }
             }

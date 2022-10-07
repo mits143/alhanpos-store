@@ -54,8 +54,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
                     it.data?.let {
-                        binding.animationView.visibility = View.GONE
                         prefs.accessToken = it.access_token
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()

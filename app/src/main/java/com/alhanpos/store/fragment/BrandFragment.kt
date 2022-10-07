@@ -5,48 +5,87 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.alhanpos.store.R
-import com.alhanpos.store.adapter.MainAdapter
+import com.alhanpos.store.adapter.BrandAdapter
 import com.alhanpos.store.databinding.FragmentBrandBinding
+import com.alhanpos.store.model.response.brand.BrandResponseItem
+import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
-import com.alhanpos.store.viewmodel.PosViewModel
+import com.alhanpos.store.viewmodel.BrandViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BrandFragment : BaseFragment<FragmentBrandBinding>() {
+class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentBrandBinding =
         FragmentBrandBinding::inflate
 
-    private val viewModel: PosViewModel by viewModel()
+    private val viewModel: BrandViewModel by viewModel()
 
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: BrandAdapter
+
+    private var pos = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
-        adapter = MainAdapter(arrayListOf(), "TYPE_BRAND")
-        binding.rVCategory.adapter = adapter
-
         binding.flAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_brand_to_nav_add_brand)
+            val action =
+                BrandFragmentDirections.actionNavBrandToNavAddBrand()
+            findNavController().navigate(action)
         }
+    }
 
-        viewModel.fetchData()
+    private fun setBrandData(dataList: ArrayList<BrandResponseItem>) {
+        adapter = BrandAdapter(dataList, this)
+        binding.rVCategory.adapter = adapter
     }
 
     private fun setObserver() {
-        viewModel.getData.observe(this) {
+        viewModel.fetchBrand("Bearer " + prefs.accessToken)
+        viewModel.getBrandData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
                     it.data?.let {
-                        adapter.addData(it)
+                        setBrandData(it)
                     }
                 }
                 Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
                     showToast(it.message)
                 }
             }
         }
+
+        viewModel.getMsg.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
+                    it.data?.let {
+                        showToast(it)
+                        adapter.removeItem(pos)
+                    }
+                }
+                Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
+                    showToast(it.message)
+                }
+            }
+        }
+    }
+
+    override fun onEditClick(data: BrandResponseItem) {
+        val action =
+            BrandFragmentDirections.actionNavBrandToNavAddBrand(data)
+        findNavController().navigate(action)
+    }
+
+    override fun onDeleteClick(data: BrandResponseItem, pos: Int) {
+        this.pos = pos
+        viewModel.deleteBrand("Bearer " + prefs.accessToken, data.id.toString())
     }
 }

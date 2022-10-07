@@ -15,6 +15,9 @@ val viewModelModule = module {
         PosViewModel(get(), get())
     }
     viewModel {
+        AddPosViewModel(get(), get())
+    }
+    viewModel {
         ContactViewModel(get(), get())
     }
     viewModel {
@@ -25,5 +28,11 @@ val viewModelModule = module {
     }
     viewModel {
         AddCategoryViewModel(get(), get())
+    }
+    viewModel {
+        BrandViewModel(get(), get())
+    }
+    viewModel {
+        AddBrandViewModel(get(), get())
     }
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
-import com.alhanpos.store.R
 import com.alhanpos.store.adapter.PosAdapter
 import com.alhanpos.store.databinding.FragmentPosBinding
 import com.alhanpos.store.model.response.product.ProductData
@@ -31,15 +30,24 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
     var productList: ArrayList<PosViewModel.product> = ArrayList()
 
     private var posList: ArrayList<ProductData> = arrayListOf()
+    lateinit var adapter: PosAdapter
 
     var sku = ""
-    var subTotal = 0.0
-    var tax = 0.0
+    var totalItems = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+
+        if (productList.isNotEmpty())
+            setProductData(productList)
+
         binding.txtProceed.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_pos_to_nav_pos_payment)
+            val action =
+                PosFragmentDirections.actionNavPosToNavPosPayment(
+                    totalItems,
+                    binding.txtTotal.text.toString().trim()
+                )
+            findNavController().navigate(action)
         }
     }
 
@@ -49,13 +57,11 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
         binding.spinnerLocation.threshold = 2
         binding.spinnerLocation.setAdapter(adapter)
         binding.spinnerLocation.setText(locationList[0])
-
-
     }
 
     private fun setContactData(contactList: ArrayList<String>) {
         val adapter =
-            ArrayAdapter(requireContext(), android.R.layout.select_dialog_item, contactList)
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, contactList)
         binding.spinnerType.threshold = 2
         binding.spinnerType.setAdapter(adapter)
         binding.spinnerType.setText(contactList[0])
@@ -72,7 +78,12 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                 if (productDataList.isNotEmpty() && sku.isNotEmpty()) {
                     for (i in productDataList.indices) {
                         if (TextUtils.equals(productDataList[i].sku, sku)) {
-                            posList.add(productDataList[i])
+                            if (!productDataList[i].isAdded) {
+                                productDataList[i].isAdded = true
+                                posList.add(productDataList[i])
+                            } else {
+                                showToast("Product already added")
+                            }
                         }
                     }
                     setPosData(posList)
@@ -82,14 +93,12 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
     }
 
     private fun setPosData(posList: ArrayList<ProductData>) {
-        val adapter = PosAdapter(posList, this)
+        adapter = PosAdapter(posList, this)
         binding.rvProduct.adapter = adapter
     }
 
     private fun setObserver() {
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
-        viewModel.fetchContact("Bearer " + prefs.accessToken!!)
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
 
         viewModel.getLocationData.observe(this) {
             when (it.status) {
@@ -101,10 +110,9 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                         it.data.forEach {
                             locationList.add(it.name)
                         }
-//                        locationList.add(0, "Select Location")
                         setLocationData(locationList)
-
                     }
+                    viewModel.fetchContact("Bearer " + prefs.accessToken!!)
                 }
                 Status.ERROR -> {
                     showToast(it.message!!)
@@ -122,12 +130,12 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                         it.data.forEach {
                             contactList.add(it.name)
                         }
-//                        contactList.add(0, "Select Customer")
                         setContactData(contactList)
                     }
+                    viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
                 }
                 Status.ERROR -> {
-                    showToast(it.message!!)
+                    showToast(it.message)
                 }
             }
         }
@@ -135,35 +143,41 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
         viewModel.getProductData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
-                    it.data?.let {
-                        productDataList.clear()
-                        productList.clear()
-                        productDataList.addAll(it.data)
-                        it.data.forEach {
-                            productList.add(PosViewModel.product(it.name, it.sku))
+                    if (it.data != null) {
+                        it.data.let {
+                            binding.animationView.visibility = View.GONE
+                            productDataList.clear()
+                            productList.clear()
+                            productDataList.addAll(it.data)
+                            it.data.forEach {
+                                productList.add(PosViewModel.product(it.name!!, it.sku!!))
+                            }
+                            setProductData(productList)
                         }
-                        setProductData(productList)
+                    } else {
+                        showToast("No data available")
                     }
                 }
                 Status.ERROR -> {
-                    showToast(it.message!!)
+                    binding.animationView.visibility = View.GONE
+                    showToast(it.message)
                 }
             }
         }
     }
 
-    private fun setTotal() {
-//        binding.txtSubTotal.text = price.toString()
-//        binding.txtTax.text = tax.toString()
-//        binding.txtTotal.text = (price.toFloat() + tax.toFloat()).toString()
-    }
+    override fun onClick(dataList: ArrayList<ProductData>, position: Int) {
+        var total = 0f
+        for (i in 0 until dataList.size) {
+            total += (dataList[i].product_variations[0].variations[0].sell_price_inc_tax!!.toFloat() * dataList[i].quantity.toFloat())
+        }
 
-    var price = "0"
-    override fun onClick(data: ArrayList<ProductData>, position: Int) {
-        for (i in data.indices)
-            price = data[position].price
-        binding.txtSubTotal.text = price
+        totalItems = dataList.size.toString()
+        binding.txtSubTotal.text = total.toString()
+//        binding.txtTax.text = tax.toString()
+        binding.txtTotal.text = total.toString()
     }
 }

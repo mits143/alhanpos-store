@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import com.alhanpos.store.R
 import com.alhanpos.store.databinding.FragmentHomeBinding
 import com.alhanpos.store.model.response.dashboard.graph.Dataset
@@ -27,7 +26,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -141,13 +139,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @SuppressLint("SetTextI18n")
     private fun setObserver() {
         viewModel.fetchHomeData("Bearer " + prefs.accessToken)
-        viewModel.fetchGraphData("Bearer " + prefs.accessToken)
         viewModel.getHomeData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                 }
-                Status.SUCCESS
-                -> {
+                Status.SUCCESS -> {
                     it.data?.let { it ->
                         binding.txtTotalPurchase?.text =
                             " ج.م " + it.total_purchase.toString()
@@ -159,24 +155,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         binding.txtInvoiceDue?.text = " ج.م " + it.invoice_due.toString()
                         binding.txtExpense?.text = " ج.م " + it.total_expense.toString()
                     }
+                    viewModel.fetchGraphData("Bearer " + prefs.accessToken)
                 }
                 Status.ERROR -> {
-                    showToast(it.message!!)
+                    showToast(it.message)
                 }
             }
         }
         viewModel.getGraph.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView?.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
                     it.data?.let { it ->
+                        binding.animationView?.visibility = View.GONE
                         setMonthlyChart(it.sells_chart_1)
                         setYearlyChart(it.sells_chart_2)
                     }
                 }
                 Status.ERROR -> {
-                    showToast(it.message!!)
+                    binding.animationView?.visibility = View.GONE
+                    showToast(it.message)
                 }
             }
         }

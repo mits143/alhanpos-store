@@ -35,13 +35,16 @@ class ContactFragment : BaseFragment<FragmentContactBinding>() {
         viewModel.getContactData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
                     it.data?.let {
                         adapter.addData(it.data)
                     }
                 }
                 Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
                     showToast(it.message)
                 }
             }

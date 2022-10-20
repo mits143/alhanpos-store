@@ -1,4 +1,4 @@
-package com.alhanpos.store.model.response
+package com.alhanpos.store.model.response.account
 
 
 import com.google.gson.annotations.SerializedName

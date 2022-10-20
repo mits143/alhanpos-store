@@ -8,6 +8,7 @@ import com.alhanpos.store.networking.ApiHelper
 import com.alhanpos.store.networking.ApiHelperImpl
 import com.alhanpos.store.networking.ApiService
 import com.alhanpos.store.util.NetworkHelper
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
+
 
 val appModule = module {
     single { provideOkHttpClient() }
@@ -45,13 +47,15 @@ private fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
     .Builder()
     .build()
 
-private fun provideRetrofit(
-): Retrofit =
-    Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
-        .client(UnsafeOkHttpClient.unsafeOkHttpClient)
-        .build()
+var gson = GsonBuilder()
+    .setLenient()
+    .create()
+
+private fun provideRetrofit(): Retrofit = Retrofit.Builder()
+    .addConverterFactory(GsonConverterFactory.create())
+    .baseUrl(BASE_URL)
+    .client(UnsafeOkHttpClient.unsafeOkHttpClient)
+    .build()
 
 private fun provideApiService(retrofit: Retrofit): ApiService =
     retrofit.create(ApiService::class.java)

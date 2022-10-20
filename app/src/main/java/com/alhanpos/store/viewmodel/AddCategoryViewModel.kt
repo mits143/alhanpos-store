@@ -51,7 +51,7 @@ class AddCategoryViewModel(
                             )
                     } else setMsg.postValue(
                         Resource.error(
-                            it.errorBody().toString(),
+                            it.message(),
                             null
                         )
                     )

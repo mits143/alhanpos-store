@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.alhanpos.store.R
 import com.alhanpos.store.adapter.ProductAdapter
 import com.alhanpos.store.databinding.FragmentAllProductBinding
 import com.alhanpos.store.model.response.product.ProductData
@@ -55,6 +54,8 @@ class AllFragment : BaseFragment<FragmentAllProductBinding>(), ProductAdapter.Bu
     }
 
     override fun onClick() {
-        findNavController().navigate(R.id.action_nav_product_to_nav_add_product)
+        val action =
+            AllFragmentDirections.actionNavAllProductToNavAddProduct()
+        findNavController().navigate(action)
     }
 }

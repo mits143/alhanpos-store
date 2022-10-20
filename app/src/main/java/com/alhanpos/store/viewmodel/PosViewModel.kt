@@ -100,7 +100,11 @@ class PosViewModel(
                 ).let {
                     if (it.isSuccessful) {
                         setProductData.postValue(Resource.success(it.body()))
-                    } else setProductData.postValue(Resource.error(it.errorBody().toString(), null))
+                    } else setProductData.postValue(
+                        Resource.error(
+                            it.message(), null
+                        )
+                    )
                 }
             } else setProductData.postValue(Resource.error("No internet connection", null))
         }

@@ -32,7 +32,7 @@ class ContactViewModel(
                         setContactData.postValue(Resource.success(it.body()))
                     } else setContactData.postValue(
                         Resource.error(
-                            it.errorBody().toString(),
+                            it.message(),
                             null
                         )
                     )

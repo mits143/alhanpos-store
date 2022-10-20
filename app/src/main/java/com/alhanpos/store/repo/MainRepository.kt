@@ -1,10 +1,10 @@
 package com.alhanpos.store.repo
 
-import com.alhanpos.store.model.response.PaymentAccountResponse
-import com.alhanpos.store.model.response.PaymentMethodResponse
+import com.alhanpos.store.model.request.payment.PaymentRequest
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.networking.ApiHelper
+import com.google.gson.JsonObject
 import retrofit2.Response
 
 class MainRepository(private val apiHelper: ApiHelper) {
@@ -50,13 +50,7 @@ class MainRepository(private val apiHelper: ApiHelper) {
         description: String,
         add_as_sub_cat: String
     ) = apiHelper.addUpdateCategory(
-        token,
-        id,
-        name,
-        short_code,
-        category_type,
-        description,
-        add_as_sub_cat
+        token, id, name, short_code, category_type, description, add_as_sub_cat
     )
 
     suspend fun deleteCategory(
@@ -68,17 +62,9 @@ class MainRepository(private val apiHelper: ApiHelper) {
     ) = apiHelper.brandList(token)
 
     suspend fun addUpdateBrand(
-        token: String,
-        id: String,
-        name: String,
-        description: String,
-        add_as_sub_cat: String
+        token: String, id: String, name: String, description: String, add_as_sub_cat: String
     ) = apiHelper.addUpdateBrand(
-        token,
-        id,
-        name,
-        description,
-        add_as_sub_cat
+        token, id, name, description, add_as_sub_cat
     )
 
     suspend fun deleteBrand(
@@ -87,11 +73,26 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun paymentAccounts(
         token: String,
-    ): Response<PaymentAccountResponse> =
-        apiHelper.paymentAccounts(token)
+    ) = apiHelper.paymentAccounts(token)
 
     suspend fun paymentMethods(
         token: String,
-    ): Response<PaymentMethodResponse> =
-        apiHelper.paymentMethods(token)
+    ) = apiHelper.paymentMethods(token)
+
+    suspend fun addUpdateProduct(
+        token: String,
+        name: String,
+        brand_id: String,
+        category_id: String,
+        unit_id: String,
+        selling_price: String
+    ) = apiHelper.addUpdateProduct(
+        token, name, brand_id, category_id, unit_id, selling_price
+    )
+
+    suspend fun finalizePayment(
+        token: String, jsonObject: PaymentRequest
+    ): Response<JsonObject> = apiHelper.finalizePayment(
+        token, jsonObject
+    )
 }

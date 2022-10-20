@@ -36,7 +36,7 @@ class CategoryViewModel(
                         setCategoryData.postValue(Resource.success(it.body()))
                     } else setCategoryData.postValue(
                         Resource.error(
-                            it.errorBody().toString(),
+                            it.message(),
                             null
                         )
                     )

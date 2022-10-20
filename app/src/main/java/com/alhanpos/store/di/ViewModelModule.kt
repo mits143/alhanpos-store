@@ -35,4 +35,7 @@ val viewModelModule = module {
     viewModel {
         AddBrandViewModel(get(), get())
     }
+    viewModel {
+        AddProductViewModel(get(), get())
+    }
 }

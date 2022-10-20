@@ -47,7 +47,11 @@ class HomeViewModel(
                 ).let {
                     if (it.isSuccessful) {
                         setHomeData.postValue(Resource.success(it.body()))
-                    } else setHomeData.postValue(Resource.error(it.errorBody().toString(), null))
+                    } else setHomeData.postValue(
+                        Resource.error(
+                            it.message(), null
+                        )
+                    )
                 }
             } else setHomeData.postValue(Resource.error("No internet connection", null))
         }
@@ -64,7 +68,11 @@ class HomeViewModel(
                 ).let {
                     if (it.isSuccessful) {
                         setGraph.postValue(Resource.success(it.body()))
-                    } else setGraph.postValue(Resource.error(it.errorBody().toString(), null))
+                    } else setGraph.postValue(
+                        Resource.error(
+                            it.message(), null
+                        )
+                    )
                 }
             } else setGraph.postValue(Resource.error("No internet connection", null))
         }

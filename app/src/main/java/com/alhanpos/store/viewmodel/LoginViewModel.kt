@@ -35,7 +35,11 @@ class LoginViewModel(
                 ).let {
                     if (it.isSuccessful) {
                         setUser.postValue(Resource.success(it.body()))
-                    } else setUser.postValue(Resource.error(it.errorBody().toString(), null))
+                    } else setUser.postValue(
+                        Resource.error(
+                            it.message(), null
+                        )
+                    )
                 }
             } else setUser.postValue(Resource.error("No internet connection", null))
         }

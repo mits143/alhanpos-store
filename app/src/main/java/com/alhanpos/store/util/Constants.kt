@@ -9,10 +9,13 @@ object Constants {
     const val PRODUCTLIST = "connector/api/product"
     const val PAYMENT_ACCOUNTS = "connector/api/payment-accounts"
     const val PAYMENT_METHODS = "connector/api/payment-methods"
+    const val UNITSLIST = "api/units"
     const val CATEGORYLIST = "api/categories"
     const val ADDUPDATECATEGORY = "api/category/add"
     const val DELETECATEGORY = "api/category/delete"
     const val BRANDLIST = "api/brands"
     const val ADDUPDATEBRAND = "api/brand/add"
     const val DELETEBRAND = "api/brand/delete"
+    const val ADDUPDATEPRODUCT = "api/product/add"
+    const val FINALIZEPAYMENT = "api/finalize/payment"
 }

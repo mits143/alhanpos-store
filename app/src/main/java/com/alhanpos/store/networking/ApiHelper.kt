@@ -1,7 +1,7 @@
 package com.alhanpos.store.networking
 
-import com.alhanpos.store.model.response.PaymentAccountResponse
-import com.alhanpos.store.model.response.PaymentMethodResponse
+import com.alhanpos.store.model.request.payment.PaymentRequest
+import com.alhanpos.store.model.response.account.PaymentAccountResponse
 import com.alhanpos.store.model.response.brand.BrandResponse
 import com.alhanpos.store.model.response.category.CategoryResponse
 import com.alhanpos.store.model.response.contact.ContactListResponse
@@ -9,6 +9,7 @@ import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
+import com.alhanpos.store.model.response.method.PaymentMethodResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -91,4 +92,18 @@ interface ApiHelper {
     suspend fun paymentMethods(
         token: String
     ): Response<PaymentMethodResponse>
+
+    suspend fun addUpdateProduct(
+        token: String,
+        name: String,
+        brand_id: String,
+        category_id: String,
+        unit_id: String,
+        selling_price: String
+    ): Response<JsonObject>
+
+    suspend fun finalizePayment(
+        token: String,
+        jsonObject: PaymentRequest
+    ): Response<JsonObject>
 }

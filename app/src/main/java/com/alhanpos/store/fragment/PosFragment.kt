@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.PosAdapter
 import com.alhanpos.store.databinding.FragmentPosBinding
 import com.alhanpos.store.model.response.product.ProductData
+import com.alhanpos.store.model.response.product.ProductListResponse
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.PosViewModel
@@ -44,7 +45,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
         binding.txtProceed.setOnClickListener {
             val action =
                 PosFragmentDirections.actionNavPosToNavPosPayment(
-                    totalItems,
+                    ProductListResponse(posList),
                     binding.txtTotal.text.toString().trim()
                 )
             findNavController().navigate(action)
@@ -177,7 +178,6 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
 
         totalItems = dataList.size.toString()
         binding.txtSubTotal.text = total.toString()
-//        binding.txtTax.text = tax.toString()
         binding.txtTotal.text = total.toString()
     }
 }

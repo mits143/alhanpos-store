@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+    tools:context=".fragment.AddProductFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -64,6 +64,7 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtProductName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -92,17 +93,18 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_medium"
-                                android:text="@string/unit"
+                                android:text="@string/category"
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <EditText
+                            <Spinner
+                                android:id="@+id/spinCategory"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/unit"
+                                android:hint="@string/category"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -117,7 +119,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -129,17 +132,18 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_medium"
-                                android:text="@string/category"
+                                android:text="@string/unit"
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <EditText
+                            <Spinner
+                                android:id="@+id/spinUnit"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/category"
+                                android:hint="@string/unit"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -182,9 +186,10 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <EditText
+                            <Spinner
+                                android:id="@+id/spinBrand"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
@@ -217,6 +222,7 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtPrice"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -254,4 +260,17 @@
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7F000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_100sdp"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="loader.json"
+        app:lottie_loop="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

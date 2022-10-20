@@ -5,15 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alhanpos.store.model.response.brand.BrandResponse
+import com.alhanpos.store.model.response.category.CategoryResponse
 import com.alhanpos.store.repo.MainRepository
 import com.alhanpos.store.util.NetworkHelper
 import com.alhanpos.store.util.Resource
 import kotlinx.coroutines.launch
 
-class BrandViewModel(
+class AddProductViewModel(
     private val mainRepository: MainRepository,
     private val networkHelper: NetworkHelper,
 ) : ViewModel() {
+
+    private val setCategoryData = MutableLiveData<Resource<CategoryResponse>>()
+    val getCategoryData: LiveData<Resource<CategoryResponse>>
+        get() = setCategoryData
 
     private val setBrandData = MutableLiveData<Resource<BrandResponse>>()
     val getBrandData: LiveData<Resource<BrandResponse>>
@@ -22,6 +27,28 @@ class BrandViewModel(
     private val setMsg = MutableLiveData<Resource<String>>()
     val getMsg: LiveData<Resource<String>>
         get() = setMsg
+
+    fun fetchCategory(
+        token: String
+    ) {
+        viewModelScope.launch {
+            setCategoryData.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                mainRepository.categoryList(
+                    token
+                ).let {
+                    if (it.isSuccessful) {
+                        setCategoryData.postValue(Resource.success(it.body()))
+                    } else setCategoryData.postValue(
+                        Resource.error(
+                            it.errorBody().toString(), null
+                        )
+                    )
+                }
+            } else setCategoryData.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
 
     fun fetchBrand(
         token: String
@@ -36,8 +63,7 @@ class BrandViewModel(
                         setBrandData.postValue(Resource.success(it.body()))
                     } else setBrandData.postValue(
                         Resource.error(
-                            it.message(),
-                            null
+                            it.message(),null
                         )
                     )
                 }
@@ -45,35 +71,41 @@ class BrandViewModel(
         }
     }
 
-    fun deleteBrand(
+    fun addUpdateProduct(
         token: String,
-        id: String
+        name: String,
+        brand_id: String,
+        category_id: String,
+        unit_id: String,
+        selling_price: String,
     ) {
         viewModelScope.launch {
             setMsg.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
-                mainRepository.deleteBrand(
-                    token,
-                    id
+                mainRepository.addUpdateProduct(
+                    token, name, brand_id, category_id, unit_id, selling_price
                 ).let {
                     if (it.isSuccessful) {
-                        if (it.body()?.get("success")?.asBoolean!!)
-                            setMsg.postValue(Resource.success(it.body()?.get("msg")?.asString))
-                        else
-                            setMsg.postValue(
-                                Resource.error(
-                                    it.body()?.get("msg")?.asString!!,
-                                    null
-                                )
+                        if (it.body()?.get("success")?.asBoolean!!
+                        ) setMsg.postValue(Resource.success(it.body()?.get("msg")?.asString))
+                        else setMsg.postValue(
+                            Resource.error(
+                                it.body()?.get("msg")?.asString!!, null
                             )
+                        )
                     } else setMsg.postValue(
                         Resource.error(
-                            it.message(),
-                            null
+                            it.message(), null
                         )
                     )
                 }
             } else setMsg.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    class Common(var name: String, var id: String) {
+        override fun toString(): String {
+            return name
         }
     }
 }

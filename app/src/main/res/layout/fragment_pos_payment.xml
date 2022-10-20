@@ -58,7 +58,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="1.00"
+                            android:text="0.00"
                             android:textColor="@color/fontColor2"
                             android:textSize="@dimen/_16ssp" />
 
@@ -98,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="ج.م 250.00"
+                            android:text="ج.م 0.00"
                             android:textColor="@color/fontColor2"
                             android:textSize="@dimen/_16ssp" />
 
@@ -148,7 +148,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="1.00"
+                            android:text="0.00"
                             android:textColor="@color/fontColor2"
                             android:textSize="@dimen/_16ssp" />
 
@@ -187,7 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="ج.م 250.00"
+                            android:text="ج.م 0.00"
                             android:textColor="@color/fontColor2"
                             android:textSize="@dimen/_16ssp" />
 
@@ -237,7 +237,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="1.00"
+                            android:text="0.00"
                             android:textColor="@color/fontColor2"
                             android:textSize="@dimen/_16ssp" />
 
@@ -277,7 +277,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="ج.م 250.00"
+                            android:text="ج.م 0.00"
                             android:textColor="@color/fontColor2"
                             android:textSize="@dimen/_16ssp" />
 

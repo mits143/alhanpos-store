@@ -28,9 +28,11 @@
         tools:layout="@layout/fragment_pos_payment">
 
         <argument
-            android:name="totalItems"
-            android:defaultValue=""
-            app:argType="string" />
+            android:name="data"
+            android:defaultValue="@null"
+            app:argType="com.alhanpos.store.model.response.product.ProductListResponse"
+            app:nullable="true" />
+
 
         <argument
             android:name="total"
@@ -45,7 +47,7 @@
         tools:layout="@layout/fragment_product">
 
         <action
-            android:id="@+id/action_nav_product_to_nav_add_product"
+            android:id="@+id/action_nav_all_product_to_nav_add_product"
             app:destination="@id/nav_add_product" />
 
         <action
@@ -198,9 +200,15 @@
         tools:layout="@layout/fragment_all_product">
 
         <action
-            android:id="@+id/action_nav_product_to_nav_add_product"
+            android:id="@+id/action_nav_all_product_to_nav_add_product"
             app:destination="@id/nav_add_product" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_product"
+        android:name="com.alhanpos.store.fragment.AddProductFragment"
+        android:label="@string/add_new_product"
+        tools:layout="@layout/fragment_add_product" />
 
     <fragment
         android:id="@+id/nav_manage_users_fragment"
@@ -243,11 +251,5 @@
         android:name="com.alhanpos.store.fragment.PaymentFragment"
         android:label="@string/payment"
         tools:layout="@layout/fragment_payment" />
-
-    <fragment
-        android:id="@+id/nav_add_product"
-        android:name="com.alhanpos.store.fragment.AddProductFragment"
-        android:label="@string/add_new_product"
-        tools:layout="@layout/fragment_add_product" />
 
 </navigation>

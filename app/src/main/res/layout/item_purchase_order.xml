@@ -13,7 +13,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtDate"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -23,7 +24,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtRefNo"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -33,7 +35,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtLocation"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -43,7 +46,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtSupplier"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -53,7 +57,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtAction"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -63,7 +68,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtStatus"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -73,7 +79,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtQuantityRemaining"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -83,7 +90,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtShippingStatus"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
@@ -93,7 +101,8 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txtAdded"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"

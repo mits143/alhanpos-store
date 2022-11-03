@@ -4,33 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+    tools:context=".fragment.AllFragment">
 
-    <TextView
-        android:id="@+id/txtProduct"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:padding="@dimen/_10sdp"
-        android:text="@string/total_products"
-        android:textAllCaps="true"
-        android:textColor="@color/btnColor"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProduct"
-        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/_5sdp"
-        android:nestedScrollingEnabled="false"
-        tools:listitem="@layout/item_product"
-        app:spanCount="2"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:overScrollMode="never"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtProduct" />
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/product"
+                    android:textColor="@color/btnColor"
+                    android:textSize="@dimen/_12ssp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.SearchView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/btnColor"
+                            android:textSize="@dimen/_12ssp"
+                            app:iconifiedByDefault="false"
+                            app:queryHint="@string/search_product" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="0dp" />
+
+                    <FrameLayout
+                        android:id="@+id/flAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bkg"
+                        android:padding="@dimen/_10sdp">
+
+                        <com.alhanpos.store.util.TextViewDrawableSize
+                            android:id="@+id/imgAdd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/whir"
+                            android:drawablePadding="@dimen/_8sdp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:text="@string/add"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp"
+                            app:compoundDrawableHeight="@dimen/_20sdp"
+                            app:compoundDrawableWidth="@dimen/_20sdp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    app:spanCount="2"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_product" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"

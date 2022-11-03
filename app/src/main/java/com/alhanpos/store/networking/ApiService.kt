@@ -7,10 +7,16 @@ import com.alhanpos.store.model.response.category.CategoryResponse
 import com.alhanpos.store.model.response.contact.ContactListResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
+import com.alhanpos.store.model.response.expenses.ExpensesResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.method.PaymentMethodResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
+import com.alhanpos.store.model.response.sell.SellResponse
+import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
+import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
+import com.alhanpos.store.model.response.subscription.SubscripitionResponse
 import com.alhanpos.store.util.Constants.ADDUPDATEBRAND
 import com.alhanpos.store.util.Constants.ADDUPDATECATEGORY
 import com.alhanpos.store.util.Constants.ADDUPDATEPRODUCT
@@ -21,12 +27,19 @@ import com.alhanpos.store.util.Constants.DASHBOARD
 import com.alhanpos.store.util.Constants.DASHBOARD_GRAPH
 import com.alhanpos.store.util.Constants.DELETEBRAND
 import com.alhanpos.store.util.Constants.DELETECATEGORY
+import com.alhanpos.store.util.Constants.EXPENSES
 import com.alhanpos.store.util.Constants.FINALIZEPAYMENT
 import com.alhanpos.store.util.Constants.LOCATION
 import com.alhanpos.store.util.Constants.LOGIN
 import com.alhanpos.store.util.Constants.PAYMENT_ACCOUNTS
 import com.alhanpos.store.util.Constants.PAYMENT_METHODS
 import com.alhanpos.store.util.Constants.PRODUCTLIST
+import com.alhanpos.store.util.Constants.PURCHASEORDERS
+import com.alhanpos.store.util.Constants.SELLS
+import com.alhanpos.store.util.Constants.STOCKADJUSTMENTS
+import com.alhanpos.store.util.Constants.STOCKTRANSFER
+import com.alhanpos.store.util.Constants.SUBSCRIPTIONS
+import com.alhanpos.store.util.Constants.SUPPLIERLIST
 import com.alhanpos.store.util.Constants.UNITSLIST
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -66,6 +79,11 @@ interface ApiService {
 
     @GET(CONTACTLIST)
     suspend fun contactList(
+        @Header("Authorization") token: String
+    ): Response<ContactListResponse>
+
+    @GET(SUPPLIERLIST)
+    suspend fun supplierList(
         @Header("Authorization") token: String
     ): Response<ContactListResponse>
 
@@ -148,5 +166,35 @@ interface ApiService {
     suspend fun finalizePayment(
         @Header("Authorization") token: String, @Body jsonObject: PaymentRequest
     ): Response<JsonObject>
+
+    @GET(STOCKTRANSFER)
+    suspend fun stocktransfer(
+        @Header("Authorization") token: String
+    ): Response<StockTransferResponse>
+
+    @GET(EXPENSES)
+    suspend fun expenses(
+        @Header("Authorization") token: String
+    ): Response<ExpensesResponse>
+
+    @GET(SELLS)
+    suspend fun sells(
+        @Header("Authorization") token: String
+    ): Response<SellResponse>
+
+    @GET(PURCHASEORDERS)
+    suspend fun purchaseorders(
+        @Header("Authorization") token: String
+    ): Response<PurchaseOrderResponse>
+
+    @GET(STOCKADJUSTMENTS)
+    suspend fun stockadjustments(
+        @Header("Authorization") token: String
+    ): Response<StockAdjustmentResponse>
+
+    @GET(SUBSCRIPTIONS)
+    suspend fun subscriptions(
+        @Header("Authorization") token: String
+    ): Response<SubscripitionResponse>
 
 }

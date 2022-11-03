@@ -3,6 +3,12 @@ package com.alhanpos.store.repo
 import com.alhanpos.store.model.request.payment.PaymentRequest
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
+import com.alhanpos.store.model.response.expenses.ExpensesResponse
+import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
+import com.alhanpos.store.model.response.sell.SellResponse
+import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
+import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
+import com.alhanpos.store.model.response.subscription.SubscripitionResponse
 import com.alhanpos.store.networking.ApiHelper
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -32,6 +38,10 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun contactList(
         token: String
     ) = apiHelper.contactList(token)
+
+    suspend fun supplierList(
+        token: String
+    ) = apiHelper.supplierList(token)
 
     suspend fun productList(
         token: String
@@ -94,5 +104,41 @@ class MainRepository(private val apiHelper: ApiHelper) {
         token: String, jsonObject: PaymentRequest
     ): Response<JsonObject> = apiHelper.finalizePayment(
         token, jsonObject
+    )
+
+    suspend fun stocktransfer(
+        token: String
+    ): Response<StockTransferResponse> = apiHelper.stocktransfer(
+        token
+    )
+
+    suspend fun expenses(
+        token: String
+    ): Response<ExpensesResponse> = apiHelper.expenses(
+        token
+    )
+
+    suspend fun sells(
+        token: String
+    ): Response<SellResponse> = apiHelper.sells(
+        token
+    )
+
+    suspend fun purchaseorders(
+        token: String
+    ): Response<PurchaseOrderResponse> = apiHelper.purchaseorders(
+        token
+    )
+
+    suspend fun stockadjustments(
+        token: String
+    ): Response<StockAdjustmentResponse> = apiHelper.stockadjustments(
+        token
+    )
+
+    suspend fun subscriptions(
+        token: String
+    ): Response<SubscripitionResponse> = apiHelper.subscriptions(
+        token
     )
 }

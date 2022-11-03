@@ -2,16 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_24pxblack"
             android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_contact_fragment"
-            android:icon="@drawable/ic_description_24pxblack"
-            android:title="@string/contact" />
+        <item android:title="@string/contact">
+            <menu>
+                <item
+                    android:id="@+id/nav_contact_fragment"
+                    android:icon="@drawable/ic_description_24pxblack"
+                    android:title="@string/customer" />
+
+                <item
+                    android:id="@+id/nav_supplier_fragment"
+                    android:icon="@drawable/ic_description_24pxblack"
+                    android:title="@string/suppliers" />
+            </menu>
+        </item>
         <item
             android:id="@+id/nav_pos"
             android:icon="@drawable/ic_description_24pxblack"

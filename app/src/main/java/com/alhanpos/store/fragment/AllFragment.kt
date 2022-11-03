@@ -26,7 +26,7 @@ class AllFragment : BaseFragment<FragmentAllProductBinding>(), ProductAdapter.Bu
     }
 
     private fun setAllData(posList: ArrayList<ProductData>) {
-        val layoutManager = GridAutofitLayoutManager(requireContext(), 325)
+        val layoutManager = GridAutofitLayoutManager(requireContext(), 400)
         val adapter = ProductAdapter(posList, this)
         binding.rvProduct.adapter = adapter
         binding.rvProduct.layoutManager = layoutManager

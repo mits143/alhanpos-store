@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.alhanpos.store.adapter.ContactAdapter
+import com.alhanpos.store.adapter.ProductAdapter
 import com.alhanpos.store.databinding.FragmentContactBinding
 import com.alhanpos.store.prefs
+import com.alhanpos.store.util.GridAutofitLayoutManager
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.ContactViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,8 +28,11 @@ class ContactFragment : BaseFragment<FragmentContactBinding>() {
     }
 
     private fun setContactData() {
+//        adapter = ContactAdapter(arrayListOf())
+        val layoutManager = GridAutofitLayoutManager(requireContext(), 400)
         adapter = ContactAdapter(arrayListOf())
         binding.rVCategory.adapter = adapter
+        binding.rVCategory.layoutManager = layoutManager
     }
 
     private fun setObserver() {

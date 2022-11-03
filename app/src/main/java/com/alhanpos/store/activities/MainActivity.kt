@@ -47,6 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
                 R.id.nav_items,
                 R.id.nav_more,
                 R.id.nav_contact_fragment,
+                R.id.nav_supplier_fragment,
                 R.id.nav_stock_adjustment,
                 R.id.nav_expenses,
             ), binding.drawerLayout
@@ -92,6 +93,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             R.id.nav_add_sale -> hideBottomNavigation()
             R.id.nav_add_stock_transfer -> hideBottomNavigation()
             R.id.nav_contact_fragment -> hideBottomNavigation()
+            R.id.nav_supplier_fragment -> hideBottomNavigation()
             R.id.nav_stock_adjustment -> hideBottomNavigation()
             R.id.nav_expenses -> hideBottomNavigation()
             else -> showBottomNavigationView()

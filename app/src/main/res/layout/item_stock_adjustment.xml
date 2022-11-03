@@ -12,9 +12,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/txtDate"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
@@ -24,9 +24,9 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/txtRefNo"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
@@ -36,9 +36,9 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/txtLocation"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
@@ -49,9 +49,9 @@
             android:visibility="visible" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/txtAdjustment"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"

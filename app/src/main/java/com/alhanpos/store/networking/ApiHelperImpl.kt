@@ -7,10 +7,16 @@ import com.alhanpos.store.model.response.category.CategoryResponse
 import com.alhanpos.store.model.response.contact.ContactListResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
+import com.alhanpos.store.model.response.expenses.ExpensesResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.method.PaymentMethodResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
+import com.alhanpos.store.model.response.sell.SellResponse
+import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
+import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
+import com.alhanpos.store.model.response.subscription.SubscripitionResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
 
@@ -41,6 +47,10 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun contactList(
         token: String
     ): Response<ContactListResponse> = apiService.contactList(token)
+
+    override suspend fun supplierList(
+        token: String
+    ): Response<ContactListResponse> = apiService.supplierList(token)
 
     override suspend fun productList(
         token: String
@@ -104,6 +114,42 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         jsonObject: PaymentRequest
     ): Response<JsonObject> = apiService.finalizePayment(
         token, jsonObject
+    )
+
+    override suspend fun stocktransfer(
+        token: String
+    ): Response<StockTransferResponse> = apiService.stocktransfer(
+        token
+    )
+
+    override suspend fun expenses(
+        token: String
+    ): Response<ExpensesResponse> = apiService.expenses(
+        token
+    )
+
+    override suspend fun sells(
+        token: String
+    ): Response<SellResponse> = apiService.sells(
+        token
+    )
+
+    override suspend fun purchaseorders(
+        token: String
+    ): Response<PurchaseOrderResponse> = apiService.purchaseorders(
+        token
+    )
+
+    override suspend fun stockadjustments(
+        token: String
+    ): Response<StockAdjustmentResponse> = apiService.stockadjustments(
+        token
+    )
+
+    override suspend fun subscriptions(
+        token: String
+    ): Response<SubscripitionResponse> = apiService.subscriptions(
+        token
     )
 
 }

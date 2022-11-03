@@ -172,4 +172,12 @@
     <string name="select_product">Select Product</string>
     <string name="select_payment_account">Select Payment Account</string>
     <string name="select_payment_method">Select Payment Method</string>
+    <string name="quantity">Quantity</string>
+    <string name="sku">SKU</string>
+    <string name="product_price">Price</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="total_due">Total Due</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="supplier_id">Supplier ID</string>
+    <string name="search_product">Search Product</string>
 </resources>

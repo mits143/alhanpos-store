@@ -7,10 +7,16 @@ import com.alhanpos.store.model.response.category.CategoryResponse
 import com.alhanpos.store.model.response.contact.ContactListResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
+import com.alhanpos.store.model.response.expenses.ExpensesResponse
 import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.method.PaymentMethodResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
+import com.alhanpos.store.model.response.sell.SellResponse
+import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
+import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
+import com.alhanpos.store.model.response.subscription.SubscripitionResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
 
@@ -42,6 +48,10 @@ interface ApiHelper {
     ): Response<LocationResponse>
 
     suspend fun contactList(
+        token: String
+    ): Response<ContactListResponse>
+
+    suspend fun supplierList(
         token: String
     ): Response<ContactListResponse>
 
@@ -106,4 +116,28 @@ interface ApiHelper {
         token: String,
         jsonObject: PaymentRequest
     ): Response<JsonObject>
+
+    suspend fun stocktransfer(
+        token: String,
+    ): Response<StockTransferResponse>
+
+    suspend fun expenses(
+        token: String,
+    ): Response<ExpensesResponse>
+
+    suspend fun sells(
+        token: String,
+    ): Response<SellResponse>
+
+    suspend fun purchaseorders(
+        token: String,
+    ): Response<PurchaseOrderResponse>
+
+    suspend fun stockadjustments(
+        token: String,
+    ): Response<StockAdjustmentResponse>
+
+    suspend fun subscriptions(
+        token: String,
+    ): Response<SubscripitionResponse>
 }

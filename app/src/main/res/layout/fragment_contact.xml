@@ -18,7 +18,6 @@
             android:layout_marginHorizontal="@dimen/_8sdp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:cardElevation="@dimen/_4sdp"
             app:cardUseCompatPadding="true"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -90,92 +89,85 @@
 
                 </LinearLayout>
 
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:fadeScrollbars="false"
-                    android:nestedScrollingEnabled="false"
-                    android:overScrollMode="ifContentScrolls"
-                    android:scrollbarThumbHorizontal="@color/btnColor"
-                    android:scrollbars="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@color/btnColor"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10sdp"
+                        android:visibility="gone">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="@dimen/_100sdp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:background="@color/btnColor"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/_10sdp">
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/contact_id"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
 
-                            <TextView
-                                android:layout_width="@dimen/_100sdp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/contact_id"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/business_name"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/name"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/email_address"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/tax_no"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp"
-                                android:visibility="visible" />
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rVCategory"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_contact" />
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/business_name"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <TextView
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/name"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <TextView
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/email_address"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <TextView
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/tax_no"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp"
+                            android:visibility="visible" />
+
                     </LinearLayout>
-                </HorizontalScrollView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rVCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:spanCount="2"
+                        tools:listitem="@layout/item_contact" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -183,7 +175,8 @@
                     android:layout_gravity="end"
                     android:orientation="horizontal"
                     android:paddingHorizontal="@dimen/_10sdp"
-                    android:paddingVertical="@dimen/_20sdp">
+                    android:paddingVertical="@dimen/_20sdp"
+                    android:visibility="gone">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtPrev"

@@ -21,7 +21,6 @@
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
-                app:cardElevation="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -325,7 +324,6 @@
                 android:layout_marginTop="@dimen/_minus20sdp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
-                app:cardElevation="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintTop_toBottomOf="@+id/cvWelcome">
 
@@ -364,7 +362,6 @@
                 android:visibility="visible"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
-                app:cardElevation="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintTop_toBottomOf="@+id/cvLastSales">
 

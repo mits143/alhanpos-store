@@ -1,12 +1,8 @@
 package com.alhanpos.store.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.alhanpos.store.R
 import com.alhanpos.store.databinding.ItemProductBinding
 import com.alhanpos.store.model.response.product.ProductData
 
@@ -24,30 +20,11 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(dataList[position]) {
-                if (absoluteAdapterPosition == 0) {
-                    binding.imgProduct.setImageResource(R.drawable.whir)
-                    val layoutParams = LinearLayout.LayoutParams(150, 150)
-                    binding.imgProduct.layoutParams = layoutParams
-                    binding.txtProduct.text = "Add"
-                    binding.txtPrice.visibility = View.GONE
-                    binding.txtProduct.setTextColor(
-                        ContextCompat.getColor(
-                            itemView.context, R.color.white
-                        )
-                    )
-                    binding.cvProduct.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            itemView.context, R.color.btnColor
-                        )
-                    )
-
-                    binding.cvProduct.setOnClickListener {
-                        buttonClick.onClick()
-                    }
-                } else {
-                    binding.txtProduct.text = this.name
-    //                    binding.txtPrice.text =
-    //                        this.product_variations[0].variations[0].default_sell_price
+                binding.txtProduct.text = this.name.toString()
+                binding.txtSKU.text = this.sku.toString()
+                binding.txtQuantity.text = this.alert_quantity.toString()
+                if (this.brand != null) {
+                    binding.txtBrand.text = this.brand.name
                 }
             }
         }

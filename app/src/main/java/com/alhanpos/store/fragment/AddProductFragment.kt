@@ -78,18 +78,19 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
             binding.edtProductName.requestFocus()
             return
         }
-        if (TextUtils.isEmpty(binding.edtPrice.text.toString().trim())) {
-            binding.edtPrice.error = "Price cannot be empty"
-            binding.edtPrice.requestFocus()
-            return
-        }
+//        if (TextUtils.isEmpty(binding.edtPrice.text.toString().trim())) {
+//            binding.edtPrice.error = "Price cannot be empty"
+//            binding.edtPrice.requestFocus()
+//            return
+//        }
         viewModel.addUpdateProduct(
             "Bearer " + prefs.accessToken,
             binding.edtProductName.text.toString().trim(),
             categoryID,
             brandID,
             "0",
-            binding.edtPrice.text.toString().trim(),
+//            binding.edtPrice.text.toString().trim(),
+        ""
         )
     }
 
@@ -159,7 +160,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
                     it.data?.let {
                         showToast(it)
                         binding.edtProductName.setText("")
-                        binding.edtPrice.setText("")
+//                        binding.edtPrice.setText("")
                         binding.spinCategory.setSelection(0)
                         binding.spinBrand.setSelection(0)
                     }

@@ -25,7 +25,6 @@
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
-                app:cardElevation="@dimen/_4sdp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -266,7 +265,6 @@
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
-                app:cardElevation="@dimen/_4sdp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintTop_toBottomOf="@+id/cvAddPurchaseOrder">
 
@@ -346,7 +344,6 @@
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 app:cardBackgroundColor="#f3f3f3"
                 app:cardCornerRadius="@dimen/_10sdp"
-                app:cardElevation="@dimen/_4sdp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintTop_toBottomOf="@+id/cvScanAddProduct">
 

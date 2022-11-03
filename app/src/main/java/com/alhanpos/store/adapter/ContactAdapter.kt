@@ -20,11 +20,13 @@ class ContactAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(dataList[position]) {
-                binding.txtID.text = this.id.toString()
-                binding.txtBusiness.text = this.supplier_business_name ?: "-"
-                binding.txtName.text = this.name ?: "-"
-                binding.txtEmail.text = this.email ?: "-"
-                binding.txtTax.text = this.tax_number ?: "-"
+//                binding.imgEdit.text = this.id.toString()
+//                binding.imgCustomer.text = this.supplier_business_name ?: "-"
+                binding.txtContactID.text = this.contact_id
+                binding.txtPhoneNumber.text = this.mobile
+                binding.txtEmail.text = this.email
+                binding.txtAdvanceBalance.text = this.balance
+                binding.txtTotalDue.text = this.total_due
             }
         }
     }

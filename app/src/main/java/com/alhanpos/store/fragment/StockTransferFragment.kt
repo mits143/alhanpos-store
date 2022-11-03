@@ -7,45 +7,60 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.MainAdapter
+import com.alhanpos.store.adapter.StockTransferAdapter
 import com.alhanpos.store.databinding.FragmentStockTransferBinding
+import com.alhanpos.store.model.response.stocktransfer.Data
+import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
-import com.alhanpos.store.viewmodel.PosViewModel
+import com.alhanpos.store.viewmodel.StockTransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>() {
+class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(), StockTransferAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentStockTransferBinding =
         FragmentStockTransferBinding::inflate
 
-    private val viewModel: PosViewModel by viewModel()
+    private val viewModel: StockTransferViewModel by viewModel()
 
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: StockTransferAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
-        adapter = MainAdapter(arrayListOf(), "TYPE_STOCK_TRANSFER")
-        binding.rVCategory.adapter = adapter
         binding.flAdd.setOnClickListener {
             findNavController().navigate(R.id.action_nav_stock_transfer_to_nav_add_stock_transfer)
         }
+    }
 
-        viewModel.fetchData()
+    private fun setStockData(list: ArrayList<Data>){
+        adapter = StockTransferAdapter(arrayListOf(), this)
+        binding.rVCategory.adapter = adapter
+        adapter.addData(list)
     }
 
     private fun setObserver() {
-        viewModel.getData.observe(this) {
+        viewModel.fetchStock("Bearer " + prefs.accessToken)
+        viewModel.getStockData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
                     it.data?.let {
-                        adapter.addData(it)
+                        setStockData(it.data)
                     }
                 }
                 Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
                     showToast(it.message)
                 }
             }
         }
+    }
+
+    override fun onEditClick(data: Data) {
+    }
+
+    override fun onDeleteClick(data: Data, pos: Int) {
     }
 }

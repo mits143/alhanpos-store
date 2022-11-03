@@ -70,6 +70,7 @@
         android:layout_gravity="start"
         android:background="@color/white"
         android:fitsSystemWindows="true"
+        app:subheaderColor="@color/black"
         app:headerLayout="@layout/nav_header_home"
         app:itemBackground="@color/nav_item_bg"
         app:itemIconTint="@color/bnv_nav_item_foreground"

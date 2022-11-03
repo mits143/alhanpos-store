@@ -21,16 +21,13 @@
             android:name=".activities.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.AlhanposStore.NoActionBar" />
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="false" />
         <activity
             android:name=".activities.SplashActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

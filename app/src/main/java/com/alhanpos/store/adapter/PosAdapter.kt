@@ -1,9 +1,7 @@
 package com.alhanpos.store.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemPosBinding
 import com.alhanpos.store.model.response.product.ProductData
@@ -28,7 +26,8 @@ class PosAdapter(
                 binding.txtName.text = "$name $sku"
                 quantity = if (quantity == 0) 1 else quantity
                 binding.txtQty.setText(quantity.toString())
-                price = (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax!!.toFloat()).toString()
+                price =
+                    (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax!!.toFloat()).toString()
                 binding.txtPrice.text = price
                 buttonClick.onClick(dataList, position)
 

@@ -5,7 +5,10 @@ object Constants {
     const val DASHBOARD = "api/get-totals"
     const val DASHBOARD_GRAPH = "api/get-dashboard"
     const val LOCATION = "connector/api/business-location"
-    const val CONTACTLIST = "connector/api/contactapi"
+
+    //    const val CONTACTLIST = "connector/api/contactapi"
+    const val CONTACTLIST = "api/customers"
+    const val SUPPLIERLIST = "api/suppliers"
     const val PRODUCTLIST = "connector/api/product"
     const val PAYMENT_ACCOUNTS = "connector/api/payment-accounts"
     const val PAYMENT_METHODS = "connector/api/payment-methods"
@@ -18,4 +21,10 @@ object Constants {
     const val DELETEBRAND = "api/brand/delete"
     const val ADDUPDATEPRODUCT = "api/product/add"
     const val FINALIZEPAYMENT = "api/finalize/payment"
+    const val STOCKTRANSFER = "api/stocktransfer"
+    const val EXPENSES = "api/expenses"
+    const val SELLS = "api/sells"
+    const val PURCHASEORDERS = "api/purchaseorders"
+    const val STOCKADJUSTMENTS = "api/stockadjustments"
+    const val SUBSCRIPTIONS = "api/subscriptions"
 }

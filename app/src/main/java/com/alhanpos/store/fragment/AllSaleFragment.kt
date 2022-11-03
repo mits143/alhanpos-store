@@ -6,42 +6,47 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
-import com.alhanpos.store.adapter.MainAdapter
+import com.alhanpos.store.adapter.SellsAdapter
 import com.alhanpos.store.databinding.FragmentAllSaleBinding
+import com.alhanpos.store.model.response.sell.SellResponseItem
+import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
-import com.alhanpos.store.viewmodel.PosViewModel
+import com.alhanpos.store.viewmodel.SellsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllSaleFragment : BaseFragment<FragmentAllSaleBinding>() {
+class AllSaleFragment : BaseFragment<FragmentAllSaleBinding>(), SellsAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAllSaleBinding =
         FragmentAllSaleBinding::inflate
 
-    private val viewModel: PosViewModel by viewModel()
+    private val viewModel: SellsViewModel by viewModel()
 
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: SellsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
-        adapter = MainAdapter(arrayListOf(), "TYPE_ALL_SALE")
-        binding.rVCategory.adapter = adapter
         binding.flAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_all_sale_to_nav_add_sale)
+            findNavController().navigate(R.id.action_nav_stock_transfer_to_nav_add_stock_transfer)
         }
+    }
 
-        viewModel.fetchData()
+    private fun setExpensesData(list: ArrayList<SellResponseItem>) {
+        adapter = SellsAdapter(arrayListOf(), this)
+        binding.rVCategory.adapter = adapter
+        adapter.addData(list)
     }
 
     private fun setObserver() {
-        viewModel.getData.observe(this) {
+        viewModel.fetchSells("Bearer " + prefs.accessToken)
+        viewModel.getSellData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     binding.animationView.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
-                    binding.animationView.visibility = View.GONE
                     it.data?.let {
-                        adapter.addData(it)
+                        binding.animationView.visibility = View.GONE
+                        setExpensesData(it)
                     }
                 }
                 Status.ERROR -> {
@@ -50,5 +55,11 @@ class AllSaleFragment : BaseFragment<FragmentAllSaleBinding>() {
                 }
             }
         }
+    }
+
+    override fun onEditClick(data: SellResponseItem) {
+    }
+
+    override fun onDeleteClick(data: SellResponseItem, pos: Int) {
     }
 }

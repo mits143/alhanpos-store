@@ -60,5 +60,6 @@ data class ContactData(
     val total_rp_used: String,
     val type: String,
     val updated_at: String,
+    val total_due: String,
     val zip_code: String
 )

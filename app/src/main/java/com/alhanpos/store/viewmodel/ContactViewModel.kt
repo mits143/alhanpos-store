@@ -40,4 +40,26 @@ class ContactViewModel(
             } else setContactData.postValue(Resource.error("No internet connection", null))
         }
     }
+
+    fun fetchSupplier(
+        token: String
+    ) {
+        viewModelScope.launch {
+            setContactData.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                mainRepository.supplierList(
+                    token
+                ).let {
+                    if (it.isSuccessful) {
+                        setContactData.postValue(Resource.success(it.body()))
+                    } else setContactData.postValue(
+                        Resource.error(
+                            it.message(),
+                            null
+                        )
+                    )
+                }
+            } else setContactData.postValue(Resource.error("No internet connection", null))
+        }
+    }
 }

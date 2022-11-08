@@ -17,6 +17,7 @@ import com.alhanpos.store.model.response.sell.SellResponse
 import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
 import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
 import com.alhanpos.store.model.response.subscription.SubscripitionResponse
+import com.alhanpos.store.model.response.units.UnitResponse
 import com.alhanpos.store.util.Constants.ADDUPDATEBRAND
 import com.alhanpos.store.util.Constants.ADDUPDATECATEGORY
 import com.alhanpos.store.util.Constants.ADDUPDATEPRODUCT
@@ -105,7 +106,7 @@ interface ApiService {
     @GET(UNITSLIST)
     suspend fun unitsList(
         @Header("Authorization") token: String
-    ): Response<CategoryResponse>
+    ): Response<UnitResponse>
 
     @GET(CATEGORYLIST)
     suspend fun categoryList(
@@ -159,7 +160,10 @@ interface ApiService {
         @Field(value = "brand_id", encoded = false) brand_id: String,
         @Field(value = "category_id", encoded = false) category_id: String,
         @Field(value = "unit_id", encoded = false) unit_id: String,
-        @Field(value = "selling_price", encoded = false) selling_price: String
+        @Field(value = "selling_price", encoded = false) selling_price: String,
+        @Field(value = "tax", encoded = false) tax: String,
+        @Field(value = "sku", encoded = false) sku: String,
+        @Field(value = "alert_quantity", encoded = false) alert_quantity: String
     ): Response<JsonObject>
 
     @POST(FINALIZEPAYMENT)

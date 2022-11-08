@@ -27,6 +27,8 @@ class StockAdjustmentAdapter(
                 binding.txtRefNo.text = this.refNo
                 binding.txtLocation.text = this.locationName
                 binding.txtAdjustment.text = this.adjustmentType
+                binding.txtTotalAmt.text = this.finalTotal
+                binding.txtTotalAmtRec.text = this.totalAmountRecovered
             }
         }
     }

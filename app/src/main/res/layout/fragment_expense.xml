@@ -164,6 +164,50 @@
                                 android:fontFamily="@font/poppins_regular"
                                 android:gravity="center"
                                 android:paddingHorizontal="@dimen/_10sdp"
+                                android:text="@string/payment_status"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/_10sdp"
+                                android:text="@string/tax"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/_10sdp"
+                                android:text="@string/total_amount"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/_10sdp"
+                                android:text="@string/total_amount_due"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/_10sdp"
                                 android:text="@string/note"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10ssp"

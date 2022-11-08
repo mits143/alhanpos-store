@@ -26,6 +26,9 @@ class ProductAdapter(
                 if (this.brand != null) {
                     binding.txtBrand.text = this.brand.name
                 }
+                binding.imgEdit.setOnClickListener {
+                    buttonClick.onClick(this)
+                }
             }
         }
     }
@@ -45,6 +48,6 @@ class ProductAdapter(
     }
 
     interface ButtonClick {
-        fun onClick()
+        fun onClick(data: ProductData)
     }
 }

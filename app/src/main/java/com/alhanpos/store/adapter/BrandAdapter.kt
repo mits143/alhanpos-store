@@ -55,7 +55,7 @@ class BrandAdapter(
     fun removeItem(position: Int) {
         this.dataList.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position, itemCount - position)
+        notifyItemRangeChanged(position, itemCount)
     }
 
     interface ButtonClick {

@@ -8,7 +8,7 @@ data class ProductData(
     var quantity: Int = 0,
     val alert_quantity: String? = null,
     val barcode_type: String? = null,
-    val brand: Brand,
+    val brand: Brand? = null,
     val business_id: String? = null,
     val category: Any? = null,
     val created_by: String? = null,

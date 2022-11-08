@@ -43,7 +43,7 @@ data class Data(
     @SerializedName("subscription_repeat_on")
     val subscriptionRepeatOn: Any,
     @SerializedName("tax")
-    val tax: Any,
+    val tax: String,
     @SerializedName("transaction_date")
     val transactionDate: String,
     @SerializedName("type")

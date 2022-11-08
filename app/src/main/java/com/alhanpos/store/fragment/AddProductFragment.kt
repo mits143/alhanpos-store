@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.navArgs
 import com.alhanpos.store.R
 import com.alhanpos.store.databinding.FragmentAddProductBinding
 import com.alhanpos.store.prefs
@@ -25,6 +26,9 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
     var categoryList: ArrayList<AddProductViewModel.Common> = ArrayList()
     var brandList: ArrayList<AddProductViewModel.Common> = ArrayList()
 
+    private val args: AddProductFragmentArgs by navArgs()
+
+    var unitID = ""
     var categoryID = ""
     var brandID = ""
 
@@ -41,12 +45,24 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
         binding.spinCategory.adapter = adapter
         binding.spinCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
+                parent: AdapterView<*>, view: View?, position: Int, id: Long
             ) {
                 categoryID = (adapter.getItem(position) as AddProductViewModel.Common).id
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    private fun setUnitData(dataList: ArrayList<AddProductViewModel.Common>) {
+        val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, dataList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinUnit.adapter = adapter
+        binding.spinUnit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>, view: View?, position: Int, id: Long
+            ) {
+                unitID = (adapter.getItem(position) as AddProductViewModel.Common).id
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -60,10 +76,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
 
         binding.spinBrand.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
+                parent: AdapterView<*>, view: View?, position: Int, id: Long
             ) {
                 brandID = (adapter.getItem(position) as AddProductViewModel.Common).id
             }
@@ -78,24 +91,46 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
             binding.edtProductName.requestFocus()
             return
         }
-//        if (TextUtils.isEmpty(binding.edtPrice.text.toString().trim())) {
-//            binding.edtPrice.error = "Price cannot be empty"
-//            binding.edtPrice.requestFocus()
-//            return
-//        }
         viewModel.addUpdateProduct(
             "Bearer " + prefs.accessToken,
             binding.edtProductName.text.toString().trim(),
-            categoryID,
             brandID,
-            "0",
-//            binding.edtPrice.text.toString().trim(),
-        ""
+            categoryID,
+            unitID,
+            binding.spinPrice.text.toString().trim(),
+            binding.spinTax.text.toString().trim(),
+            binding.spinSKU.text.toString().trim(),
+            binding.spinQuantity.text.toString().trim()
         )
     }
 
     private fun setObserver() {
-        viewModel.fetchCategory("Bearer " + prefs.accessToken)
+        viewModel.fetchUnit("Bearer " + prefs.accessToken)
+        viewModel.getUnitData.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
+                    it.data?.let {
+                        it.data.forEach {
+                            unitList.add(
+                                AddProductViewModel.Common(
+                                    it.actualName, it.id.toString()
+                                )
+                            )
+                        }
+                        setUnitData(unitList)
+                    }
+                    viewModel.fetchCategory("Bearer " + prefs.accessToken)
+                }
+                Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
+                    showToast(it.message)
+                }
+            }
+        }
 
         viewModel.getCategoryData.observe(this) {
             when (it.status) {
@@ -108,8 +143,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
                         it.forEach {
                             categoryList.add(
                                 AddProductViewModel.Common(
-                                    it.name!!,
-                                    it.id.toString()
+                                    it.name!!, it.id.toString()
                                 )
                             )
                         }
@@ -135,8 +169,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
                         it.forEach {
                             brandList.add(
                                 AddProductViewModel.Common(
-                                    it.name!!,
-                                    it.id.toString()
+                                    it.name!!, it.id.toString()
                                 )
                             )
                         }

@@ -96,14 +96,14 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <Spinner
+                            <EditText
                                 android:id="@+id/spinSKU"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/category"
+                                android:hint="@string/sku"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -135,14 +135,14 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <Spinner
-                                android:id="@+id/spinUnit"
+                            <EditText
+                                android:id="@+id/spinQuantity"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/unit"
+                                android:hint="@string/quantity"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -161,6 +161,28 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/unit"
+                                android:textColor="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <Spinner
+                                android:id="@+id/spinUnit"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/unit"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
+                                android:textSize="@dimen/_11ssp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -257,14 +279,14 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <Spinner
+                            <EditText
                                 android:id="@+id/spinTax"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/brand"
+                                android:hint="@string/tax"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -291,14 +313,14 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <Spinner
+                            <EditText
                                 android:id="@+id/spinPrice"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/category"
+                                android:hint="@string/product_price"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"

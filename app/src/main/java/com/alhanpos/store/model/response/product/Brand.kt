@@ -1,5 +1,7 @@
 package com.alhanpos.store.model.response.product
 
+import java.io.Serializable
+
 data class Brand(
     val business_id: String? = null,
     val created_at: String? = null,
@@ -10,4 +12,4 @@ data class Brand(
     val name: String? = null,
     val updated_at: String? = null,
     val use_for_repair: String? = null
-) : java.io.Serializable
+) : Serializable

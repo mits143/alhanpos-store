@@ -160,6 +160,28 @@
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10ssp" />
 
+                            <TextView
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/_10sdp"
+                                android:text="@string/total_amount"
+
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/_10sdp"
+                                android:text="@string/total_amount_receviced"
+
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
                         </LinearLayout>
 
                         <androidx.recyclerview.widget.RecyclerView

@@ -25,9 +25,13 @@ class ExpensesAdapter(
             with(dataList[position]) {
                 binding.txtDate.text = this.transactionDate
                 binding.txtRefNo.text = this.refNo
-                binding.txtRecurring.text = this.isRecurring
+                binding.txtRecurring.text = this.recurInterval
                 binding.txtExpCat.text = this.category
                 binding.txtNote.text = this.additionalNotes
+                binding.txtPaymentStatus.text = this.paymentStatus
+                binding.txtTax.text = this.tax
+                binding.txtTotalAmt.text = this.finalTotal
+                binding.txtPaymentDue.text = "0"
             }
         }
     }

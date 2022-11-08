@@ -60,6 +60,54 @@
             android:textSize="@dimen/_10ssp" />
 
         <TextView
+            android:id="@+id/txtPaymentStatus"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/expense_category"
+            android:textColor="@color/fontColor3"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:id="@+id/txtTax"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/expense_category"
+            android:textColor="@color/fontColor3"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:id="@+id/txtTotalAmt"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/expense_category"
+            android:textColor="@color/fontColor3"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:id="@+id/txtPaymentDue"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/expense_category"
+            android:textColor="@color/fontColor3"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
             android:id="@+id/txtNote"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"

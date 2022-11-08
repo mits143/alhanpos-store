@@ -180,4 +180,6 @@
     <string name="suppliers">Suppliers</string>
     <string name="supplier_id">Supplier ID</string>
     <string name="search_product">Search Product</string>
+    <string name="total_amount_receviced">Total Amount Received</string>
+    <string name="total_amount_due">Total Amount Due</string>
 </resources>

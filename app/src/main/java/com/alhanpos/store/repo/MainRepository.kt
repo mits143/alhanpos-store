@@ -9,6 +9,7 @@ import com.alhanpos.store.model.response.sell.SellResponse
 import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
 import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
 import com.alhanpos.store.model.response.subscription.SubscripitionResponse
+import com.alhanpos.store.model.response.units.UnitResponse
 import com.alhanpos.store.networking.ApiHelper
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -95,9 +96,12 @@ class MainRepository(private val apiHelper: ApiHelper) {
         brand_id: String,
         category_id: String,
         unit_id: String,
-        selling_price: String
+        selling_price: String,
+        tax: String,
+        sku: String,
+        alert_quantity: String
     ) = apiHelper.addUpdateProduct(
-        token, name, brand_id, category_id, unit_id, selling_price
+        token, name, brand_id, category_id, unit_id, selling_price, tax, sku, alert_quantity
     )
 
     suspend fun finalizePayment(
@@ -139,6 +143,12 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun subscriptions(
         token: String
     ): Response<SubscripitionResponse> = apiHelper.subscriptions(
+        token
+    )
+
+    suspend fun unitsList(
+        token: String
+    ): Response<UnitResponse> = apiHelper.unitsList(
         token
     )
 }

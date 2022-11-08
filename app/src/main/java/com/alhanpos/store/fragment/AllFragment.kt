@@ -23,6 +23,11 @@ class AllFragment : BaseFragment<FragmentAllProductBinding>(), ProductAdapter.Bu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.flAdd.setOnClickListener {
+            val action =
+                AllFragmentDirections.actionNavAllProductToNavAddProduct()
+            findNavController().navigate(action)
+        }
     }
 
     private fun setAllData(posList: ArrayList<ProductData>) {
@@ -53,9 +58,9 @@ class AllFragment : BaseFragment<FragmentAllProductBinding>(), ProductAdapter.Bu
         }
     }
 
-    override fun onClick() {
+    override fun onClick(data: ProductData) {
         val action =
-            AllFragmentDirections.actionNavAllProductToNavAddProduct()
+            AllFragmentDirections.actionNavAllProductToNavAddProduct(data)
         findNavController().navigate(action)
     }
 }

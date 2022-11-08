@@ -22,7 +22,7 @@ class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonC
 
     private lateinit var adapter: BrandAdapter
 
-    private var pos = 0
+    private var position = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
@@ -41,38 +41,42 @@ class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonC
     private fun setObserver() {
         viewModel.fetchBrand("Bearer " + prefs.accessToken)
         viewModel.getBrandData.observe(this) {
-            when (it.status) {
-                Status.LOADING -> {
-                    binding.animationView.visibility = View.VISIBLE
-                }
-                Status.SUCCESS -> {
-                    binding.animationView.visibility = View.GONE
-                    it.data?.let {
-                        setBrandData(it)
+            it.getContentIfNotHandled()?.let { //
+                when (it.status) {
+                    Status.LOADING -> {
+                        binding.animationView.visibility = View.VISIBLE
                     }
-                }
-                Status.ERROR -> {
-                    binding.animationView.visibility = View.GONE
-                    showToast(it.message)
+                    Status.SUCCESS -> {
+                        binding.animationView.visibility = View.GONE
+                        it.data?.let {
+                            setBrandData(it)
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.animationView.visibility = View.GONE
+                        showToast(it.message)
+                    }
                 }
             }
         }
 
         viewModel.getMsg.observe(this) {
-            when (it.status) {
-                Status.LOADING -> {
-                    binding.animationView.visibility = View.VISIBLE
-                }
-                Status.SUCCESS -> {
-                    binding.animationView.visibility = View.GONE
-                    it.data?.let {
-                        showToast(it)
-                        adapter.removeItem(pos)
+            it.getContentIfNotHandled()?.let { //
+                when (it.status) {
+                    Status.LOADING -> {
+                        binding.animationView.visibility = View.VISIBLE
                     }
-                }
-                Status.ERROR -> {
-                    binding.animationView.visibility = View.GONE
-                    showToast(it.message)
+                    Status.SUCCESS -> {
+                        binding.animationView.visibility = View.GONE
+                        it.data?.let {
+                            showToast(it)
+                            adapter.removeItem(position)
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.animationView.visibility = View.GONE
+                        showToast(it.message)
+                    }
                 }
             }
         }
@@ -85,7 +89,7 @@ class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonC
     }
 
     override fun onDeleteClick(data: BrandResponseItem, pos: Int) {
-        this.pos = pos
+        position = pos
         viewModel.deleteBrand("Bearer " + prefs.accessToken, data.id.toString())
     }
 }

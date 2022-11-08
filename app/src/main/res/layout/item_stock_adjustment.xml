@@ -60,6 +60,30 @@
             android:textColor="@color/fontColor3"
             android:textSize="@dimen/_10ssp" />
 
+        <TextView
+            android:id="@+id/txtTotalAmt"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/total_amount"
+
+            android:textColor="@color/fontColor3"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:id="@+id/txtTotalAmtRec"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/total_amount_receviced"
+
+            android:textColor="@color/fontColor3"
+            android:textSize="@dimen/_10ssp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

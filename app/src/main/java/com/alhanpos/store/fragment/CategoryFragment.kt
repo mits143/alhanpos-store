@@ -40,38 +40,42 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
     private fun setObserver() {
         viewModel.fetchCategory("Bearer " + prefs.accessToken)
         viewModel.getCategoryData.observe(this) {
-            when (it.status) {
-                Status.LOADING -> {
-                    binding.animationView.visibility = View.VISIBLE
-                }
-                Status.SUCCESS -> {
-                    binding.animationView.visibility = View.GONE
-                    it.data?.let {
-                        setCategoryData(it)
+            it.getContentIfNotHandled()?.let { //
+                when (it.status) {
+                    Status.LOADING -> {
+                        binding.animationView.visibility = View.VISIBLE
                     }
-                }
-                Status.ERROR -> {
-                    binding.animationView.visibility = View.GONE
-                    showToast(it.message)
+                    Status.SUCCESS -> {
+                        binding.animationView.visibility = View.GONE
+                        it.data?.let {
+                            setCategoryData(it)
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.animationView.visibility = View.GONE
+                        showToast(it.message)
+                    }
                 }
             }
         }
 
         viewModel.getMsg.observe(this) {
-            when (it.status) {
-                Status.LOADING -> {
-                    binding.animationView.visibility = View.VISIBLE
-                }
-                Status.SUCCESS -> {
-                    binding.animationView.visibility = View.GONE
-                    it.data?.let {
-                        showToast(it)
-                        adapter.removeItem(pos)
+            it.getContentIfNotHandled()?.let { //
+                when (it.status) {
+                    Status.LOADING -> {
+                        binding.animationView.visibility = View.VISIBLE
                     }
-                }
-                Status.ERROR -> {
-                    binding.animationView.visibility = View.GONE
-                    showToast(it.message)
+                    Status.SUCCESS -> {
+                        binding.animationView.visibility = View.GONE
+                        it.data?.let {
+                            showToast(it)
+                            adapter.removeItem(pos)
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.animationView.visibility = View.GONE
+                        showToast(it.message)
+                    }
                 }
             }
         }

@@ -17,6 +17,7 @@ import com.alhanpos.store.model.response.sell.SellResponse
 import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
 import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
 import com.alhanpos.store.model.response.subscription.SubscripitionResponse
+import com.alhanpos.store.model.response.units.UnitResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
 
@@ -109,7 +110,10 @@ interface ApiHelper {
         brand_id: String,
         category_id: String,
         unit_id: String,
-        selling_price: String
+        selling_price: String,
+        tax: String,
+        sku: String,
+        alert_quantity: String
     ): Response<JsonObject>
 
     suspend fun finalizePayment(
@@ -140,4 +144,8 @@ interface ApiHelper {
     suspend fun subscriptions(
         token: String,
     ): Response<SubscripitionResponse>
+
+    suspend fun unitsList(
+        token: String,
+    ): Response<UnitResponse>
 }

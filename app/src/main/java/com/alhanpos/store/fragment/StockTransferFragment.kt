@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
-import com.alhanpos.store.adapter.MainAdapter
 import com.alhanpos.store.adapter.StockTransferAdapter
 import com.alhanpos.store.databinding.FragmentStockTransferBinding
 import com.alhanpos.store.model.response.stocktransfer.Data
@@ -15,7 +14,8 @@ import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.StockTransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(), StockTransferAdapter.ButtonClick {
+class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(),
+    StockTransferAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentStockTransferBinding =
         FragmentStockTransferBinding::inflate
@@ -31,7 +31,7 @@ class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(), Stoc
         }
     }
 
-    private fun setStockData(list: ArrayList<Data>){
+    private fun setStockData(list: ArrayList<Data>) {
         adapter = StockTransferAdapter(arrayListOf(), this)
         binding.rVCategory.adapter = adapter
         adapter.addData(list)

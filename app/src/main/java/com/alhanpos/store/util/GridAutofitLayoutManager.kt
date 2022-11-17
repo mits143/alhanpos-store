@@ -1,11 +1,10 @@
 package com.alhanpos.store.util
 
 import android.content.Context
-import androidx.recyclerview.widget.GridLayoutManager
 import android.util.TypedValue
-import androidx.recyclerview.widget.RecyclerView.Recycler
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.Recycler
 
 class GridAutofitLayoutManager : GridLayoutManager {
     private var columnWidth = 0

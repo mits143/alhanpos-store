@@ -35,12 +35,13 @@
                     android:padding="@dimen/_10sdp">
 
                     <TextView
+                        android:id="@+id/txtHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
-                        android:text="@string/add_purchase_order"
+                        android:text="@string/add_contact"
                         android:textAllCaps="true"
                         android:textColor="@color/btnColor"
                         android:textSize="@dimen/_12ssp" />
@@ -57,21 +58,24 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txtCustName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_medium"
-                                android:text="@string/contact_type"
+                                android:text="@string/customer_name"
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/contact_type"
+                                android:hint="@string/customer_name"
                                 android:imeOptions="actionNext"
+                                android:inputType="text"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
@@ -90,14 +94,16 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txtCustomerID"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_medium"
-                                android:text="@string/contact_id"
+                                android:text="@string/customer_id"
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtID"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -105,6 +111,7 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/contact_id"
                                 android:imeOptions="actionNext"
+                                android:inputType="text"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
@@ -135,6 +142,7 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtMobile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
@@ -142,77 +150,8 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/mobile"
                                 android:imeOptions="actionNext"
-                                android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
-                                android:textColor="@color/fontColor3"
-                                android:textColorHint="@color/fontColor3"
-                                android:textSize="@dimen/_10ssp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/_10sdp"
-                            android:layout_height="0dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_medium"
-                                android:text="@string/alternate_contact_number"
-                                android:textColor="@color/fontColor2"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:background="@drawable/border"
-                                android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/alternate_contact_number"
-                                android:imeOptions="actionNext"
-                                android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
-                                android:textColor="@color/fontColor3"
-                                android:textColorHint="@color/fontColor3"
-                                android:textSize="@dimen/_10ssp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_medium"
-                                android:text="@string/landline"
-                                android:textAllCaps="true"
-                                android:textColor="@color/fontColor2"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:background="@drawable/border"
-                                android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/landline"
-                                android:imeOptions="actionNext"
+                                android:inputType="phone"
+                                android:maxLength="10"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
@@ -239,13 +178,15 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/email"
-                                android:imeOptions="actionDone"
+                                android:imeOptions="actionNext"
+                                android:inputType="textEmailAddress"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
@@ -261,13 +202,87 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:orientation="horizontal">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/advance_balance"
+                                android:textColor="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <EditText
+                                android:id="@+id/edtAdvanceBal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/advance_balance"
+                                android:imeOptions="actionNext"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/total_due"
+                                android:textColor="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <EditText
+                                android:id="@+id/edtTotalDue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/total_due"
+                                android:imeOptions="actionDone"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
                         <com.google.android.material.checkbox.MaterialCheckBox
                             android:id="@+id/chkIndividual"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:buttonTint="@color/btnColor"
-                            android:checked="true"
                             android:fontFamily="@font/poppins_medium"
                             android:text="@string/individual"
                             android:textAllCaps="true"
@@ -280,7 +295,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:buttonTint="@color/btnColor"
-                            android:checked="true"
                             android:fontFamily="@font/poppins_medium"
                             android:text="@string/business"
                             android:textAllCaps="true"
@@ -288,6 +302,23 @@
                             android:textSize="@dimen/_12ssp" />
 
                     </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txtProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/btn_bkg"
+                        android:focusable="true"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/save"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintTop_toBottomOf="@+id/cvAddContact" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -297,6 +328,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:visibility="gone"
                 app:cardBackgroundColor="#f3f3f3"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
@@ -329,6 +361,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:visibility="gone"
                 app:cardBackgroundColor="#f3f3f3"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
@@ -355,23 +388,19 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtProceed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/btn_bkg"
-                android:focusable="true"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/save"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintTop_toBottomOf="@+id/cvAddContact" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7F000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_100sdp"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="loader.json"
+        app:lottie_loop="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/date"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/reference_no"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/location"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -57,7 +57,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/adjustment"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -69,7 +69,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/total_amount"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -81,7 +81,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/total_amount_receviced"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
     </LinearLayout>

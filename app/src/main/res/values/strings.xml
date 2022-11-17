@@ -25,7 +25,7 @@
     <string name="category">Category</string>
     <string name="brand">Brand</string>
     <string name="purchase_order">Purchase Order</string>
-    <string name="all_sale">All Sale</string>
+    <string name="all_sale">Sells</string>
     <string name="subscription">Subscription</string>
     <string name="stock_transfer">Stock Transfer</string>
     <string name="reports">Reports</string>
@@ -87,7 +87,7 @@
     <string name="next">Next</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="all_purchase_orders">All purchase orders</string>
+    <string name="all_purchase_orders">Purchase Orders</string>
     <string name="date">Date</string>
     <string name="reference_no">Reference No</string>
     <string name="supplier">Supplier</string>
@@ -158,7 +158,7 @@
     <string name="applicable_tax">Applicable Tax</string>
     <string name="add_expense">Add Expense</string>
     <string name="recurring">Recurring</string>
-    <string name="adjustment_date">Adjustment Date</string>
+    <string name="adjustment_type">Adjustment Type</string>
     <string name="amount_recovered">Amount Recovered</string>
     <string name="adjustment">Adjustment</string>
     <string name="start_at">Start At</string>
@@ -182,4 +182,37 @@
     <string name="search_product">Search Product</string>
     <string name="total_amount_receviced">Total Amount Received</string>
     <string name="total_amount_due">Total Amount Due</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="supplier_name">Supplier Name</string>
+    <string name="add_supplier">Add Supplier</string>
+    <string name="purchase_status">Purchase Status</string>
+    <string name="purchase_date">Purchase Date</string>
+    <string name="additional_shipping_charges">(+) Additional Shipping Charges</string>
+    <string name="total_amount_recovered">Total Amount Recovered</string>
+    <string name="reason">Reason</string>
+    <string name="expense_note">Expense Note</string>
+    <string name="paid_on">Paid on</string>
+    <string name="purchase">Purchase</string>
+    <string name="add_purchase">Add Purchase</string>
+    <string-array name="orderStatuses">
+        <item>Received</item>
+        <item>Pending</item>
+        <item>Ordered</item>
+    </string-array>
+    <string-array name="term">
+        <item>Days</item>
+        <item>Months</item>
+    </string-array>
+    <string-array name="status">
+        <item>Pending</item>
+        <item>In Transit</item>
+        <item>Completed</item>
+    </string-array>
+    <string-array name="expcat">
+        <item>None</item>
+    </string-array>
+    <string-array name="adjstmntType">
+        <item>Normal</item>
+        <item>Abnormal</item>
+    </string-array>
 </resources>

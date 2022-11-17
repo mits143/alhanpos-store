@@ -47,6 +47,7 @@
                 android:paddingHorizontal="@dimen/_5sdp">
 
                 <TextView
+                    android:id="@+id/txtID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
@@ -64,7 +65,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="ج.م 20.00"
-                    android:textColor="@color/black"
+                    android:textColor="@color/fontColor2"
                     android:textSize="@dimen/_10ssp" />
 
             </LinearLayout>
@@ -96,7 +97,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="ج.م 20.00"
-                    android:textColor="@color/black"
+                    android:textColor="@color/fontColor2"
                     android:textSize="@dimen/_10ssp" />
 
             </LinearLayout>
@@ -128,7 +129,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="ج.م 20.00"
-                    android:textColor="@color/black"
+                    android:textColor="@color/fontColor2"
                     android:textSize="@dimen/_10ssp" />
 
             </LinearLayout>

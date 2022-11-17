@@ -104,7 +104,7 @@ class AddProductViewModel(
         category_id: String,
         unit_id: String,
         selling_price: String,
-        tax: String,
+//        tax: String,
         sku: String,
         alert_quantity: String
     ) {
@@ -112,7 +112,15 @@ class AddProductViewModel(
             setMsg.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.addUpdateProduct(
-                    token, name, brand_id, category_id, unit_id, selling_price, tax, sku, alert_quantity
+                    token,
+                    name,
+                    brand_id,
+                    category_id,
+                    unit_id,
+                    selling_price,
+//                    tax,
+                    sku,
+                    alert_quantity
                 ).let {
                     if (it.isSuccessful) {
                         if (it.body()?.get("success")?.asBoolean!!

@@ -8,6 +8,7 @@ import com.alhanpos.store.model.response.contact.ContactData
 
 class ContactAdapter(
     var dataList: ArrayList<ContactData>,
+    var buttonClick: ButtonClick
 ) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemContactBinding) : RecyclerView.ViewHolder(binding.root)
@@ -27,6 +28,10 @@ class ContactAdapter(
                 binding.txtEmail.text = this.email
                 binding.txtAdvanceBalance.text = this.balance
                 binding.txtTotalDue.text = this.total_due
+
+                binding.imgEdit.setOnClickListener {
+                    buttonClick.onEditClick(this)
+                }
             }
         }
     }
@@ -44,5 +49,9 @@ class ContactAdapter(
         dataList.addAll(list)
 //        notifyItemInserted(list.size - itemCount - 1);
         notifyDataSetChanged()
+    }
+
+    interface ButtonClick {
+        fun onEditClick(data: ContactData)
     }
 }

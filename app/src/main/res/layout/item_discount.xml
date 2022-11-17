@@ -19,7 +19,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/date"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/start_at"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/ends_at"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/discount_amount"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
     </LinearLayout>

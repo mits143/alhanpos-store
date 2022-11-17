@@ -131,9 +131,9 @@
 
     <fragment
         android:id="@+id/nav_all_sale"
-        android:name="com.alhanpos.store.fragment.AllSaleFragment"
+        android:name="com.alhanpos.store.fragment.AllSellFragment"
         android:label="@string/all_sale"
-        tools:layout="@layout/fragment_all_sale">
+        tools:layout="@layout/fragment_all_sell">
 
         <action
             android:id="@+id/action_nav_all_sale_to_nav_add_sale"
@@ -195,7 +195,7 @@
 
     <fragment
         android:id="@+id/nav_all_fragment"
-        android:name="com.alhanpos.store.fragment.AllFragment"
+        android:name="com.alhanpos.store.fragment.ProductListingFragment"
         android:label="@string/all"
         tools:layout="@layout/fragment_all_product">
 
@@ -232,25 +232,59 @@
         android:id="@+id/nav_contact_fragment"
         android:name="com.alhanpos.store.fragment.ContactFragment"
         android:label="@string/contact"
-        tools:layout="@layout/fragment_contact" />
+        tools:layout="@layout/fragment_contact">
+
+        <action
+            android:id="@+id/action_nav_contact_to_nav_add_contact"
+            app:destination="@id/nav_add_contact" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_supplier_fragment"
-        android:name="com.alhanpos.store.fragment.SuppliierFragment"
+        android:name="com.alhanpos.store.fragment.SupplierFragment"
         android:label="@string/supplier"
-        tools:layout="@layout/fragment_contact" />
+        tools:layout="@layout/fragment_contact">
+
+        <action
+            android:id="@+id/action_nav_supplier_to_nav_add_supplier"
+            app:destination="@id/nav_add_supplier" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_stock_adjustment"
         android:name="com.alhanpos.store.fragment.StockAdjustmentFragment"
         android:label="@string/stock_adjustment"
-        tools:layout="@layout/fragment_stock_adjustment" />
+        tools:layout="@layout/fragment_stock_adjustment">
+
+        <action
+            android:id="@+id/action_nav_stock_adjustment_to_nav_add_stock_adjustment"
+            app:destination="@id/nav_stock_add_stock_adjustment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_stock_add_stock_adjustment"
+        android:name="com.alhanpos.store.fragment.AddStockAdjustmentFragment"
+        android:label="@string/stock_adjustment"
+        tools:layout="@layout/fragment_add_stock_adjustment" />
 
     <fragment
         android:id="@+id/nav_expenses"
         android:name="com.alhanpos.store.fragment.ExpenseFragment"
         android:label="@string/expenses"
-        tools:layout="@layout/fragment_expense" />
+        tools:layout="@layout/fragment_expense">
+
+        <action
+            android:id="@+id/action_nav_expenses_to_nav_add_expenses"
+            app:destination="@id/nav_add_expenses" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_expenses"
+        android:name="com.alhanpos.store.fragment.AddExpenseFragment"
+        android:label="@string/expenses"
+        tools:layout="@layout/fragment_add_expense" />
 
     <fragment
         android:id="@+id/nav_expenses_category"
@@ -263,5 +297,31 @@
         android:name="com.alhanpos.store.fragment.PaymentFragment"
         android:label="@string/payment"
         tools:layout="@layout/fragment_payment" />
+
+    <fragment
+        android:id="@+id/nav_add_contact"
+        android:name="com.alhanpos.store.fragment.AddContactFragment"
+        android:label="@string/add_contact"
+        tools:layout="@layout/fragment_add_contact">
+
+        <argument
+            android:name="data"
+            android:defaultValue="@null"
+            app:argType="com.alhanpos.store.model.response.contact.ContactData"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_supplier"
+        android:name="com.alhanpos.store.fragment.AddSupplierFragment"
+        android:label="@string/add_supplier"
+        tools:layout="@layout/fragment_add_contact">
+
+        <argument
+            android:name="data"
+            android:defaultValue="@null"
+            app:argType="com.alhanpos.store.model.response.contact.ContactData"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alhanpos.store.adapter.ContactAdapter
+import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.SupplierAdapter
 import com.alhanpos.store.databinding.FragmentContactBinding
+import com.alhanpos.store.model.response.contact.ContactData
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.GridAutofitLayoutManager
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.ContactViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SuppliierFragment : BaseFragment<FragmentContactBinding>() {
+class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentContactBinding =
         FragmentContactBinding::inflate
@@ -25,11 +26,17 @@ class SuppliierFragment : BaseFragment<FragmentContactBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
         setContactData()
+
+        binding.flAdd.setOnClickListener {
+            val action =
+                SupplierFragmentDirections.actionNavSupplierToNavAddSupplier()
+            findNavController().navigate(action)
+        }
     }
 
     private fun setContactData() {
         val layoutManager = GridAutofitLayoutManager(requireContext(), 400)
-        adapter = SupplierAdapter(arrayListOf())
+        adapter = SupplierAdapter(arrayListOf(), this)
         binding.rVCategory.adapter = adapter
         binding.rVCategory.layoutManager = layoutManager
     }
@@ -54,5 +61,11 @@ class SuppliierFragment : BaseFragment<FragmentContactBinding>() {
                 }
             }
         }
+    }
+
+    override fun onEditClick(data: ContactData) {
+        val action =
+            SupplierFragmentDirections.actionNavSupplierToNavAddSupplier(data)
+        findNavController().navigate(action)
     }
 }

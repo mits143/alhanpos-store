@@ -30,12 +30,12 @@ class ProductFragment : BaseFragment<FragmentProductBinding>(), RadioGroup.OnChe
         adapter = FragmentPagerAdapter(
             childFragmentManager
         )
-        adapter.add(AllFragment())
+        adapter.add(ProductListingFragment())
         adapter.add(CategoryFragment())
         adapter.add(BrandFragment())
         binding.radioGroup.setOnCheckedChangeListener(this)
         binding.viewPager.adapter = adapter
-        binding.viewPager.addOnPageChangeListener (this)
+        binding.viewPager.addOnPageChangeListener(this)
         binding.viewPager.currentItem = args.currentItem
     }
 

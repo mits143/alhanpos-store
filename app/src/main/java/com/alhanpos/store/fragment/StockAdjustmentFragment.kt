@@ -6,19 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
-import com.alhanpos.store.adapter.SellsAdapter
 import com.alhanpos.store.adapter.StockAdjustmentAdapter
-import com.alhanpos.store.databinding.FragmentAllSaleBinding
 import com.alhanpos.store.databinding.FragmentStockAdjustmentBinding
-import com.alhanpos.store.model.response.sell.SellResponseItem
 import com.alhanpos.store.model.response.stockadjustment.Data
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
-import com.alhanpos.store.viewmodel.SellsViewModel
 import com.alhanpos.store.viewmodel.StockAdjustmentViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StockAdjustmentFragment : BaseFragment<FragmentStockAdjustmentBinding>(), StockAdjustmentAdapter.ButtonClick {
+class StockAdjustmentFragment : BaseFragment<FragmentStockAdjustmentBinding>(),
+    StockAdjustmentAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentStockAdjustmentBinding =
         FragmentStockAdjustmentBinding::inflate
@@ -30,7 +27,7 @@ class StockAdjustmentFragment : BaseFragment<FragmentStockAdjustmentBinding>(), 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
         binding.flAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_stock_transfer_to_nav_add_stock_transfer)
+            findNavController().navigate(R.id.action_nav_stock_adjustment_to_nav_add_stock_adjustment)
         }
     }
 

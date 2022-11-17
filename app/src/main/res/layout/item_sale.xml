@@ -20,7 +20,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/date"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/invoice"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/customer_name"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/contact_number"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/location"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -76,7 +76,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/payment_status"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -88,7 +88,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/payment_method"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -100,7 +100,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/total_amount"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -112,7 +112,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/total_paid"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -124,7 +124,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/sell_due"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -136,7 +136,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/sell_return_date"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -148,7 +148,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/shipping_status"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 
@@ -160,7 +160,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/total_items"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
     </LinearLayout>

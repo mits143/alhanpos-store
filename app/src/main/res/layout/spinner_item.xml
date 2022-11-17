@@ -6,5 +6,5 @@
     android:layout_height="wrap_content"
     android:fontFamily="@font/poppins_medium"
     android:singleLine="true"
-    android:textColor="@color/black"
+    android:textColor="@color/fontColor2"
     android:textSize="@dimen/_8ssp" />

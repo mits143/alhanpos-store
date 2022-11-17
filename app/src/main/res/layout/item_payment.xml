@@ -19,7 +19,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/date"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/acc_type"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/acc_sub_type"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/acc_number"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/note"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 

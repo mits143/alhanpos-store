@@ -1,8 +1,6 @@
 package com.alhanpos.store
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.alhanpos.store.di.appModule
 import com.alhanpos.store.di.repoModule
 import com.alhanpos.store.di.viewModelModule

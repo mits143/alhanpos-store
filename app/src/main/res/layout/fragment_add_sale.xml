@@ -70,12 +70,12 @@
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/product_name"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
-                                android:hint="@string/product_name"
-                                android:textColorHint="@color/fontColor3"
                                 android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
 
@@ -254,6 +254,23 @@
 
                     </LinearLayout>
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txtProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/btn_bkg"
+                        android:focusable="true"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/save"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -262,6 +279,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
@@ -338,6 +356,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cvProductInfo"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
@@ -371,6 +390,7 @@
                 android:id="@+id/cvPaymentDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 app:cardBackgroundColor="#f3f3f3"
                 app:cardCornerRadius="@dimen/_10sdp"
@@ -400,21 +420,4 @@
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/txtProceed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/btn_bkg"
-        android:focusable="true"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center"
-        android:padding="@dimen/_10sdp"
-        android:text="@string/save"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,32 +6,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import com.alhanpos.store.R
 import com.alhanpos.store.databinding.FragmentAddContactBinding
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
-import com.alhanpos.store.viewmodel.AddContactViewModel
+import com.alhanpos.store.viewmodel.AddSupplierViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AddContactFragment : BaseFragment<FragmentAddContactBinding>() {
+class AddSupplierFragment : BaseFragment<FragmentAddContactBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddContactBinding =
         FragmentAddContactBinding::inflate
 
-    private val viewModel: AddContactViewModel by viewModel()
+    private val viewModel: AddSupplierViewModel by viewModel()
 
-    private val args: AddContactFragmentArgs by navArgs()
+    private val args: AddSupplierFragmentArgs by navArgs()
 
     private var id = "0"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
 
-        binding.edtName.setText(args.data?.name)
+        binding.edtName.setText(args.data?.supplier_business_name)
         binding.edtID.setText(args.data?.contact_id)
         binding.edtMobile.setText(args.data?.mobile)
         binding.edtEmail.setText(args.data?.email)
         binding.edtAdvanceBal.setText(args.data?.balance)
         binding.edtTotalDue.setText(args.data?.total_due)
+
+        binding.txtHeader.text = context?.getString(R.string.add_supplier)
+        binding.txtCustName.text = context?.getString(R.string.supplier_name)
+        binding.txtCustomerID.text = context?.getString(R.string.supplier_id)
+        binding.edtName.hint = context?.getString(R.string.supplier_name)
+        binding.edtID.hint = context?.getString(R.string.supplier_id)
 
         binding.txtProceed.setOnClickListener {
             if (TextUtils.isEmpty(binding.edtName.text.toString().trim())) {
@@ -64,7 +71,7 @@ class AddContactFragment : BaseFragment<FragmentAddContactBinding>() {
                 binding.edtTotalDue.requestFocus()
                 return@setOnClickListener
             }
-            viewModel.addUpdateCustomer(
+            viewModel.addUpdateSupplier(
                 "Bearer " + prefs.accessToken,
                 binding.edtName.text.toString().trim(),
                 binding.edtEmail.text.toString().trim(),

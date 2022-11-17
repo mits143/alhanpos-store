@@ -26,7 +26,7 @@ class ExpenseFragment : BaseFragment<FragmentExpenseBinding>(), ExpensesAdapter.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
         binding.flAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_stock_transfer_to_nav_add_stock_transfer)
+            findNavController().navigate(R.id.action_nav_expenses_to_nav_add_expenses)
         }
     }
 

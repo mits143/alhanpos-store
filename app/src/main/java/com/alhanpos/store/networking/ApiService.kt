@@ -21,6 +21,12 @@ import com.alhanpos.store.model.response.units.UnitResponse
 import com.alhanpos.store.util.Constants.ADDUPDATEBRAND
 import com.alhanpos.store.util.Constants.ADDUPDATECATEGORY
 import com.alhanpos.store.util.Constants.ADDUPDATEPRODUCT
+import com.alhanpos.store.util.Constants.ADD_CUSTOMER
+import com.alhanpos.store.util.Constants.ADD_EXPENSE
+import com.alhanpos.store.util.Constants.ADD_PURCHASE
+import com.alhanpos.store.util.Constants.ADD_STOCKADJUSTMENT
+import com.alhanpos.store.util.Constants.ADD_STOCKTRANSFER
+import com.alhanpos.store.util.Constants.ADD_SUPPLIER
 import com.alhanpos.store.util.Constants.BRANDLIST
 import com.alhanpos.store.util.Constants.CATEGORYLIST
 import com.alhanpos.store.util.Constants.CONTACTLIST
@@ -43,6 +49,8 @@ import com.alhanpos.store.util.Constants.SUBSCRIPTIONS
 import com.alhanpos.store.util.Constants.SUPPLIERLIST
 import com.alhanpos.store.util.Constants.UNITSLIST
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -161,9 +169,33 @@ interface ApiService {
         @Field(value = "category_id", encoded = false) category_id: String,
         @Field(value = "unit_id", encoded = false) unit_id: String,
         @Field(value = "selling_price", encoded = false) selling_price: String,
-        @Field(value = "tax", encoded = false) tax: String,
+//        @Field(value = "tax", encoded = false) tax: String,
         @Field(value = "sku", encoded = false) sku: String,
         @Field(value = "alert_quantity", encoded = false) alert_quantity: String
+    ): Response<JsonObject>
+
+    @FormUrlEncoded
+    @POST(ADD_SUPPLIER)
+    suspend fun add_supplier(
+        @Header("Authorization") token: String,
+        @Field(value = "name", encoded = false) name: String,
+        @Field(value = "email", encoded = false) email: String,
+        @Field(value = "mobile", encoded = false) mobile: String,
+        @Field(value = "balance", encoded = false) balance: String,
+        @Field(value = "id", encoded = false) id: String,
+        @Field(value = "due", encoded = false) due: String
+    ): Response<JsonObject>
+
+    @FormUrlEncoded
+    @POST(ADD_CUSTOMER)
+    suspend fun add_customer(
+        @Header("Authorization") token: String,
+        @Field(value = "name", encoded = false) name: String,
+        @Field(value = "email", encoded = false) email: String,
+        @Field(value = "mobile", encoded = false) mobile: String,
+        @Field(value = "balance", encoded = false) balance: String,
+        @Field(value = "id", encoded = false) id: String,
+        @Field(value = "due", encoded = false) due: String
     ): Response<JsonObject>
 
     @POST(FINALIZEPAYMENT)
@@ -201,4 +233,68 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Response<SubscripitionResponse>
 
+    @FormUrlEncoded
+    @POST(ADD_STOCKTRANSFER)
+    suspend fun add_stocktransfer(
+        @Header("Authorization") token: String,
+        @Field(value = "transaction_date", encoded = false) transaction_date: String,
+        @Field(value = "ref_no", encoded = false) ref_no: String,
+        @Field(value = "status", encoded = false) status: String,
+        @Field(value = "final_total", encoded = false) final_total: String,
+        @Field(value = "transfer_location_id", encoded = false) transfer_location_id: String,
+        @Field(value = "shipping_charges", encoded = false) shipping_charges: String,
+    ): Response<JsonObject>
+
+    @FormUrlEncoded
+    @POST(ADD_STOCKADJUSTMENT)
+    suspend fun add_stockadjustment(
+        @Header("Authorization") token: String,
+        @Field(value = "location_id", encoded = false) location_id: String,
+        @Field(value = "ref_no", encoded = false) ref_no: String,
+        @Field(value = "transaction_date", encoded = false) transaction_date: String,
+        @Field(value = "adjustment_type", encoded = false) adjustment_type: String,
+        @Field(value = "search_product", encoded = false) search_product: String,
+        @Field(value = "final_total", encoded = false) final_total: String,
+        @Field(value = "total_amount_recovered", encoded = false) total_amount_recovered: String,
+        @Field(value = "additional_notes", encoded = false) additional_notes: String
+    ): Response<JsonObject>
+
+    @Multipart
+    @POST(ADD_PURCHASE)
+    suspend fun add_purchase(
+        @Header("Authorization") token: String,
+        @Part("contact_id") contact_id: RequestBody,
+        @Part("ref_no") ref_no: RequestBody,
+        @Part("transaction_date") transaction_date: RequestBody,
+        @Part("status") status: RequestBody,
+        @Part("location_id") location_id: RequestBody,
+        @Part("pay_term_number") pay_term_number: RequestBody,
+        @Part("pay_term_type") pay_term_type: RequestBody,
+//        @Part file: MultipartBody.Part,
+        @Part("shipping_details") shipping_details: RequestBody,
+        @Part("shipping_charges") shipping_charges: RequestBody,
+        @Part("final_total") final_total: RequestBody
+    ): Response<JsonObject>
+
+    @Multipart
+    @POST(ADD_EXPENSE)
+    suspend fun add_expense(
+        @Header("Authorization") token: String,
+        @Part("location_id") location_id: RequestBody,
+        @Part("expense_category_id") expense_category_id: RequestBody,
+        @Part("expense_sub_category_id") expense_sub_category_id: RequestBody,
+        @Part("ref_no") ref_no: RequestBody,
+        @Part("transaction_date") transaction_date: RequestBody,
+        @Part("expense_for") expense_for: RequestBody,
+        @Part("contact_id") contact_id: RequestBody,
+        @Part file: MultipartBody.Part,
+        @Part("tax_id") tax_id: RequestBody,
+        @Part("final_total") final_total: RequestBody,
+        @Part("additional_notes") additional_notes: RequestBody,
+        @Part("payment[0][amount]") paymentamount: RequestBody,
+        @Part("payment[0][paid_on]") paymentpaid_on: RequestBody,
+        @Part("payment[0][method]") paymentmethod: RequestBody,
+        @Part("payment[0][account_id]") paymentaccount_id: RequestBody,
+        @Part("payment[0][note]") paymentnote: RequestBody
+    ): Response<JsonObject>
 }

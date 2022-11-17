@@ -3,7 +3,6 @@ package com.alhanpos.store.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alhanpos.store.databinding.ItemExpenseBinding
 import com.alhanpos.store.databinding.ItemSubscriptionBinding
 import com.alhanpos.store.model.response.subscription.Data
 

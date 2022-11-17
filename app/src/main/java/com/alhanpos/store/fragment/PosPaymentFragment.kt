@@ -215,7 +215,7 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
                         it.data.forEach {
                             paymentAccountList.add(
                                 AddPosViewModel.Common(
-                                    it.name!!, it.id.toString()
+                                    it.name, it.id.toString()
                                 )
                             )
                         }

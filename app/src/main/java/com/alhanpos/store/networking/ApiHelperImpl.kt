@@ -19,6 +19,8 @@ import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
 import com.alhanpos.store.model.response.subscription.SubscripitionResponse
 import com.alhanpos.store.model.response.units.UnitResponse
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 
 class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
@@ -106,11 +108,35 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         category_id: String,
         unit_id: String,
         selling_price: String,
-        tax: String,
+//        tax: String,
         sku: String,
         alert_quantity: String
     ): Response<JsonObject> = apiService.addUpdateProduct(
-        token, name, brand_id, category_id, unit_id, selling_price, tax, sku, alert_quantity
+        token, name, brand_id, category_id, unit_id, selling_price, /*tax,*/ sku, alert_quantity
+    )
+
+    override suspend fun add_supplier(
+        token: String,
+        name: String,
+        email: String,
+        mobile: String,
+        balance: String,
+        id: String,
+        due: String,
+    ): Response<JsonObject> = apiService.add_supplier(
+        token, name, email, mobile, balance, id, due
+    )
+
+    override suspend fun add_customer(
+        token: String,
+        name: String,
+        email: String,
+        mobile: String,
+        balance: String,
+        id: String,
+        due: String,
+    ): Response<JsonObject> = apiService.add_customer(
+        token, name, email, mobile, balance, id, due
     )
 
     override suspend fun finalizePayment(
@@ -160,6 +186,112 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         token: String
     ): Response<UnitResponse> = apiService.unitsList(
         token
+    )
+
+    override suspend fun add_stocktransfer(
+        token: String,
+        transaction_date: String,
+        ref_no: String,
+        status: String,
+        final_total: String,
+        transfer_location_id: String,
+        shipping_charges: String,
+    ): Response<JsonObject> = apiService.add_stocktransfer(
+        token,
+        transaction_date,
+        ref_no,
+        status,
+        final_total,
+        transfer_location_id,
+        shipping_charges
+    )
+
+    override suspend fun add_stockadjustment(
+        token: String,
+        location_id: String,
+        ref_no: String,
+        transaction_date: String,
+        adjustment_type: String,
+        search_product: String,
+        final_total: String,
+        total_amount_recovered: String,
+        additional_notes: String
+    ): Response<JsonObject> = apiService.add_stockadjustment(
+        token,
+        location_id,
+        ref_no,
+        transaction_date,
+        adjustment_type,
+        search_product,
+        final_total,
+        total_amount_recovered,
+        additional_notes
+    )
+
+    override suspend fun add_purchase(
+        token: String,
+        contact_id: RequestBody,
+        ref_no: RequestBody,
+        transaction_date: RequestBody,
+        status: RequestBody,
+        location_id: RequestBody,
+        pay_term_number: RequestBody,
+        pay_term_type: RequestBody,
+//        document: MultipartBody.Part,
+        shipping_details: RequestBody,
+        shipping_charges: RequestBody,
+        final_total: RequestBody
+    ): Response<JsonObject> = apiService.add_purchase(
+        token,
+        contact_id,
+        ref_no,
+        transaction_date,
+        status,
+        location_id,
+        pay_term_number,
+        pay_term_type,
+//        document,
+        shipping_details,
+        shipping_charges,
+        final_total
+    )
+
+    override suspend fun add_expense(
+        token: String,
+        location_id: RequestBody,
+        expense_category_id: RequestBody,
+        expense_sub_category_id: RequestBody,
+        ref_no: RequestBody,
+        transaction_date: RequestBody,
+        expense_for: RequestBody,
+        contact_id: RequestBody,
+        document: MultipartBody.Part,
+        tax_id: RequestBody,
+        final_total: RequestBody,
+        additional_notes: RequestBody,
+        paymentamount: RequestBody,
+        paymentpaid_on: RequestBody,
+        paymentmethod: RequestBody,
+        paymentaccount_id: RequestBody,
+        paymentnote: RequestBody,
+    ): Response<JsonObject> = apiService.add_expense(
+        token,
+        location_id,
+        expense_category_id,
+        expense_sub_category_id,
+        ref_no,
+        transaction_date,
+        expense_for,
+        contact_id,
+        document,
+        tax_id,
+        final_total,
+        additional_notes,
+        paymentamount,
+        paymentpaid_on,
+        paymentmethod,
+        paymentaccount_id,
+        paymentnote
     )
 
 }

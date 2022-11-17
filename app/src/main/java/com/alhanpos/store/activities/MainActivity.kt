@@ -53,7 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             ), binding.drawerLayout
         )
 
-        binding.bottomNavView.menu.getItem(0).isCheckable=false
+        binding.bottomNavView.menu.getItem(0).isCheckable = false
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)

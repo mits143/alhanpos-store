@@ -98,7 +98,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
             categoryID,
             unitID,
             binding.spinPrice.text.toString().trim(),
-            binding.spinTax.text.toString().trim(),
+//            binding.spinTax.text.toString().trim(),
             binding.spinSKU.text.toString().trim(),
             binding.spinQuantity.text.toString().trim()
         )

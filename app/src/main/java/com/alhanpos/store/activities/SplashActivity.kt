@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import androidx.lifecycle.lifecycleScope
-import com.alhanpos.store.databinding.ActivityLoginBinding
 import com.alhanpos.store.databinding.ActivitySplashBinding
 import com.alhanpos.store.prefs
 import kotlinx.coroutines.delay

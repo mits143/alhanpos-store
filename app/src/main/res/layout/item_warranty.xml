@@ -20,7 +20,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/name"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/desc"
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:text="@string/duration"
 
-            android:textColor="@color/fontColor3"
+            android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
 

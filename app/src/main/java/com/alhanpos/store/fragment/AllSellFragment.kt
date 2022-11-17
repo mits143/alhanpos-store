@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.SellsAdapter
-import com.alhanpos.store.databinding.FragmentAllSaleBinding
+import com.alhanpos.store.databinding.FragmentAllSellBinding
 import com.alhanpos.store.model.response.sell.SellResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.SellsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllSaleFragment : BaseFragment<FragmentAllSaleBinding>(), SellsAdapter.ButtonClick {
+class AllSellFragment : BaseFragment<FragmentAllSellBinding>(), SellsAdapter.ButtonClick {
 
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAllSaleBinding =
-        FragmentAllSaleBinding::inflate
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAllSellBinding =
+        FragmentAllSellBinding::inflate
 
     private val viewModel: SellsViewModel by viewModel()
 

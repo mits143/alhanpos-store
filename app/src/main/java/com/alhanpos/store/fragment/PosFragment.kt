@@ -116,7 +116,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                     viewModel.fetchContact("Bearer " + prefs.accessToken!!)
                 }
                 Status.ERROR -> {
-                    showToast(it.message!!)
+                    showToast(it.message)
                 }
             }
         }
@@ -129,7 +129,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                     it.data?.let {
                         contactList.clear()
                         it.data.forEach {
-                            contactList.add(it.name)
+                            contactList.add(it.name!!)
                         }
                         setContactData(contactList)
                     }

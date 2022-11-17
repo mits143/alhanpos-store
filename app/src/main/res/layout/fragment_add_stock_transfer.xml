@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+    tools:context=".fragment.AddStockTransferFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -65,12 +65,15 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtDate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/product_name"
+                                android:hint="@string/date"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -98,12 +101,13 @@
                                 android:textSize="@dimen/_10ssp" />
 
                             <EditText
+                                android:id="@+id/edtRefNO"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/unit"
+                                android:hint="@string/reference_no"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -134,11 +138,13 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <EditText
+                            <Spinner
+                                android:id="@+id/spinStatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
+                                android:entries="@array/status"
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/category"
                                 android:imeOptions="actionNext"
@@ -203,13 +209,14 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <EditText
+                            <Spinner
+                                android:id="@+id/spinLocationFrom"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
-                                android:hint="@string/brand"
+                                android:hint="@string/location_from"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
@@ -236,9 +243,10 @@
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />
 
-                            <EditText
+                            <Spinner
+                                android:id="@+id/spinLocationTO"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
@@ -254,6 +262,97 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Shipping Details"
+                            android:textColor="@color/fontColor2"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <EditText
+                                android:id="@+id/edtShippingDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="5"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="@string/additional_shipping_charges"
+                            android:textColor="@color/fontColor2"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <EditText
+                                android:id="@+id/edtShippingCharges"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="5"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txtProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/btn_bkg"
+                        android:focusable="true"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/save"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintTop_toBottomOf="@+id/cvProductInfo" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -262,6 +361,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
@@ -341,6 +441,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:visibility="gone"
                 app:cardBackgroundColor="#f3f3f3"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
@@ -367,24 +468,20 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtProceed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/btn_bkg"
-                android:focusable="true"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/save"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintTop_toBottomOf="@+id/cvProductInfo" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7F000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_100sdp"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="loader.json"
+        app:lottie_loop="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

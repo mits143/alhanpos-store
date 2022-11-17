@@ -86,4 +86,7 @@ dependencies {
 //    MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    //Dexter
+    implementation 'com.karumi:dexter:6.2.2'
+
 }

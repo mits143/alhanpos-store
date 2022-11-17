@@ -14,7 +14,8 @@ import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AllProductViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllFragment : BaseFragment<FragmentAllProductBinding>(), ProductAdapter.ButtonClick {
+class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
+    ProductAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAllProductBinding =
         FragmentAllProductBinding::inflate
@@ -25,7 +26,7 @@ class AllFragment : BaseFragment<FragmentAllProductBinding>(), ProductAdapter.Bu
         setObserver()
         binding.flAdd.setOnClickListener {
             val action =
-                AllFragmentDirections.actionNavAllProductToNavAddProduct()
+                ProductListingFragmentDirections.actionNavAllProductToNavAddProduct()
             findNavController().navigate(action)
         }
     }
@@ -60,7 +61,7 @@ class AllFragment : BaseFragment<FragmentAllProductBinding>(), ProductAdapter.Bu
 
     override fun onClick(data: ProductData) {
         val action =
-            AllFragmentDirections.actionNavAllProductToNavAddProduct(data)
+            ProductListingFragmentDirections.actionNavAllProductToNavAddProduct(data)
         findNavController().navigate(action)
     }
 }

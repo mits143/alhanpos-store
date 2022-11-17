@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alhanpos.store.model.response.expenses.ExpensesResponse
-import com.alhanpos.store.model.response.stocktransfer.StockTransferResponse
 import com.alhanpos.store.repo.MainRepository
 import com.alhanpos.store.util.NetworkHelper
 import com.alhanpos.store.util.Resource

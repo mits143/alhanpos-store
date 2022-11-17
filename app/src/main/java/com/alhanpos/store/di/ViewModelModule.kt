@@ -56,4 +56,22 @@ val viewModelModule = module {
     viewModel {
         SubscripitionViewModel(get(), get())
     }
+    viewModel {
+        AddContactViewModel(get(), get())
+    }
+    viewModel {
+        AddSupplierViewModel(get(), get())
+    }
+    viewModel {
+        AddStockAdjustmentViewModel(get(), get())
+    }
+    viewModel {
+        AddStockTransferViewModel(get(), get())
+    }
+    viewModel {
+        AddExpenseViewModel(get(), get())
+    }
+    viewModel {
+        AddPurchaseViewModel(get(), get())
+    }
 }

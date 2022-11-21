@@ -96,6 +96,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             R.id.nav_supplier_fragment -> hideBottomNavigation()
             R.id.nav_stock_adjustment -> hideBottomNavigation()
             R.id.nav_expenses -> hideBottomNavigation()
+            R.id.nav_add_expenses -> hideBottomNavigation()
+            R.id.nav_add_stock_adjustment -> hideBottomNavigation()
+            R.id.nav_add_contact -> hideBottomNavigation()
+            R.id.nav_add_supplier -> hideBottomNavigation()
+            R.id.nav_add_product -> hideBottomNavigation()
             else -> showBottomNavigationView()
         }
     }

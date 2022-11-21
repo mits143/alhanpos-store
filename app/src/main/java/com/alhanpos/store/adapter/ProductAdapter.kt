@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemProductBinding
-import com.alhanpos.store.model.response.product.ProductData
+import com.alhanpos.store.model.response.product.ProductListResponseItem
 
 class ProductAdapter(
-    var dataList: ArrayList<ProductData>, var buttonClick: ButtonClick
+    var dataList: ArrayList<ProductListResponseItem>, var buttonClick: ButtonClick
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
@@ -20,12 +20,12 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(dataList[position]) {
-                binding.txtProduct.text = this.name.toString()
-                binding.txtSKU.text = this.sku.toString()
-                binding.txtQuantity.text = this.alert_quantity.toString()
-                if (this.brand != null) {
-                    binding.txtBrand.text = this.brand.name
-                }
+                binding.txtProduct.text = this.name
+                binding.txtSKU.text = this.subSku
+                binding.txtQuantity.text = this.qtyAvailable?:""
+//                if (this.brand != null) {
+//                    binding.txtBrand.text = this.brand.name
+//                }
                 binding.imgEdit.setOnClickListener {
                     buttonClick.onClick(this)
                 }
@@ -41,13 +41,13 @@ class ProductAdapter(
         return position.toLong()
     }
 
-    fun addData(list: List<ProductData>) {
+    fun addData(list: List<ProductListResponseItem>) {
         dataList.clear()
         dataList.addAll(list)
         notifyDataSetChanged()
     }
 
     interface ButtonClick {
-        fun onClick(data: ProductData)
+        fun onClick(data: ProductListResponseItem)
     }
 }

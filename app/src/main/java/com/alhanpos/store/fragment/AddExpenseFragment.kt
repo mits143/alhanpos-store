@@ -90,16 +90,18 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
             val ref_no = binding.edtRefNO.text.toString().trim().toRequestBody(MultipartBody.FORM)
             val transaction_date =
                 binding.edtDate.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val expense_for =
-                "".toRequestBody(MultipartBody.FORM)
+            val expense_for = "".toRequestBody(MultipartBody.FORM)
             val contact_id = contact_ID.toRequestBody(MultipartBody.FORM)
 
             val requestFile = file!!.asRequestBody(FileUtils.MIME_TYPE_IMAGE.toMediaTypeOrNull())
             val document = MultipartBody.Part.createFormData(
                 "document", file?.name, requestFile
             )
-            val tax_id =
-                "".toRequestBody(MultipartBody.FORM)
+            val tax_id = "".toRequestBody(MultipartBody.FORM)
+            val tax_calculation_amount = "0".toRequestBody(MultipartBody.FORM)
+            val recur_interval = "0".toRequestBody(MultipartBody.FORM)
+            val recur_interval_type = "days".toRequestBody(MultipartBody.FORM)
+            val recur_repetitions = "0".toRequestBody(MultipartBody.FORM)
             val final_total =
                 binding.edtTotal.text.toString().trim().toRequestBody(MultipartBody.FORM)
             val additional_notes =
@@ -109,11 +111,9 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
             val paymentpaid_on: RequestBody =
                 binding.edtPaidOn.text.toString().trim().toRequestBody(MultipartBody.FORM)
 
-            val paymentmethod =
-                binding.spinnerPaymentMethod.selectedItem.toString().trim()
-                    .toRequestBody(MultipartBody.FORM)
-            val paymentaccount_id =
-                accountID.toRequestBody(MultipartBody.FORM)
+            val paymentmethod = binding.spinnerPaymentMethod.selectedItem.toString().trim()
+                .toRequestBody(MultipartBody.FORM)
+            val paymentaccount_id = accountID.toRequestBody(MultipartBody.FORM)
             val paymentnote: RequestBody =
                 binding.edtPaymenNote.text.toString().trim().toRequestBody(MultipartBody.FORM)
 
@@ -123,11 +123,15 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
                 expense_category_id,
                 expense_sub_category_id,
                 ref_no,
-                transaction_date,
+//                transaction_date,
                 expense_for,
                 contact_id,
                 document,
                 tax_id,
+                tax_calculation_amount,
+                recur_interval,
+                recur_interval_type,
+                recur_repetitions,
                 final_total,
                 additional_notes,
                 paymentamount,
@@ -253,8 +257,7 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
                             if (!it.data[i].name.isNullOrEmpty()) {
                                 dataList.add(
                                     AddExpenseViewModel.Common(
-                                        it.data[i].name!!,
-                                        it.data[i].id.toString()
+                                        it.data[i].name!!, it.data[i].id.toString()
                                     )
                                 )
                             }

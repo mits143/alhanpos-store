@@ -26,8 +26,6 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
     var categoryList: ArrayList<AddProductViewModel.Common> = ArrayList()
     var brandList: ArrayList<AddProductViewModel.Common> = ArrayList()
 
-    private val args: AddProductFragmentArgs by navArgs()
-
     var unitID = ""
     var categoryID = ""
     var brandID = ""

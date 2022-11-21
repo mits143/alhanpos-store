@@ -9,7 +9,7 @@ object Constants {
     //    const val CONTACTLIST = "connector/api/contactapi"
     const val CONTACTLIST = "api/customers"
     const val SUPPLIERLIST = "api/suppliers"
-    const val PRODUCTLIST = "connector/api/product"
+    const val PRODUCTLIST = "api/product/list"
     const val PAYMENT_ACCOUNTS = "connector/api/payment-accounts"
     const val PAYMENT_METHODS = "connector/api/payment-methods"
     const val UNITSLIST = "api/units"

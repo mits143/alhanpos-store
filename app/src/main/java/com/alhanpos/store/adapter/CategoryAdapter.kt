@@ -1,6 +1,7 @@
 package com.alhanpos.store.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemCategoryBrandBinding
@@ -23,8 +24,10 @@ class CategoryAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(dataList[position]) {
-                binding.txtCategory.text = this.categoryType
+                binding.txtCategory.text = this.name
+                binding.txtCode.visibility = View.VISIBLE
                 binding.txtCode.text = this.shortCode
+                binding.txtDesc.text = this.description
 
                 binding.txtEdit.setOnClickListener {
                     buttonClick.onEditClick(this)

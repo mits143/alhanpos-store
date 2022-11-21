@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.alhanpos.store.R
+import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddStockAdjustmentBinding
+import com.alhanpos.store.model.response.product.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AddStockAdjustmentViewModel
@@ -19,7 +21,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBinding>() {
+class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBinding>(),
+    AddStockTransferAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddStockAdjustmentBinding =
         FragmentAddStockAdjustmentBinding::inflate
@@ -28,8 +31,12 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
 
     val myCalendar = Calendar.getInstance()
     private var locationList: ArrayList<AddStockAdjustmentViewModel.Common> = arrayListOf()
+    private var productDataList: ArrayList<ProductListResponseItem> = arrayListOf()
+    var productList: ArrayList<AddStockAdjustmentViewModel.product> = ArrayList()
+    private var posList: ArrayList<ProductListResponseItem> = arrayListOf()
+    lateinit var adapter: AddStockTransferAdapter
+    var sku = ""
     private var location_ID = "0"
-    private var id = "0"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
@@ -79,9 +86,19 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                 binding.edtDate.text.toString().trim(),
                 binding.edtAdjustmentType.selectedItem.toString().trim(),
                 "",
-                "",
+                "0",
                 binding.edtAmtRecovered.text.toString().trim(),
-                binding.edtReason.text.toString().trim()
+                binding.edtReason.text.toString().trim(),
+                "",
+                posList[0].productId,
+                posList[0].variationId,
+                posList[0].enableStock,
+                posList[0].quantity.toString(),
+                "1",
+                "1",
+                "1",
+                posList[0].sellingPrice,
+                posList[0].price,
             )
         }
     }
@@ -102,7 +119,38 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
         }
     }
 
+    private fun setProductData(productList: ArrayList<AddStockAdjustmentViewModel.product>) {
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, productList)
+        binding.spinnerProduct.threshold = 2
+        binding.spinnerProduct.setAdapter(adapter)
+        binding.spinnerProduct.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, long ->
+                sku = (adapter.getItem(position) as AddStockAdjustmentViewModel.product).sku
+                if (productDataList.isNotEmpty() && sku.isNotEmpty()) {
+                    for (i in productDataList.indices) {
+                        if (TextUtils.equals(productDataList[i].subSku, sku)) {
+                            if (!productDataList[i].isAdded) {
+                                productDataList[i].isAdded = true
+                                posList.add(productDataList[i])
+                            } else {
+                                showToast("Product already added")
+                            }
+                        }
+                    }
+                    setPosData(posList)
+                    binding.spinnerProduct.setText("")
+                }
+            }
+    }
+
+    private fun setPosData(posList: ArrayList<ProductListResponseItem>) {
+        adapter = AddStockTransferAdapter(posList, this)
+        binding.rVCategory.adapter = adapter
+    }
+
     private fun setObserver() {
+        viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
 
         viewModel.getLocationData.observe(this) {
@@ -123,6 +171,39 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                             )
                         }
                         setLocationData(locationList)
+                    }
+                }
+                Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
+                    showToast(it.message)
+                }
+            }
+        }
+
+        viewModel.getProductData.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    if (it.data != null) {
+                        it.data.let {
+                            binding.animationView.visibility = View.GONE
+                            productDataList.clear()
+                            productList.clear()
+                            productDataList.addAll(it)
+                            it.forEach {
+                                productList.add(
+                                    AddStockAdjustmentViewModel.product(
+                                        it.name,
+                                        it.subSku
+                                    )
+                                )
+                            }
+                            setProductData(productList)
+                        }
+                    } else {
+                        showToast("No data available")
                     }
                 }
                 Status.ERROR -> {
@@ -155,8 +236,11 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
     }
 
     private fun updateLabel() {
-        val myFormat = "MM/dd/yy"
+        val myFormat = "yyyy/MM/dd"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         binding.edtDate.setText(dateFormat.format(myCalendar.time))
+    }
+
+    override fun onClick(data: ArrayList<ProductListResponseItem>, position: Int) {
     }
 }

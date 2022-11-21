@@ -361,7 +361,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
@@ -392,46 +392,98 @@
                         android:orientation="horizontal">
 
                         <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@drawable/border">
-
-                            <ImageView
-                                android:id="@+id/imgScan"
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="@dimen/_35sdp"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/ic_center_focus_weak_24px" />
-                        </FrameLayout>
-
-                        <FrameLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/border">
 
-                            <Spinner
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                 android:id="@+id/spinnerProduct"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_35sdp" />
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:background="@drawable/border">
-
-                            <ImageView
-                                android:id="@+id/imgAdd1"
-                                android:layout_width="@dimen/_50sdp"
                                 android:layout_height="@dimen/_35sdp"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/group_3012" />
+                                android:background="@null" />
                         </FrameLayout>
 
                     </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fadeScrollbars="false"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="ifContentScrolls"
+                        android:scrollbars="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_10sdp">
+
+                                <TextView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:text="@string/product"
+                                    android:textColor="@color/fontColor2"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <TextView
+                                    android:layout_width="@dimen/_75sdp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:text="@string/quantity"
+                                    android:textColor="@color/fontColor2"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <TextView
+                                    android:layout_width="@dimen/_75sdp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:text="@string/unit_price"
+                                    android:textColor="@color/fontColor2"
+                                    android:textSize="@dimen/_10ssp"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="@dimen/_75sdp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:text="@string/sub_total"
+                                    android:textColor="@color/fontColor2"
+                                    android:textSize="@dimen/_10ssp"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:text="@string/action"
+                                    android:textColor="@color/fontColor2"
+                                    android:textSize="@dimen/_10ssp" />
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rVCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:nestedScrollingEnabled="false"
+                                android:overScrollMode="never"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_add_stock_search" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

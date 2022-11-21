@@ -84,10 +84,27 @@ class AddPurchaseViewModel(
         location_id: RequestBody,
         pay_term_number: RequestBody,
         pay_term_type: RequestBody,
-//        document: MultipartBody.Part,
+        file: MultipartBody.Part,
         shipping_details: RequestBody,
         shipping_charges: RequestBody,
-        final_total: RequestBody
+        discount_type: RequestBody,
+        tax_id: RequestBody,
+        advance_balance: RequestBody,
+        final_total: RequestBody,
+        product_id: RequestBody,
+        variation_id: RequestBody,
+        quantity: RequestBody,
+        product_unit_id: RequestBody,
+        sub_unit_id: RequestBody,
+        purchase_price: RequestBody,
+        purchase_line_tax_id: RequestBody,
+        purchase_price_inc_tax: RequestBody,
+        default_sell_price: RequestBody,
+        paymentamount: RequestBody,
+        paymentpaid_on: RequestBody,
+        paymentmethod: RequestBody,
+        paymentaccount_id: RequestBody,
+        paymentnote: RequestBody
     ) {
         viewModelScope.launch {
             setMsg.postValue(Resource.loading(null))
@@ -101,10 +118,27 @@ class AddPurchaseViewModel(
                     location_id,
                     pay_term_number,
                     pay_term_type,
-//                    document,
+                    file,
                     shipping_details,
                     shipping_charges,
-                    final_total
+                    discount_type,
+                    tax_id,
+                    advance_balance,
+                    final_total,
+                    product_id,
+                    variation_id,
+                    quantity,
+                    product_unit_id,
+                    sub_unit_id,
+                    purchase_price,
+                    purchase_line_tax_id,
+                    purchase_price_inc_tax,
+                    default_sell_price,
+                    paymentamount,
+                    paymentpaid_on,
+                    paymentmethod,
+                    paymentaccount_id,
+                    paymentnote
                 ).let {
                     if (it.isSuccessful) {
                         if (it.body()?.get("success")?.asInt!! == 1)

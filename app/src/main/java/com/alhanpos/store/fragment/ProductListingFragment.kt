@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.ProductAdapter
 import com.alhanpos.store.databinding.FragmentAllProductBinding
-import com.alhanpos.store.model.response.product.ProductData
+import com.alhanpos.store.model.response.product.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.GridAutofitLayoutManager
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AllProductViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
     ProductAdapter.ButtonClick {
@@ -31,7 +32,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
         }
     }
 
-    private fun setAllData(posList: ArrayList<ProductData>) {
+    private fun setAllData(posList: ArrayList<ProductListResponseItem>) {
         val layoutManager = GridAutofitLayoutManager(requireContext(), 400)
         val adapter = ProductAdapter(posList, this)
         binding.rvProduct.adapter = adapter
@@ -48,7 +49,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
                 Status.SUCCESS -> {
                     binding.animationView.visibility = View.GONE
                     it.data?.let {
-                        setAllData(it.data)
+                        setAllData(it)
                     }
                 }
                 Status.ERROR -> {
@@ -59,7 +60,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
         }
     }
 
-    override fun onClick(data: ProductData) {
+    override fun onClick(data: ProductListResponseItem) {
         val action =
             ProductListingFragmentDirections.actionNavAllProductToNavAddProduct(data)
         findNavController().navigate(action)

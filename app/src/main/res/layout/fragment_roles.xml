@@ -140,6 +140,7 @@
                 android:layout_gravity="end"
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/_10sdp"
+                android:visibility="gone"
                 android:paddingVertical="@dimen/_20sdp">
 
                 <com.google.android.material.textview.MaterialTextView

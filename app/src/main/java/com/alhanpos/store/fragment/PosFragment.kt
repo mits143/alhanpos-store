@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.PosAdapter
 import com.alhanpos.store.databinding.FragmentPosBinding
-import com.alhanpos.store.model.response.product.ProductData
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.product.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.PosViewModel
@@ -27,10 +27,10 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
 
     private var locationList: ArrayList<String> = arrayListOf()
     private var contactList: ArrayList<String> = arrayListOf()
-    private var productDataList: ArrayList<ProductData> = arrayListOf()
+    private var productDataList: ArrayList<ProductListResponseItem> = arrayListOf()
     var productList: ArrayList<PosViewModel.product> = ArrayList()
 
-    private var posList: ArrayList<ProductData> = arrayListOf()
+    private var posList: ArrayList<ProductListResponseItem> = arrayListOf()
     lateinit var adapter: PosAdapter
 
     var sku = ""
@@ -45,7 +45,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
         binding.txtProceed.setOnClickListener {
             val action =
                 PosFragmentDirections.actionNavPosToNavPosPayment(
-                    ProductListResponse(posList),
+                    ProductListResponse(),
                     binding.txtTotal.text.toString().trim()
                 )
             findNavController().navigate(action)
@@ -78,7 +78,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                 sku = (adapter.getItem(position) as PosViewModel.product).sku
                 if (productDataList.isNotEmpty() && sku.isNotEmpty()) {
                     for (i in productDataList.indices) {
-                        if (TextUtils.equals(productDataList[i].sku, sku)) {
+                        if (TextUtils.equals(productDataList[i].subSku, sku)) {
                             if (!productDataList[i].isAdded) {
                                 productDataList[i].isAdded = true
                                 posList.add(productDataList[i])
@@ -93,7 +93,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
             }
     }
 
-    private fun setPosData(posList: ArrayList<ProductData>) {
+    private fun setPosData(posList: ArrayList<ProductListResponseItem>) {
         adapter = PosAdapter(posList, this)
         binding.rvProduct.adapter = adapter
     }
@@ -152,9 +152,9 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                             binding.animationView.visibility = View.GONE
                             productDataList.clear()
                             productList.clear()
-                            productDataList.addAll(it.data)
-                            it.data.forEach {
-                                productList.add(PosViewModel.product(it.name!!, it.sku!!))
+                            productDataList.addAll(it)
+                            it.forEach {
+                                productList.add(PosViewModel.product(it.name, it.subSku))
                             }
                             setProductData(productList)
                         }
@@ -170,10 +170,10 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
         }
     }
 
-    override fun onClick(dataList: ArrayList<ProductData>, position: Int) {
+    override fun onClick(dataList: ArrayList<ProductListResponseItem>, position: Int) {
         var total = 0f
         for (i in 0 until dataList.size) {
-            total += (dataList[i].product_variations[0].variations[0].sell_price_inc_tax!!.toFloat() * dataList[i].quantity.toFloat())
+            total += (dataList[i].sellingPrice.toFloat() * dataList[i].quantity.toFloat())
         }
 
         totalItems = dataList.size.toString()

@@ -1,45 +1,50 @@
 package com.alhanpos.store.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alhanpos.store.databinding.ItemPosBinding
+import com.alhanpos.store.databinding.ItemAddStockSearchBinding
 import com.alhanpos.store.model.response.product.ProductListResponseItem
 
 
-class PosAdapter(
+class AddStockTransferAdapter(
     var dataList: ArrayList<ProductListResponseItem>,
     var buttonClick: ButtonClick
-) : RecyclerView.Adapter<PosAdapter.ViewHolder>() {
-    var x = 0f
+) : RecyclerView.Adapter<AddStockTransferAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemPosBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemAddStockSearchBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemPosBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemAddStockSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(dataList[position]) {
-                binding.txtName.text = "$name $subSku"
+                binding.txtName.text = "$name\n $subSku"
                 quantity = if (quantity == 0) 1 else quantity
                 binding.txtQty.setText(quantity.toString())
-                price =
-                    (quantity.toFloat() * sellingPrice.toFloat()).toString()
-                binding.txtPrice.text = price
+                binding.txtPrice.text = sellingPrice
+                price = (quantity.toFloat() * sellingPrice.toFloat()).toString()
+                binding.txtTotal.text = price
                 buttonClick.onClick(dataList, position)
 
-                /*binding.txtQty.addTextChangedListener(object : TextWatcher {
+                binding.txtQty.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
                         if (s.toString().isEmpty())
                             return
                         quantity = s.toString().toInt()
+                        price = (quantity.toFloat() * sellingPrice.toFloat()).toString()
+                        binding.txtTotal.text = price
 //                        price =
 //                            (quantity.toFloat() * product_variations[0].variations[0].sell_price_inc_tax.toFloat()).toString()
 
-                        notifyItemChanged(absoluteAdapterPosition)
+//                        notifyItemChanged(absoluteAdapterPosition)
                     }
 
                     override fun beforeTextChanged(
@@ -57,18 +62,7 @@ class PosAdapter(
                         count: Int
                     ) {
                     }
-                })*/
-
-                binding.imgDecrease.setOnClickListener {
-                    if (quantity == 1)
-                        return@setOnClickListener
-                    quantity = (quantity.minus(1))
-                    notifyItemChanged(absoluteAdapterPosition)
-                }
-                binding.imgIncrease.setOnClickListener {
-                    quantity = (quantity.plus(1))
-                    notifyItemChanged(absoluteAdapterPosition)
-                }
+                })
             }
         }
     }

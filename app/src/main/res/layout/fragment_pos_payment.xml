@@ -451,8 +451,8 @@
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/payment_note"
                                 android:padding="@dimen/_10sdp"
-                                android:text="@string/payment_note"
                                 android:textColor="@color/btnColor"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
@@ -485,8 +485,8 @@
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/sell_note"
                                 android:padding="@dimen/_10sdp"
-                                android:text="@string/amount"
                                 android:textColor="@color/btnColor"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
@@ -516,8 +516,8 @@
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/staff_note"
                                 android:padding="@dimen/_10sdp"
-                                android:text="@string/amount"
                                 android:textColor="@color/btnColor"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>

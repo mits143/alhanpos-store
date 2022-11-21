@@ -194,6 +194,7 @@
     <string name="paid_on">Paid on</string>
     <string name="purchase">Purchase</string>
     <string name="add_purchase">Add Purchase</string>
+    <string name="unit_price">Unit Price</string>
     <string-array name="orderStatuses">
         <item>Received</item>
         <item>Pending</item>

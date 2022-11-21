@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alhanpos.store.model.response.location.LocationResponse
+import com.alhanpos.store.model.response.product.ProductListResponse
 import com.alhanpos.store.repo.MainRepository
 import com.alhanpos.store.util.NetworkHelper
 import com.alhanpos.store.util.Resource
@@ -22,6 +23,10 @@ class AddStockAdjustmentViewModel(
     private val setLocationData = MutableLiveData<Resource<LocationResponse>>()
     val getLocationData: LiveData<Resource<LocationResponse>>
         get() = setLocationData
+
+    private val setProductData = MutableLiveData<Resource<ProductListResponse>>()
+    val getProductData: LiveData<Resource<ProductListResponse>>
+        get() = setProductData
 
 
     fun fetchLocation(
@@ -55,7 +60,17 @@ class AddStockAdjustmentViewModel(
         search_product: String,
         final_total: String,
         total_amount_recovered: String,
-        additional_notes: String
+        additional_notes: String,
+        lot_no_line_id: String,
+        product_id: String,
+        variation_id: String,
+        enable_stock: String,
+        quantity: String,
+        base_unit_multiplier: String,
+        product_unit_id: String,
+        sub_unit_id: String,
+        unit_price: String,
+        price: String
     ) {
         viewModelScope.launch {
             setMsg.postValue(Resource.loading(null))
@@ -69,7 +84,17 @@ class AddStockAdjustmentViewModel(
                     search_product,
                     final_total,
                     total_amount_recovered,
-                    additional_notes
+                    additional_notes,
+                    lot_no_line_id,
+                    product_id,
+                    variation_id,
+                    enable_stock,
+                    quantity,
+                    base_unit_multiplier,
+                    product_unit_id,
+                    sub_unit_id,
+                    unit_price,
+                    price
                 ).let {
                     if (it.isSuccessful) {
                         if (it.body()?.get("success")?.asInt!! == 1)
@@ -86,6 +111,34 @@ class AddStockAdjustmentViewModel(
                     )
                 }
             } else setMsg.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    fun fetchProduct(
+        token: String,
+    ) {
+        viewModelScope.launch {
+            setProductData.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                mainRepository.productList(
+                    token
+                ).let {
+                    if (it.isSuccessful) {
+                        setProductData.postValue(Resource.success(it.body()))
+                    } else setProductData.postValue(
+                        Resource.error(
+                            it.message(), null
+                        )
+                    )
+                }
+            } else setProductData.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    class product(var name: String, var sku: String) {
+        override fun toString(): String {
+            return name
         }
     }
 

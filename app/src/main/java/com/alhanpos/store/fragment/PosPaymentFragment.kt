@@ -37,7 +37,7 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
     var accountID = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.txtTotalItems.text = args.data?.data?.size.toString()
+        binding.txtTotalItems.text = args.data?.size.toString()
         binding.txtTotal.text = args.total
 
         binding.edtAmount.addTextChangedListener(object : TextWatcher {
@@ -106,10 +106,10 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
         val currentDateandTime: String = sdf.format(Date())
         val payments: ArrayList<Payment> = arrayListOf()
         val products: ArrayList<Product> = arrayListOf()
-        for (i in 0 until args.data?.data?.size!!) {
+        for (i in 0 until args.data?.size!!) {
             val payment = Payment(
                 accountID,
-                args.data?.data?.get(i)?.product_variations?.get(0)?.variations?.get(0)?.sell_price_inc_tax.toString(),
+                args.data?.get(i)?.sellingPrice.toString(),
                 "",
                 "",
                 "",
@@ -126,7 +126,7 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
 
             payments.add(payment)
         }
-        for (i in 0 until args.data?.data?.size!!) {
+        for (i in 0 until args.data?.size!!) {
             val product = Product(
                 "1",
                 "",
@@ -134,16 +134,16 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
                 "",
                 "fixed",
                 "",
-                args.data?.data?.get(i)?.id.toString(),
-                args.data?.data?.get(0)?.type!!,
+                args.data?.get(i)?.productId.toString(),
+                args.data?.get(i)?.type!!,
                 "1",
-                args.data?.data?.get(i)?.quantity.toString(),
+                args.data?.get(i)?.quantity.toString(),
                 "",
                 "1",
                 "",
-                args.data?.data?.get(i)?.product_variations?.get(0)?.variations?.get(0)?.sell_price_inc_tax.toString(),
-                args.data?.data?.get(i)?.product_variations?.get(0)?.variations?.get(0)?.sell_price_inc_tax.toString(),
-                args.data?.data?.get(i)?.product_variations?.get(0)?.id.toString(),
+                args.data?.get(i)?.sellingPrice.toString(),
+                args.data?.get(i)?.sellingPrice.toString(),
+                args.data?.get(i)?.variationId.toString()
             )
 
             products.add(product)

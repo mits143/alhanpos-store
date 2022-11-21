@@ -48,11 +48,10 @@ class GridAutofitLayoutManager : GridLayoutManager {
             isColumnWidthChanged = true
         }
     }
-
     override fun onLayoutChildren(recycler: Recycler, state: RecyclerView.State) {
         val width = width
         val height = height
-        if (columnWidth > 0 && width > 0 && height > 0 && (isColumnWidthChanged || lastWidth != width || lastHeight != height)) {
+        if (isColumnWidthChanged && columnWidth > 0) {
             val totalSpace: Int
             totalSpace = if (orientation == VERTICAL) {
                 width - paddingRight - paddingLeft
@@ -61,7 +60,7 @@ class GridAutofitLayoutManager : GridLayoutManager {
             }
             val spanCount = Math.max(1, totalSpace / columnWidth)
             setSpanCount(spanCount)
-            isColumnWidthChanged = false
+            isColumnWidthChanged = true
         }
         lastWidth = width
         lastHeight = height

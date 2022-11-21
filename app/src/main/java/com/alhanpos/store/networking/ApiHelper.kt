@@ -34,16 +34,11 @@ interface ApiHelper {
     ): Response<LoginResponse>
 
     suspend fun dashboard(
-        token: String,
-        start: String,
-        end: String,
-        location_id: String
+        token: String, start: String, end: String, location_id: String
     ): Response<DashboardResponse>
 
     suspend fun dashboard_graph(
-        token: String,
-        currency_id: String,
-        business_id: String
+        token: String, currency_id: String, business_id: String
     ): Response<DashboardGraphResponse>
 
     suspend fun location(
@@ -97,8 +92,7 @@ interface ApiHelper {
     ): Response<JsonObject>
 
     suspend fun deleteCategory(
-        token: String,
-        id: String
+        token: String, id: String
     ): Response<JsonObject>
 
     suspend fun brandList(
@@ -106,16 +100,11 @@ interface ApiHelper {
     ): Response<BrandResponse>
 
     suspend fun addUpdateBrand(
-        token: String,
-        id: String,
-        name: String,
-        description: String,
-        add_as_sub_cat: String
+        token: String, id: String, name: String, description: String, add_as_sub_cat: String
     ): Response<JsonObject>
 
     suspend fun deleteBrand(
-        token: String,
-        id: String
+        token: String, id: String
     ): Response<JsonObject>
 
     suspend fun paymentAccounts(
@@ -139,8 +128,7 @@ interface ApiHelper {
     ): Response<JsonObject>
 
     suspend fun finalizePayment(
-        token: String,
-        jsonObject: PaymentRequest
+        token: String, jsonObject: PaymentRequest
     ): Response<JsonObject>
 
     suspend fun stocktransfer(
@@ -179,6 +167,18 @@ interface ApiHelper {
         final_total: String,
         transfer_location_id: String,
         shipping_charges: String,
+        location_id: String,
+        lot_no_line_id: String,
+        product_id: String,
+        variation_id: String,
+        enable_stock: String,
+        quantity: String,
+        base_unit_multiplier: String,
+        product_unit_id: String,
+        sub_unit_id: String,
+        unit_price: String,
+        price: String,
+        additional_notes: String
     ): Response<JsonObject>
 
     suspend fun add_stockadjustment(
@@ -191,6 +191,16 @@ interface ApiHelper {
         final_total: String,
         total_amount_recovered: String,
         additional_notes: String,
+        lot_no_line_id: String,
+        product_id: String,
+        variation_id: String,
+        enable_stock: String,
+        quantity: String,
+        base_unit_multiplier: String,
+        product_unit_id: String,
+        sub_unit_id: String,
+        unit_price: String,
+        price: String
     ): Response<JsonObject>
 
     suspend fun add_purchase(
@@ -202,10 +212,27 @@ interface ApiHelper {
         location_id: RequestBody,
         pay_term_number: RequestBody,
         pay_term_type: RequestBody,
-//        document: MultipartBody.Part,
+        file: MultipartBody.Part,
         shipping_details: RequestBody,
         shipping_charges: RequestBody,
-        final_total: RequestBody
+        discount_type: RequestBody,
+        tax_id: RequestBody,
+        advance_balance: RequestBody,
+        final_total: RequestBody,
+        product_id: RequestBody,
+        variation_id: RequestBody,
+        quantity: RequestBody,
+        product_unit_id: RequestBody,
+        sub_unit_id: RequestBody,
+        purchase_price: RequestBody,
+        purchase_line_tax_id: RequestBody,
+        purchase_price_inc_tax: RequestBody,
+        default_sell_price: RequestBody,
+        paymentamount: RequestBody,
+        paymentpaid_on: RequestBody,
+        paymentmethod: RequestBody,
+        paymentaccount_id: RequestBody,
+        paymentnote: RequestBody
     ): Response<JsonObject>
 
     suspend fun add_expense(
@@ -214,11 +241,15 @@ interface ApiHelper {
         expense_category_id: RequestBody,
         expense_sub_category_id: RequestBody,
         ref_no: RequestBody,
-        transaction_date: RequestBody,
+//        transaction_date: RequestBody,
         expense_for: RequestBody,
         contact_id: RequestBody,
         document: MultipartBody.Part,
         tax_id: RequestBody,
+        tax_calculation_amount: RequestBody,
+        recur_interval: RequestBody,
+        recur_interval_type: RequestBody,
+        recur_repetitions: RequestBody,
         final_total: RequestBody,
         additional_notes: RequestBody,
         paymentamount: RequestBody,

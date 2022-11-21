@@ -33,7 +33,6 @@
             app:argType="com.alhanpos.store.model.response.product.ProductListResponse"
             app:nullable="true" />
 
-
         <argument
             android:name="total"
             android:defaultValue=""
@@ -136,8 +135,8 @@
         tools:layout="@layout/fragment_all_sell">
 
         <action
-            android:id="@+id/action_nav_all_sale_to_nav_add_sale"
-            app:destination="@id/nav_add_sale" />
+            android:id="@+id/action_nav_all_sale_to_nav_pos"
+            app:destination="@id/nav_pos" />
     </fragment>
 
     <fragment
@@ -212,7 +211,7 @@
         <argument
             android:name="data"
             android:defaultValue="@null"
-            app:argType="com.alhanpos.store.model.response.product.ProductData"
+            app:argType="com.alhanpos.store.model.response.product.ProductListResponseItem"
             app:nullable="true" />
     </fragment>
 
@@ -259,12 +258,12 @@
 
         <action
             android:id="@+id/action_nav_stock_adjustment_to_nav_add_stock_adjustment"
-            app:destination="@id/nav_stock_add_stock_adjustment" />
+            app:destination="@id/nav_add_stock_adjustment" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/nav_stock_add_stock_adjustment"
+        android:id="@+id/nav_add_stock_adjustment"
         android:name="com.alhanpos.store.fragment.AddStockAdjustmentFragment"
         android:label="@string/stock_adjustment"
         tools:layout="@layout/fragment_add_stock_adjustment" />

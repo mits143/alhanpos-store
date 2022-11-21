@@ -12,11 +12,14 @@ import com.alhanpos.store.R
 import com.alhanpos.store.databinding.FragmentAddPurchaseOrderBinding
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Callback
+import com.alhanpos.store.util.FileUtils
 import com.alhanpos.store.util.FileUtils.getPath
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AddPurchaseViewModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -85,29 +88,72 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
             val final_total =
                 "0".toRequestBody(MultipartBody.FORM)
 
-//            val requestFile = file!!.asRequestBody(FileUtils.MIME_TYPE_IMAGE.toMediaTypeOrNull())
-//            val document = MultipartBody.Part.createFormData(
-//                "document", file?.name, requestFile
-//            )
+            val requestFile = file!!.asRequestBody(FileUtils.MIME_TYPE_IMAGE.toMediaTypeOrNull())
+            val document = MultipartBody.Part.createFormData(
+                "document", file?.name, requestFile
+            )
             val shipping_details: RequestBody =
                 binding.edtShippingDetails.text.toString().trim().toRequestBody(MultipartBody.FORM)
             val shipping_charges: RequestBody =
                 binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
 
-            viewModel.addUpdatePurchase(
-                "Bearer " + prefs.accessToken,
-                contact_id,
-                ref_no,
-                transaction_date,
-                status,
-                location_id,
-                pay_term_number,
-                pay_term_type,
+            val product_id: RequestBody =
+               "0".toRequestBody(MultipartBody.FORM)
+            val variation_id: RequestBody =
+                "0".toRequestBody(MultipartBody.FORM)
+            val quantity: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val product_unit_id: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val sub_unit_id: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val purchase_price: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val purchase_line_tax_id: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val purchase_price_inc_tax: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val default_sell_price: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val paymentamount: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val paymentpaid_on: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val paymentmethod: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val paymentaccount_id: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+            val paymentnote: RequestBody =
+                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
+
+//            viewModel.addUpdatePurchase(
+//                "Bearer " + prefs.accessToken,
+//                contact_id,
+//                ref_no,
+//                transaction_date,
+//                status,
+//                location_id,
+//                pay_term_number,
+//                pay_term_type,
 //                document,
-                shipping_details,
-                shipping_charges,
-                final_total
-            )
+//                shipping_details,
+//                shipping_charges,
+//                final_total,
+//                product_id,
+//                variation_id,
+//                quantity,
+//                product_unit_id,
+//                sub_unit_id,
+//                purchase_price,
+//                purchase_line_tax_id,
+//                purchase_price_inc_tax,
+//                default_sell_price,
+//                paymentamount,
+//                paymentpaid_on,
+//                paymentmethod,
+//                paymentaccount_id,
+//                paymentnote
+//            )
         }
     }
 

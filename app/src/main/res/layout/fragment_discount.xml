@@ -91,85 +91,85 @@
 
                 </LinearLayout>
 
-<!--                <HorizontalScrollView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="0dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:fadeScrollbars="false"-->
-<!--                    android:nestedScrollingEnabled="false"-->
-<!--                    android:overScrollMode="ifContentScrolls"-->
-<!--                    android:scrollbarThumbHorizontal="@color/btnColor"-->
-<!--                    android:scrollbars="horizontal">-->
+                <!--                <HorizontalScrollView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="0dp"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:fadeScrollbars="false"-->
+                <!--                    android:nestedScrollingEnabled="false"-->
+                <!--                    android:overScrollMode="ifContentScrolls"-->
+                <!--                    android:scrollbarThumbHorizontal="@color/btnColor"-->
+                <!--                    android:scrollbars="horizontal">-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@color/btnColor"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10sdp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:background="@color/btnColor"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/_10sdp">
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/date"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/date"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/start_at"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/ends_at"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center"
-                                android:paddingHorizontal="@dimen/_10sdp"
-                                android:text="@string/discount_amount"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rVCategory"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_discount" />
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/start_at"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/ends_at"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:text="@string/discount_amount"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
+
                     </LinearLayout>
-<!--                </HorizontalScrollView>-->
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rVCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_discount" />
+                </LinearLayout>
+                <!--                </HorizontalScrollView>-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -177,7 +177,8 @@
                     android:layout_gravity="end"
                     android:orientation="horizontal"
                     android:paddingHorizontal="@dimen/_10sdp"
-                    android:paddingVertical="@dimen/_20sdp">
+                    android:paddingVertical="@dimen/_20sdp"
+                    android:visibility="gone">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtPrev"

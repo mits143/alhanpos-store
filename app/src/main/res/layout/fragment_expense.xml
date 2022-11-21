@@ -232,7 +232,8 @@
                     android:layout_gravity="end"
                     android:orientation="horizontal"
                     android:paddingHorizontal="@dimen/_10sdp"
-                    android:paddingVertical="@dimen/_20sdp">
+                    android:paddingVertical="@dimen/_20sdp"
+                    android:visibility="gone">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtPrev"

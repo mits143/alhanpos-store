@@ -37,13 +37,13 @@
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
                 android:fontFamily="@font/poppins_regular"
                 android:hint="@string/enter_username"
                 android:imeOptions="actionNext"
                 android:textColor="@color/dashColor"
                 android:textColorHint="@color/dashColor"
-                android:textSize="@dimen/_12ssp"
-                android:theme="@style/EditTextTheme" />
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="@null"
             app:hintTextColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/txtEmail">
 
@@ -59,13 +60,13 @@
                 android:id="@+id/edtPwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
                 android:fontFamily="@font/poppins_regular"
                 android:hint="@string/enter_password"
                 android:imeOptions="actionDone"
                 android:textColor="@color/dashColor"
                 android:textColorHint="@color/dashColor"
-                android:textSize="@dimen/_12ssp"
-                android:theme="@style/EditTextTheme" />
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

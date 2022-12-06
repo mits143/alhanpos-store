@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.ExpensesAdapter
@@ -14,7 +15,8 @@ import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.ExpensesViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ExpenseFragment : BaseFragment<FragmentExpenseBinding>(), ExpensesAdapter.ButtonClick {
+class ExpenseFragment : BaseFragment<FragmentExpenseBinding>(), ExpensesAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentExpenseBinding =
         FragmentExpenseBinding::inflate
@@ -25,6 +27,7 @@ class ExpenseFragment : BaseFragment<FragmentExpenseBinding>(), ExpensesAdapter.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.searchView.setOnQueryTextListener(this)
         binding.flAdd.setOnClickListener {
             findNavController().navigate(R.id.action_nav_expenses_to_nav_add_expenses)
         }
@@ -37,7 +40,7 @@ class ExpenseFragment : BaseFragment<FragmentExpenseBinding>(), ExpensesAdapter.
     }
 
     private fun setObserver() {
-        viewModel.fetchExpenses("Bearer " + prefs.accessToken)
+        viewModel.fetchExpenses("Bearer " + prefs.accessToken, "")
         viewModel.getExpensesData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -61,5 +64,14 @@ class ExpenseFragment : BaseFragment<FragmentExpenseBinding>(), ExpensesAdapter.
     }
 
     override fun onDeleteClick(data: Data, pos: Int) {
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchExpenses("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

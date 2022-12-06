@@ -20,13 +20,15 @@ class PurchaseOrderViewModel(
         get() = setPurchaseOrderData
 
     fun fetchPurchaseOrder(
-        token: String
+        token: String,
+        term: String
     ) {
         viewModelScope.launch {
             setPurchaseOrderData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.purchaseorders(
-                    token
+                    token,
+                    term
                 ).let {
                     if (it.isSuccessful) {
                         setPurchaseOrderData.postValue(Resource.success(it.body()))

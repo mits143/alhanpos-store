@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.ContactAdapter
 import com.alhanpos.store.databinding.FragmentContactBinding
@@ -14,7 +15,8 @@ import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.ContactViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ContactFragment : BaseFragment<FragmentContactBinding>(), ContactAdapter.ButtonClick {
+class ContactFragment : BaseFragment<FragmentContactBinding>(), ContactAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentContactBinding =
         FragmentContactBinding::inflate
@@ -26,6 +28,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding>(), ContactAdapter.B
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
         setContactData()
+        binding.searchView.setOnQueryTextListener(this)
 
         binding.flAdd.setOnClickListener {
             val action =
@@ -43,7 +46,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding>(), ContactAdapter.B
     }
 
     private fun setObserver() {
-        viewModel.fetchContact("Bearer " + prefs.accessToken)
+        viewModel.fetchContact("Bearer " + prefs.accessToken, "")
         viewModel.getContactData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -67,5 +70,14 @@ class ContactFragment : BaseFragment<FragmentContactBinding>(), ContactAdapter.B
         val action =
             ContactFragmentDirections.actionNavContactToNavAddContact(data)
         findNavController().navigate(action)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchContact("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

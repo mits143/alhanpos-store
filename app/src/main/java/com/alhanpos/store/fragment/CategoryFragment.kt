@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.CategoryAdapter
 import com.alhanpos.store.databinding.FragmentCategoryBinding
@@ -13,7 +14,8 @@ import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.CategoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapter.ButtonClick {
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
         FragmentCategoryBinding::inflate
@@ -25,9 +27,9 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.searchView.setOnQueryTextListener(this)
         binding.flAdd.setOnClickListener {
-            val action =
-                CategoryFragmentDirections.actionNavCategoryToNavAddCategory()
+            val action = CategoryFragmentDirections.actionNavCategoryToNavAddCategory()
             findNavController().navigate(action)
         }
     }
@@ -38,7 +40,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
     }
 
     private fun setObserver() {
-        viewModel.fetchCategory("Bearer " + prefs.accessToken)
+        viewModel.fetchCategory("Bearer " + prefs.accessToken, "")
         viewModel.getCategoryData.observe(this) {
             it.getContentIfNotHandled()?.let { //
                 when (it.status) {
@@ -82,13 +84,21 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
     }
 
     override fun onEditClick(data: CategoryResponseItem) {
-        val action =
-            CategoryFragmentDirections.actionNavCategoryToNavAddCategory(data)
+        val action = CategoryFragmentDirections.actionNavCategoryToNavAddCategory(data)
         findNavController().navigate(action)
     }
 
     override fun onDeleteClick(data: CategoryResponseItem, pos: Int) {
         this.pos = pos
         viewModel.deleteCategory("Bearer " + prefs.accessToken, data.id.toString())
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchCategory("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

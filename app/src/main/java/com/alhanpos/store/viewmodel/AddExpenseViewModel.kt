@@ -47,7 +47,7 @@ class AddExpenseViewModel(
             setPaymentAccountData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.paymentAccounts(
-                    token
+                    token, ""
                 ).let {
                     if (it.isSuccessful) {
                         setPaymentAccountData.postValue(Resource.success(it.body()))
@@ -69,7 +69,7 @@ class AddExpenseViewModel(
             setPaymentMethodData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.paymentMethods(
-                    token
+                    token, ""
                 ).let {
                     if (it.isSuccessful) {
                         setPaymentMethodData.postValue(Resource.success(it.body()))
@@ -92,7 +92,7 @@ class AddExpenseViewModel(
             setLocationData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.location(
-                    token
+                    token, ""
                 ).let {
                     if (it.isSuccessful) {
                         setLocationData.postValue(Resource.success(it.body()))
@@ -114,7 +114,7 @@ class AddExpenseViewModel(
             setContactData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.contactList(
-                    token
+                    token, ""
                 ).let {
                     if (it.isSuccessful) {
                         setContactData.postValue(Resource.success(it.body()))

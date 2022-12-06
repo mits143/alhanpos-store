@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.StockTransferAdapter
@@ -15,7 +16,8 @@ import com.alhanpos.store.viewmodel.StockTransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(),
-    StockTransferAdapter.ButtonClick {
+    StockTransferAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentStockTransferBinding =
         FragmentStockTransferBinding::inflate
@@ -26,6 +28,7 @@ class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.searchView.setOnQueryTextListener(this)
         binding.flAdd.setOnClickListener {
             findNavController().navigate(R.id.action_nav_stock_transfer_to_nav_add_stock_transfer)
         }
@@ -38,7 +41,7 @@ class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(),
     }
 
     private fun setObserver() {
-        viewModel.fetchStock("Bearer " + prefs.accessToken)
+        viewModel.fetchStock("Bearer " + prefs.accessToken, "")
         viewModel.getStockData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -62,5 +65,14 @@ class StockTransferFragment : BaseFragment<FragmentStockTransferBinding>(),
     }
 
     override fun onDeleteClick(data: Data, pos: Int) {
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchStock("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

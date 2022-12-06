@@ -54,13 +54,11 @@
             android:id="@+id/bottomNavView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemBackground="@color/item_bg"
             app:itemIconTint="@color/bnv_tab_item_foreground"
             app:itemTextColor="@color/bnv_tab_item_foreground"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_menu" />
-
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -70,10 +68,10 @@
         android:layout_gravity="start"
         android:background="@color/white"
         android:fitsSystemWindows="true"
-        app:subheaderColor="@color/black"
+        android:theme="@style/Theme.AlhanposStore.NavigationView"
         app:headerLayout="@layout/nav_header_home"
-        app:itemBackground="@color/nav_item_bg"
         app:itemIconTint="@color/bnv_nav_item_foreground"
         app:itemTextColor="@color/bnv_nav_item_foreground"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer"
+        app:subheaderColor="@color/black" />
 </androidx.drawerlayout.widget.DrawerLayout>

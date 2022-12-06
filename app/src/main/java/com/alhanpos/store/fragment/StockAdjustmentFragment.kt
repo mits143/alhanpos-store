@@ -13,9 +13,11 @@ import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.StockAdjustmentViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.appcompat.widget.SearchView
 
 class StockAdjustmentFragment : BaseFragment<FragmentStockAdjustmentBinding>(),
-    StockAdjustmentAdapter.ButtonClick {
+    StockAdjustmentAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentStockAdjustmentBinding =
         FragmentStockAdjustmentBinding::inflate
@@ -26,6 +28,7 @@ class StockAdjustmentFragment : BaseFragment<FragmentStockAdjustmentBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.searchView.setOnQueryTextListener(this)
         binding.flAdd.setOnClickListener {
             findNavController().navigate(R.id.action_nav_stock_adjustment_to_nav_add_stock_adjustment)
         }
@@ -38,7 +41,7 @@ class StockAdjustmentFragment : BaseFragment<FragmentStockAdjustmentBinding>(),
     }
 
     private fun setObserver() {
-        viewModel.fetchExpenses("Bearer " + prefs.accessToken)
+        viewModel.fetchExpenses("Bearer " + prefs.accessToken, "")
         viewModel.getStockAdjustmentData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -62,5 +65,14 @@ class StockAdjustmentFragment : BaseFragment<FragmentStockAdjustmentBinding>(),
     }
 
     override fun onDeleteClick(data: Data, pos: Int) {
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchExpenses("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

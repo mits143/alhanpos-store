@@ -20,13 +20,15 @@ class SellsViewModel(
         get() = setSellData
 
     fun fetchSells(
-        token: String
+        token: String,
+        term: String
     ) {
         viewModelScope.launch {
             setSellData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.sells(
-                    token
+                    token,
+                    term
                 ).let {
                     if (it.isSuccessful) {
                         setSellData.postValue(Resource.success(it.body()))

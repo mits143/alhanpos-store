@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.SupplierAdapter
 import com.alhanpos.store.databinding.FragmentContactBinding
@@ -14,7 +15,8 @@ import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.ContactViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter.ButtonClick {
+class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentContactBinding =
         FragmentContactBinding::inflate
@@ -25,6 +27,7 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.searchView.setOnQueryTextListener(this)
         setContactData()
 
         binding.flAdd.setOnClickListener {
@@ -43,7 +46,7 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
 
     private fun setObserver() {
 
-        viewModel.fetchSupplier("Bearer " + prefs.accessToken)
+        viewModel.fetchSupplier("Bearer " + prefs.accessToken, "")
         viewModel.getContactData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -67,5 +70,14 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
         val action =
             SupplierFragmentDirections.actionNavSupplierToNavAddSupplier(data)
         findNavController().navigate(action)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchSupplier("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

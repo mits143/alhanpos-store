@@ -20,13 +20,15 @@ class ContactViewModel(
         get() = setContactData
 
     fun fetchContact(
-        token: String
+        token: String,
+        term: String
     ) {
         viewModelScope.launch {
             setContactData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.contactList(
-                    token
+                    token,
+                    term
                 ).let {
                     if (it.isSuccessful) {
                         setContactData.postValue(Resource.success(it.body()))
@@ -42,13 +44,15 @@ class ContactViewModel(
     }
 
     fun fetchSupplier(
-        token: String
+        token: String,
+        term: String
     ) {
         viewModelScope.launch {
             setContactData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.supplierList(
-                    token
+                    token,
+                    term
                 ).let {
                     if (it.isSuccessful) {
                         setContactData.postValue(Resource.success(it.body()))

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "470073242138",
+    "project_id": "alhanpos",
+    "storage_bucket": "alhanpos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470073242138:android:2a41ddad9a63946aba57a3",
+        "android_client_info": {
+          "package_name": "com.alhanpos.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470073242138-gm1iu5t1s8bupjimn2499tmft6394013.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alhanpos.store",
+            "certificate_hash": "f17c8fe78dedef657953461a9e207ffaaa399760"
+          }
+        },
+        {
+          "client_id": "470073242138-m1ca95gfhq1sunb829uonck14hc61o4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1aZlwta52u6W1KmZkyw0nX4sNnpYR24c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470073242138-m1ca95gfhq1sunb829uonck14hc61o4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

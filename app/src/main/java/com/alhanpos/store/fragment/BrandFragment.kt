@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.BrandAdapter
 import com.alhanpos.store.databinding.FragmentBrandBinding
@@ -13,7 +14,8 @@ import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.BrandViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonClick {
+class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentBrandBinding =
         FragmentBrandBinding::inflate
@@ -26,6 +28,7 @@ class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonC
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.searchView.setOnQueryTextListener(this)
         binding.flAdd.setOnClickListener {
             val action =
                 BrandFragmentDirections.actionNavBrandToNavAddBrand()
@@ -39,7 +42,7 @@ class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonC
     }
 
     private fun setObserver() {
-        viewModel.fetchBrand("Bearer " + prefs.accessToken)
+        viewModel.fetchBrand("Bearer " + prefs.accessToken, "")
         viewModel.getBrandData.observe(this) {
             it.getContentIfNotHandled()?.let { //
                 when (it.status) {
@@ -91,5 +94,14 @@ class BrandFragment : BaseFragment<FragmentBrandBinding>(), BrandAdapter.ButtonC
     override fun onDeleteClick(data: BrandResponseItem, pos: Int) {
         position = pos
         viewModel.deleteBrand("Bearer " + prefs.accessToken, data.id.toString())
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchBrand("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

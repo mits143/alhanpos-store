@@ -35,24 +35,29 @@ class MainRepository(private val apiHelper: ApiHelper) {
     ): Response<DashboardGraphResponse> = apiHelper.dashboard_graph(token, currency_id, business_id)
 
     suspend fun location(
-        token: String
-    ) = apiHelper.location(token)
+        token: String,
+        term: String
+    ) = apiHelper.location(token, term)
 
     suspend fun contactList(
-        token: String
-    ) = apiHelper.contactList(token)
+        token: String,
+        term: String
+    ) = apiHelper.contactList(token, term)
 
     suspend fun supplierList(
-        token: String
-    ) = apiHelper.supplierList(token)
+        token: String,
+        term: String
+    ) = apiHelper.supplierList(token, term)
 
     suspend fun productList(
-        token: String
-    ) = apiHelper.productList(token)
+        token: String,
+        term: String
+    ) = apiHelper.productList(token, term)
 
     suspend fun categoryList(
-        token: String
-    ) = apiHelper.categoryList(token)
+        token: String,
+        term: String
+    ) = apiHelper.categoryList(token, term)
 
     suspend fun addUpdateCategory(
         token: String,
@@ -71,8 +76,9 @@ class MainRepository(private val apiHelper: ApiHelper) {
     ) = apiHelper.deleteCategory(token, id)
 
     suspend fun brandList(
-        token: String
-    ) = apiHelper.brandList(token)
+        token: String,
+        term: String
+    ) = apiHelper.brandList(token, term)
 
     suspend fun addUpdateBrand(
         token: String, id: String, name: String, description: String, add_as_sub_cat: String
@@ -86,11 +92,13 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun paymentAccounts(
         token: String,
-    ) = apiHelper.paymentAccounts(token)
+        term: String
+    ) = apiHelper.paymentAccounts(token, term)
 
     suspend fun paymentMethods(
         token: String,
-    ) = apiHelper.paymentMethods(token)
+        term: String
+    ) = apiHelper.paymentMethods(token, term)
 
     suspend fun addUpdateProduct(
         token: String,
@@ -137,45 +145,52 @@ class MainRepository(private val apiHelper: ApiHelper) {
     )
 
     suspend fun stocktransfer(
-        token: String
+        token: String,
+        term: String
     ): Response<StockTransferResponse> = apiHelper.stocktransfer(
-        token
+        token, term
     )
 
     suspend fun expenses(
-        token: String
+        token: String,
+        term: String
     ): Response<ExpensesResponse> = apiHelper.expenses(
-        token
+        token, term
     )
 
     suspend fun sells(
-        token: String
+        token: String,
+        term: String
     ): Response<SellResponse> = apiHelper.sells(
-        token
+        token, term
     )
 
     suspend fun purchaseorders(
-        token: String
+        token: String,
+        term: String
     ): Response<PurchaseOrderResponse> = apiHelper.purchaseorders(
-        token
+        token, term
     )
 
     suspend fun stockadjustments(
-        token: String
+        token: String,
+        term: String
     ): Response<StockAdjustmentResponse> = apiHelper.stockadjustments(
-        token
+        token, term
     )
 
     suspend fun subscriptions(
-        token: String
+        token: String,
+        term: String
     ): Response<SubscripitionResponse> = apiHelper.subscriptions(
-        token
+        token, term
     )
 
     suspend fun unitsList(
-        token: String
+        token: String,
+        term: String
     ): Response<UnitResponse> = apiHelper.unitsList(
-        token
+        token, term
     )
 
     suspend fun add_stocktransfer(

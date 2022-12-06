@@ -36,7 +36,7 @@ class AddStockTransferViewModel(
             setLocationData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.location(
-                    token
+                    token,""
                 ).let {
                     if (it.isSuccessful) {
                         setLocationData.postValue(Resource.success(it.body()))
@@ -125,7 +125,7 @@ class AddStockTransferViewModel(
             setProductData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.productList(
-                    token
+                    token,""
                 ).let {
                     if (it.isSuccessful) {
                         setProductData.postValue(Resource.success(it.body()))

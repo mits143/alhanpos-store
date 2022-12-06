@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.ProductAdapter
 import com.alhanpos.store.databinding.FragmentAllProductBinding
@@ -16,7 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
-    ProductAdapter.ButtonClick {
+    ProductAdapter.ButtonClick,
+    SearchView.OnQueryTextListener {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAllProductBinding =
         FragmentAllProductBinding::inflate
@@ -25,6 +27,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+        binding.searchView.setOnQueryTextListener(this)
         binding.flAdd.setOnClickListener {
             val action =
                 ProductListingFragmentDirections.actionNavAllProductToNavAddProduct()
@@ -40,7 +43,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
     }
 
     private fun setObserver() {
-        viewModel.fetchProduct("Bearer " + prefs.accessToken)
+        viewModel.fetchProduct("Bearer " + prefs.accessToken, "")
         viewModel.getProductData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -64,5 +67,14 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
         val action =
             ProductListingFragmentDirections.actionNavAllProductToNavAddProduct(data)
         findNavController().navigate(action)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.fetchProduct("Bearer " + prefs.accessToken, newText!!)
+        return false
     }
 }

@@ -21,12 +21,14 @@ class AllProductViewModel(
 
     fun fetchProduct(
         token: String,
+        term: String
     ) {
         viewModelScope.launch {
             setProductData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.productList(
-                    token
+                    token,
+                    term
                 ).let {
                     if (it.isSuccessful) {
                         setProductData.postValue(Resource.success(it.body()))

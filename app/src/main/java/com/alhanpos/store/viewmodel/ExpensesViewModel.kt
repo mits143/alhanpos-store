@@ -20,13 +20,15 @@ class ExpensesViewModel(
         get() = setExpensesData
 
     fun fetchExpenses(
-        token: String
+        token: String,
+        term: String
     ) {
         viewModelScope.launch {
             setExpensesData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.expenses(
-                    token
+                    token,
+                    term
                 ).let {
                     if (it.isSuccessful) {
                         setExpensesData.postValue(Resource.success(it.body()))

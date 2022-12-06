@@ -46,8 +46,7 @@
                 android:imeOptions="actionNext"
                 android:textColor="@color/dashColor"
                 android:textColorHint="@color/dashColor"
-                android:textSize="@dimen/_12ssp"
-                android:theme="@style/EditTextTheme" />
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,8 +68,7 @@
                 android:imeOptions="actionDone"
                 android:textColor="@color/dashColor"
                 android:textColorHint="@color/dashColor"
-                android:textSize="@dimen/_12ssp"
-                android:theme="@style/EditTextTheme" />
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

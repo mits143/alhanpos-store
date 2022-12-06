@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id "androidx.navigation.safeargs.kotlin"
     id "kotlinx-serialization"
+    id 'com.google.gms.google-services'
+    id "com.google.firebase.crashlytics"
 
 }
 
@@ -88,5 +90,10 @@ dependencies {
 
     //Dexter
     implementation 'com.karumi:dexter:6.2.2'
+
+//    Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
 }

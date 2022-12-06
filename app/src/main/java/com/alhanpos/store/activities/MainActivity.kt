@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(),
@@ -78,12 +79,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         arguments: Bundle?
     ) {
         when (destination.id) {
-            R.id.nav_pos -> hideBottomNavigation()
-            R.id.nav_product -> hideBottomNavigation()
+//            R.id.nav_pos -> hideBottomNavigation()
+//            R.id.nav_product -> hideBottomNavigation()
             R.id.nav_category -> hideBottomNavigation()
             R.id.nav_brand -> hideBottomNavigation()
             R.id.nav_purchase_order -> hideBottomNavigation()
-            R.id.nav_all_sale -> hideBottomNavigation()
+//            R.id.nav_all_sale -> hideBottomNavigation()
             R.id.nav_subscription -> hideBottomNavigation()
             R.id.nav_stock_transfer -> hideBottomNavigation()
             R.id.nav_pos_payment -> hideBottomNavigation()

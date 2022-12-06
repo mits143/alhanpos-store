@@ -42,23 +42,28 @@ interface ApiHelper {
     ): Response<DashboardGraphResponse>
 
     suspend fun location(
-        token: String
+        token: String,
+        term: String
     ): Response<LocationResponse>
 
     suspend fun contactList(
-        token: String
+        token: String,
+        term: String
     ): Response<ContactListResponse>
 
     suspend fun supplierList(
-        token: String
+        token: String,
+        term: String
     ): Response<ContactListResponse>
 
     suspend fun productList(
-        token: String
+        token: String,
+        term: String
     ): Response<ProductListResponse>
 
     suspend fun categoryList(
-        token: String
+        token: String,
+        term: String
     ): Response<CategoryResponse>
 
     suspend fun addUpdateCategory(
@@ -97,6 +102,7 @@ interface ApiHelper {
 
     suspend fun brandList(
         token: String,
+        term: String
     ): Response<BrandResponse>
 
     suspend fun addUpdateBrand(
@@ -108,11 +114,13 @@ interface ApiHelper {
     ): Response<JsonObject>
 
     suspend fun paymentAccounts(
-        token: String
+        token: String,
+        term: String
     ): Response<PaymentAccountResponse>
 
     suspend fun paymentMethods(
-        token: String
+        token: String,
+        term: String
     ): Response<PaymentMethodResponse>
 
     suspend fun addUpdateProduct(
@@ -133,30 +141,37 @@ interface ApiHelper {
 
     suspend fun stocktransfer(
         token: String,
+        term: String
     ): Response<StockTransferResponse>
 
     suspend fun expenses(
         token: String,
+        term: String
     ): Response<ExpensesResponse>
 
     suspend fun sells(
         token: String,
+        term: String
     ): Response<SellResponse>
 
     suspend fun purchaseorders(
         token: String,
+        term: String
     ): Response<PurchaseOrderResponse>
 
     suspend fun stockadjustments(
         token: String,
+        term: String
     ): Response<StockAdjustmentResponse>
 
     suspend fun subscriptions(
         token: String,
+        term: String
     ): Response<SubscripitionResponse>
 
     suspend fun unitsList(
         token: String,
+        term: String
     ): Response<UnitResponse>
 
     suspend fun add_stocktransfer(

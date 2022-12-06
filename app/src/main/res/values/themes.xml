@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.AlhanposStore" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/btnColor</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -24,10 +24,10 @@
 <!--        <item name="android:windowTranslucentNavigation">true</item>-->
 <!--    </style>-->
 
-    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/dashColor</item>
-        <item name="colorControlActivated">@color/black</item>
-    </style>
+<!--    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--        <item name="colorControlNormal">@color/dashColor</item>-->
+<!--        <item name="colorControlActivated">@color/black</item>-->
+<!--    </style>-->
 
     <style name="Theme.AlhanposStore.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -41,5 +41,9 @@
 
     <style name="DrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/btnColor</item>
+    </style>
+
+    <style name="Theme.AlhanposStore.NavigationView"  >
+        <item name="android:itemBackground">@color/item_bg</item>
     </style>
 </resources>

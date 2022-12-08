@@ -21,14 +21,16 @@ class StockTransferViewModel(
 
     fun fetchStock(
         token: String,
-        term: String
+        term: String,
+        page: String
     ) {
         viewModelScope.launch {
             setStockData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.stocktransfer(
                     token,
-                    term
+                    term,
+                    page
                 ).let {
                     if (it.isSuccessful) {
                         setStockData.postValue(Resource.success(it.body()))

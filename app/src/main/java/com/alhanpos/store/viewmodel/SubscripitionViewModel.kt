@@ -21,14 +21,16 @@ class SubscripitionViewModel(
 
     fun fetchSubscriptions(
         token: String,
-        term: String
+        term: String,
+        page: String
     ) {
         viewModelScope.launch {
             setSubscriptionData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.subscriptions(
                     token,
-                    term
+                    term,
+                    page
                 ).let {
                     if (it.isSuccessful) {
                         setSubscriptionData.postValue(Resource.success(it.body()))

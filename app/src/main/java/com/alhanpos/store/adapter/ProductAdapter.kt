@@ -47,6 +47,11 @@ class ProductAdapter(
         notifyDataSetChanged()
     }
 
+    fun loadMore(list: List<ProductListResponseItem>) {
+        dataList.addAll(list)
+        notifyDataSetChanged()
+    }
+
     interface ButtonClick {
         fun onClick(data: ProductListResponseItem)
     }

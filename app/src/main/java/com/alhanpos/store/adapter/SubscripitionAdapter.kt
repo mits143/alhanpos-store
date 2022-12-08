@@ -23,9 +23,9 @@ class SubscripitionAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(dataList[position]) {
-//                binding.txtBrand.text = this.bra
-//                binding.txtSubNo.text = this.refNo
-//                binding.txtCustName.text = this.isRecurring
+                binding.txtBrand.text = this.packageName
+                binding.txtSubNo.text = this.businessId
+                binding.txtCustName.text = this.createdBy
             }
         }
     }

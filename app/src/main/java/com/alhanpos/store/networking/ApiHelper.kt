@@ -43,27 +43,32 @@ interface ApiHelper {
 
     suspend fun location(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<LocationResponse>
 
     suspend fun contactList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<ContactListResponse>
 
     suspend fun supplierList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<ContactListResponse>
 
     suspend fun productList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<ProductListResponse>
 
     suspend fun categoryList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<CategoryResponse>
 
     suspend fun addUpdateCategory(
@@ -102,7 +107,8 @@ interface ApiHelper {
 
     suspend fun brandList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<BrandResponse>
 
     suspend fun addUpdateBrand(
@@ -115,12 +121,14 @@ interface ApiHelper {
 
     suspend fun paymentAccounts(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<PaymentAccountResponse>
 
     suspend fun paymentMethods(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<PaymentMethodResponse>
 
     suspend fun addUpdateProduct(
@@ -141,37 +149,44 @@ interface ApiHelper {
 
     suspend fun stocktransfer(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<StockTransferResponse>
 
     suspend fun expenses(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<ExpensesResponse>
 
     suspend fun sells(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<SellResponse>
 
     suspend fun purchaseorders(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<PurchaseOrderResponse>
 
     suspend fun stockadjustments(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<StockAdjustmentResponse>
 
     suspend fun subscriptions(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<SubscripitionResponse>
 
     suspend fun unitsList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<UnitResponse>
 
     suspend fun add_stocktransfer(

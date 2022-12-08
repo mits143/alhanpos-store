@@ -54,6 +54,11 @@ class BrandAdapter(
         notifyDataSetChanged()
     }
 
+    fun loadMore(list: ArrayList<BrandResponseItem>) {
+        dataList.addAll(list)
+        notifyDataSetChanged()
+    }
+
     fun removeItem(position: Int) {
         this.dataList.removeAt(position)
         notifyItemRemoved(position)

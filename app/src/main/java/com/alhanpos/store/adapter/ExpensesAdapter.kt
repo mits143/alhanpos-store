@@ -50,6 +50,11 @@ class ExpensesAdapter(
         notifyDataSetChanged()
     }
 
+    fun loadMore(list: ArrayList<Data>) {
+        dataList.addAll(list)
+        notifyDataSetChanged()
+    }
+
     fun removeItem(position: Int) {
         this.dataList.removeAt(position)
         notifyItemRemoved(position)

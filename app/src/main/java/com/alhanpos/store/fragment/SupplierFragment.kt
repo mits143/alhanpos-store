@@ -25,16 +25,19 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
 
     private lateinit var adapter: SupplierAdapter
 
+    private var page = 1
+
+    private var term = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
         binding.searchView.setOnQueryTextListener(this)
-        setContactData()
-
         binding.flAdd.setOnClickListener {
             val action =
                 SupplierFragmentDirections.actionNavSupplierToNavAddSupplier()
             findNavController().navigate(action)
         }
+        setContactData()
     }
 
     private fun setContactData() {
@@ -42,11 +45,27 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
         adapter = SupplierAdapter(arrayListOf(), this)
         binding.rVCategory.adapter = adapter
         binding.rVCategory.layoutManager = layoutManager
+
+        binding.nestedScrollView.viewTreeObserver.addOnScrollChangedListener {
+            val view =
+                binding.nestedScrollView.getChildAt(binding.nestedScrollView.childCount - 1) as View
+            val diff: Int =
+                view.bottom - (binding.nestedScrollView.height + binding.nestedScrollView
+                    .scrollY)
+            if (diff == 0) {
+                page = page.plus(1)
+                viewModel.fetchContact(
+                    "Bearer " + prefs.accessToken,
+                    term,
+                    page.toString()
+                )
+            }
+        }
     }
 
     private fun setObserver() {
 
-        viewModel.fetchSupplier("Bearer " + prefs.accessToken, "")
+        viewModel.fetchSupplier("Bearer " + prefs.accessToken, "", "")
         viewModel.getContactData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -55,10 +74,15 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
                 Status.SUCCESS -> {
                     binding.animationView.visibility = View.GONE
                     it.data?.let {
-                        adapter.addData(it.data)
+                        if (page == 1) {
+                            adapter.addData(it.data)
+                        } else {
+                            adapter.loadMore(it.data)
+                        }
                     }
                 }
                 Status.ERROR -> {
+                    page = page.minus(1)
                     binding.animationView.visibility = View.GONE
                     showToast(it.message)
                 }
@@ -77,7 +101,9 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        viewModel.fetchSupplier("Bearer " + prefs.accessToken, newText!!)
+        term = newText!!
+        page = 1
+        viewModel.fetchSupplier("Bearer " + prefs.accessToken, term, page.toString())
         return false
     }
 }

@@ -121,7 +121,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
                         }
                         setUnitData(unitList)
                     }
-                    viewModel.fetchCategory("Bearer " + prefs.accessToken, "")
+                    viewModel.fetchCategory("Bearer " + prefs.accessToken)
                 }
                 Status.ERROR -> {
                     binding.animationView.visibility = View.GONE

@@ -38,7 +38,7 @@ class AddPurchaseViewModel(
             setLocationData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.location(
-                    token,""
+                    token,"", ""
                 ).let {
                     if (it.isSuccessful) {
                         setLocationData.postValue(Resource.success(it.body()))
@@ -60,7 +60,7 @@ class AddPurchaseViewModel(
             setContactData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.supplierList(
-                    token,""
+                    token,"", ""
                 ).let {
                     if (it.isSuccessful) {
                         setContactData.postValue(Resource.success(it.body()))

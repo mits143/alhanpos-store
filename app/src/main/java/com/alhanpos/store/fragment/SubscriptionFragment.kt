@@ -36,7 +36,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(),
     }
 
     private fun setObserver() {
-        viewModel.fetchSubscriptions("Bearer " + prefs.accessToken, "")
+        viewModel.fetchSubscriptions("Bearer " + prefs.accessToken, "", "")
         viewModel.getSubscriptionData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -67,7 +67,7 @@ class SubscriptionFragment : BaseFragment<FragmentSubscriptionBinding>(),
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        viewModel.fetchSubscriptions("Bearer " + prefs.accessToken, newText!!)
+        viewModel.fetchSubscriptions("Bearer " + prefs.accessToken, newText!!, "")
         return false
     }
 }

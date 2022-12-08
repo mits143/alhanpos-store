@@ -38,7 +38,7 @@ class AddPosViewModel(
             setPaymentAccountData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.paymentAccounts(
-                    token, ""
+                    token, "", ""
                 ).let {
                     if (it.isSuccessful) {
                         setPaymentAccountData.postValue(Resource.success(it.body()))
@@ -60,7 +60,7 @@ class AddPosViewModel(
             setPaymentMethodData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.paymentMethods(
-                    token, ""
+                    token, "", ""
                 ).let {
                     if (it.isSuccessful) {
                         setPaymentMethodData.postValue(Resource.success(it.body()))

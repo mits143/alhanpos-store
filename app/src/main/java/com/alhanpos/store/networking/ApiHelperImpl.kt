@@ -45,28 +45,33 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
 
     override suspend fun location(
         token: String,
-        term: String
-    ): Response<LocationResponse> = apiService.location(token, term)
+        term: String,
+        page: String
+    ): Response<LocationResponse> = apiService.location(token, term, page)
 
     override suspend fun contactList(
         token: String,
-        term: String
-    ): Response<ContactListResponse> = apiService.contactList(token, term)
+        term: String,
+        page: String
+    ): Response<ContactListResponse> = apiService.contactList(token, term, page)
 
     override suspend fun supplierList(
         token: String,
-        term: String
-    ): Response<ContactListResponse> = apiService.supplierList(token, term)
+        term: String,
+        page: String
+    ): Response<ContactListResponse> = apiService.supplierList(token, term, page)
 
     override suspend fun productList(
         token: String,
-        term: String
-    ): Response<ProductListResponse> = apiService.productList(token, term)
+        term: String,
+        page: String
+    ): Response<ProductListResponse> = apiService.productList(token, term, page)
 
     override suspend fun categoryList(
         token: String,
-        term: String
-    ): Response<CategoryResponse> = apiService.categoryList(token, term)
+        term: String,
+        page: String
+    ): Response<CategoryResponse> = apiService.categoryList(token, term, page)
 
     override suspend fun addUpdateCategory(
         token: String,
@@ -86,8 +91,9 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
 
     override suspend fun brandList(
         token: String,
-        term: String
-    ): Response<BrandResponse> = apiService.brandList(token, term)
+        term: String,
+        page: String
+    ): Response<BrandResponse> = apiService.brandList(token, term, page)
 
     override suspend fun addUpdateBrand(
         token: String, id: String, name: String, description: String, add_as_sub_cat: String
@@ -101,13 +107,15 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
 
     override suspend fun paymentAccounts(
         token: String,
-        term: String
-    ): Response<PaymentAccountResponse> = apiService.paymentAccounts(token, term)
+        term: String,
+        page: String
+    ): Response<PaymentAccountResponse> = apiService.paymentAccounts(token, term, page)
 
     override suspend fun paymentMethods(
         token: String,
-        term: String
-    ): Response<PaymentMethodResponse> = apiService.paymentMethods(token, term)
+        term: String,
+        page: String
+    ): Response<PaymentMethodResponse> = apiService.paymentMethods(token, term, page)
 
     override suspend fun addUpdateProduct(
         token: String,
@@ -156,52 +164,59 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
 
     override suspend fun stocktransfer(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<StockTransferResponse> = apiService.stocktransfer(
-        token, term
+        token, term, page
     )
 
     override suspend fun expenses(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<ExpensesResponse> = apiService.expenses(
-        token, term
+        token, term, page
     )
 
     override suspend fun sells(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<SellResponse> = apiService.sells(
-        token, term
+        token, term, page
     )
 
     override suspend fun purchaseorders(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<PurchaseOrderResponse> = apiService.purchaseorders(
-        token, term
+        token, term, page
     )
 
     override suspend fun stockadjustments(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<StockAdjustmentResponse> = apiService.stockadjustments(
         token,
-        term
+        term, page
     )
 
     override suspend fun subscriptions(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<SubscripitionResponse> = apiService.subscriptions(
-        token, term
+        token, term, page
     )
 
     override suspend fun unitsList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<UnitResponse> = apiService.unitsList(
-        token, term
+        token, term, page
     )
 
     override suspend fun add_stocktransfer(

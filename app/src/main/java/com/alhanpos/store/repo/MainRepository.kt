@@ -36,28 +36,33 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun location(
         token: String,
-        term: String
-    ) = apiHelper.location(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.location(token, term, page)
 
     suspend fun contactList(
         token: String,
-        term: String
-    ) = apiHelper.contactList(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.contactList(token, term, page)
 
     suspend fun supplierList(
         token: String,
-        term: String
-    ) = apiHelper.supplierList(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.supplierList(token, term, page)
 
     suspend fun productList(
         token: String,
-        term: String
-    ) = apiHelper.productList(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.productList(token, term, page)
 
     suspend fun categoryList(
         token: String,
-        term: String
-    ) = apiHelper.categoryList(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.categoryList(token, term, page)
 
     suspend fun addUpdateCategory(
         token: String,
@@ -77,8 +82,9 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun brandList(
         token: String,
-        term: String
-    ) = apiHelper.brandList(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.brandList(token, term, page)
 
     suspend fun addUpdateBrand(
         token: String, id: String, name: String, description: String, add_as_sub_cat: String
@@ -92,13 +98,15 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun paymentAccounts(
         token: String,
-        term: String
-    ) = apiHelper.paymentAccounts(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.paymentAccounts(token, term, page)
 
     suspend fun paymentMethods(
         token: String,
-        term: String
-    ) = apiHelper.paymentMethods(token, term)
+        term: String,
+        page: String
+    ) = apiHelper.paymentMethods(token, term, page)
 
     suspend fun addUpdateProduct(
         token: String,
@@ -146,51 +154,58 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun stocktransfer(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<StockTransferResponse> = apiHelper.stocktransfer(
-        token, term
+        token, term, page
     )
 
     suspend fun expenses(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<ExpensesResponse> = apiHelper.expenses(
-        token, term
+        token, term, page
     )
 
     suspend fun sells(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<SellResponse> = apiHelper.sells(
-        token, term
+        token, term, page
     )
 
     suspend fun purchaseorders(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<PurchaseOrderResponse> = apiHelper.purchaseorders(
-        token, term
+        token, term, page
     )
 
     suspend fun stockadjustments(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<StockAdjustmentResponse> = apiHelper.stockadjustments(
-        token, term
+        token, term, page
     )
 
     suspend fun subscriptions(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<SubscripitionResponse> = apiHelper.subscriptions(
-        token, term
+        token, term, page
     )
 
     suspend fun unitsList(
         token: String,
-        term: String
+        term: String,
+        page: String
     ): Response<UnitResponse> = apiHelper.unitsList(
-        token, term
+        token, term, page
     )
 
     suspend fun add_stocktransfer(

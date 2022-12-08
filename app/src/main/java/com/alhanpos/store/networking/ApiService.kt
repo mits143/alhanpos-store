@@ -84,49 +84,57 @@ interface ApiService {
     @GET(LOCATION)
     suspend fun location(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<LocationResponse>
 
     @GET(CONTACTLIST)
     suspend fun contactList(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<ContactListResponse>
 
     @GET(SUPPLIERLIST)
     suspend fun supplierList(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<ContactListResponse>
 
     @GET(PRODUCTLIST)
     suspend fun productList(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<ProductListResponse>
 
     @GET(PAYMENT_ACCOUNTS)
     suspend fun paymentAccounts(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<PaymentAccountResponse>
 
     @GET(PAYMENT_METHODS)
     suspend fun paymentMethods(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<PaymentMethodResponse>
 
     @GET(UNITSLIST)
     suspend fun unitsList(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<UnitResponse>
 
     @GET(CATEGORYLIST)
     suspend fun categoryList(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<CategoryResponse>
 
     @FormUrlEncoded
@@ -150,7 +158,8 @@ interface ApiService {
     @GET(BRANDLIST)
     suspend fun brandList(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<BrandResponse>
 
     @FormUrlEncoded
@@ -215,37 +224,43 @@ interface ApiService {
     @GET(STOCKTRANSFER)
     suspend fun stocktransfer(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<StockTransferResponse>
 
     @GET(EXPENSES)
     suspend fun expenses(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<ExpensesResponse>
 
     @GET(SELLS)
     suspend fun sells(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<SellResponse>
 
     @GET(PURCHASEORDERS)
     suspend fun purchaseorders(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<PurchaseOrderResponse>
 
     @GET(STOCKADJUSTMENTS)
     suspend fun stockadjustments(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<StockAdjustmentResponse>
 
     @GET(SUBSCRIPTIONS)
     suspend fun subscriptions(
         @Header("Authorization") token: String,
-        @Query("term") term: String
+        @Query("term") term: String,
+        @Query("page") page: String
     ): Response<SubscripitionResponse>
 
     @FormUrlEncoded

@@ -26,14 +26,16 @@ class CategoryViewModel(
 
     fun fetchCategory(
         token: String,
-        term: String
+        term: String,
+        page: String
     ) {
         viewModelScope.launch {
             setCategoryData.postValue(Event(Resource.loading(null)))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.categoryList(
                     token,
-                    term
+                    term,
+                    page
                 ).let {
                     if (it.isSuccessful) {
                         setCategoryData.postValue(Event(Resource.success(it.body())))

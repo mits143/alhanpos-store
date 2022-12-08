@@ -25,6 +25,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
     private lateinit var adapter: CategoryAdapter
     private var pos = 0
 
+    private var page = 1
+
+    private var term = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
         binding.searchView.setOnQueryTextListener(this)
@@ -32,15 +36,32 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
             val action = CategoryFragmentDirections.actionNavCategoryToNavAddCategory()
             findNavController().navigate(action)
         }
+        setCategoryData()
     }
 
-    private fun setCategoryData(dataList: ArrayList<CategoryResponseItem>) {
-        adapter = CategoryAdapter(dataList, this)
+    private fun setCategoryData() {
+        adapter = CategoryAdapter(arrayListOf(), this)
         binding.rVCategory.adapter = adapter
+
+        binding.nestedScrollView.viewTreeObserver.addOnScrollChangedListener {
+            val view =
+                binding.nestedScrollView.getChildAt(binding.nestedScrollView.childCount - 1) as View
+            val diff: Int =
+                view.bottom - (binding.nestedScrollView.height + binding.nestedScrollView
+                    .scrollY)
+            if (diff == 0) {
+                page = page.plus(1)
+                viewModel.fetchCategory(
+                    "Bearer " + prefs.accessToken,
+                    term,
+                    page.toString()
+                )
+            }
+        }
     }
 
     private fun setObserver() {
-        viewModel.fetchCategory("Bearer " + prefs.accessToken, "")
+        viewModel.fetchCategory("Bearer " + prefs.accessToken, "", "")
         viewModel.getCategoryData.observe(this) {
             it.getContentIfNotHandled()?.let { //
                 when (it.status) {
@@ -50,10 +71,15 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
                     Status.SUCCESS -> {
                         binding.animationView.visibility = View.GONE
                         it.data?.let {
-                            setCategoryData(it)
+                            if (page == 1) {
+                                adapter.addData(it)
+                            } else {
+                                adapter.loadMore(it)
+                            }
                         }
                     }
                     Status.ERROR -> {
+                        page = page.minus(1)
                         binding.animationView.visibility = View.GONE
                         showToast(it.message)
                     }
@@ -98,7 +124,9 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), CategoryAdapte
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        viewModel.fetchCategory("Bearer " + prefs.accessToken, newText!!)
+        term = newText!!
+        page = 1
+        viewModel.fetchCategory("Bearer " + prefs.accessToken, term, page.toString())
         return false
     }
 }

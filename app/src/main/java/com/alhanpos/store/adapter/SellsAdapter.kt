@@ -54,6 +54,11 @@ class SellsAdapter(
         notifyDataSetChanged()
     }
 
+    fun loadMore(list: ArrayList<SellResponseItem>) {
+        dataList.addAll(list)
+        notifyDataSetChanged()
+    }
+
     fun removeItem(position: Int) {
         this.dataList.removeAt(position)
         notifyItemRemoved(position)

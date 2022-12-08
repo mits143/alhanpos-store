@@ -26,14 +26,16 @@ class BrandViewModel(
 
     fun fetchBrand(
         token: String,
-        term: String
+        term: String,
+        page: String
     ) {
         viewModelScope.launch {
             setBrandData.postValue(Event(Resource.loading(null)))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.brandList(
                     token,
-                    term
+                    term,
+                    page
                 ).let {
                     if (it.isSuccessful) {
                         setBrandData.postValue(Event(Resource.success(it.body())))

@@ -51,6 +51,12 @@ class ContactAdapter(
         notifyDataSetChanged()
     }
 
+    fun loadMore(list: List<ContactData>) {
+        dataList.addAll(list)
+//        notifyItemInserted(list.size - itemCount - 1);
+        notifyDataSetChanged()
+    }
+
     interface ButtonClick {
         fun onEditClick(data: ContactData)
     }

@@ -40,7 +40,7 @@ class AddProductViewModel(
             setUnitData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.unitsList(
-                    token,""
+                    token, "", ""
                 ).let {
                     if (it.isSuccessful) {
                         setUnitData.postValue(Resource.success(it.body()))
@@ -56,14 +56,14 @@ class AddProductViewModel(
 
     fun fetchCategory(
         token: String,
-        term: String
     ) {
         viewModelScope.launch {
             setCategoryData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.categoryList(
                     token,
-                    term
+                    "",
+                    ""
                 ).let {
                     if (it.isSuccessful) {
                         setCategoryData.postValue(Resource.success(it.body()))
@@ -85,7 +85,7 @@ class AddProductViewModel(
             setBrandData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.brandList(
-                    token,""
+                    token, "", ""
                 ).let {
                     if (it.isSuccessful) {
                         setBrandData.postValue(Resource.success(it.body()))

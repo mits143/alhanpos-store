@@ -21,14 +21,16 @@ class StockAdjustmentViewModel(
 
     fun fetchExpenses(
         token: String,
-        term: String
+        term: String,
+        page: String
     ) {
         viewModelScope.launch {
             setStockAdjustmentData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.stockadjustments(
                     token,
-                    term
+                    term,
+                    page
                 ).let {
                     if (it.isSuccessful) {
                         setStockAdjustmentData.postValue(Resource.success(it.body()))

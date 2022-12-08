@@ -54,6 +54,11 @@ class CategoryAdapter(
         notifyDataSetChanged()
     }
 
+    fun loadMore(list: ArrayList<CategoryResponseItem>) {
+        dataList.addAll(list)
+        notifyDataSetChanged()
+    }
+
     fun removeItem(position: Int) {
         this.dataList.removeAt(position)
         notifyItemRemoved(position)

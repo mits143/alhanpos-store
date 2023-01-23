@@ -1,6 +1,8 @@
 package com.alhanpos.store.networking
 
 import com.alhanpos.store.model.request.payment.PaymentRequest
+import com.alhanpos.store.model.request.stockAdjustment.StockAdjustmentRequest
+import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
 import com.alhanpos.store.model.response.account.PaymentAccountResponse
 import com.alhanpos.store.model.response.brand.BrandResponse
 import com.alhanpos.store.model.response.category.CategoryResponse
@@ -263,117 +265,29 @@ interface ApiService {
         @Query("page") page: String
     ): Response<SubscripitionResponse>
 
-    @FormUrlEncoded
     @POST(ADD_STOCKTRANSFER)
     suspend fun add_stocktransfer(
-        @Header("Authorization") token: String,
-        @Field(value = "transaction_date", encoded = false) transaction_date: String,
-        @Field(value = "ref_no", encoded = false) ref_no: String,
-        @Field(value = "status", encoded = false) status: String,
-        @Field(value = "final_total", encoded = false) final_total: String,
-        @Field(value = "transfer_location_id", encoded = false) transfer_location_id: String,
-        @Field(value = "shipping_charges", encoded = false) shipping_charges: String,
-        @Field(value = "location_id", encoded = false) location_id: String,
-        @Field(value = "products[0][lot_no_line_id]", encoded = false) lot_no_line_id: String,
-        @Field(value = "products[0][product_id]", encoded = false) product_id: String,
-        @Field(value = "products[0][variation_id]", encoded = false) variation_id: String,
-        @Field(value = "products[0][enable_stock]", encoded = false) enable_stock: String,
-        @Field(value = "products[0][quantity]", encoded = false) quantity: String,
-        @Field(
-            value = "products[0][base_unit_multiplier]",
-            encoded = false
-        ) base_unit_multiplier: String,
-        @Field(value = "products[0][product_unit_id]", encoded = false) product_unit_id: String,
-        @Field(value = "products[0][sub_unit_id]", encoded = false) sub_unit_id: String,
-        @Field(value = "products[0][unit_price]", encoded = false) unit_price: String,
-        @Field(value = "products[0][price]", encoded = false) price: String,
-        @Field(value = "additional_notes", encoded = false) additional_notes: String,
+        @Header("Authorization") token: String, @Body jsonObject: StockTransferRequest
     ): Response<JsonObject>
 
-    @FormUrlEncoded
     @POST(ADD_STOCKADJUSTMENT)
     suspend fun add_stockadjustment(
-        @Header("Authorization") token: String,
-        @Field(value = "location_id", encoded = false) location_id: String,
-        @Field(value = "ref_no", encoded = false) ref_no: String,
-        @Field(value = "transaction_date", encoded = false) transaction_date: String,
-        @Field(value = "adjustment_type", encoded = false) adjustment_type: String,
-        @Field(value = "search_product", encoded = false) search_product: String,
-        @Field(value = "final_total", encoded = false) final_total: String,
-        @Field(value = "total_amount_recovered", encoded = false) total_amount_recovered: String,
-        @Field(value = "additional_notes", encoded = false) additional_notes: String,
-        @Field(value = "products[0][lot_no_line_id]", encoded = false) lot_no_line_id: String,
-        @Field(value = "products[0][product_id]", encoded = false) product_id: String,
-        @Field(value = "products[0][variation_id]", encoded = false) variation_id: String,
-        @Field(value = "products[0][enable_stock]", encoded = false) enable_stock: String,
-        @Field(value = "products[0][quantity]", encoded = false) quantity: String,
-        @Field(
-            value = "products[0][base_unit_multiplier]",
-            encoded = false
-        ) base_unit_multiplier: String,
-        @Field(value = "products[0][product_unit_id]", encoded = false) product_unit_id: String,
-        @Field(value = "products[0][sub_unit_id]", encoded = false) sub_unit_id: String,
-        @Field(value = "products[0][unit_price]", encoded = false) unit_price: String,
-        @Field(value = "products[0][price]", encoded = false) price: String
+        @Header("Authorization") token: String, @Body jsonObject: StockAdjustmentRequest
     ): Response<JsonObject>
 
     @Multipart
     @POST(ADD_PURCHASE)
     suspend fun add_purchase(
         @Header("Authorization") token: String,
-        @Part("contact_id") contact_id: RequestBody,
-        @Part("ref_no") ref_no: RequestBody,
-        @Part("transaction_date") transaction_date: RequestBody,
-        @Part("status") status: RequestBody,
-        @Part("location_id") location_id: RequestBody,
-        @Part("pay_term_number") pay_term_number: RequestBody,
-        @Part("pay_term_type") pay_term_type: RequestBody,
         @Part file: MultipartBody.Part,
-        @Part("shipping_details") shipping_details: RequestBody,
-        @Part("shipping_charges") shipping_charges: RequestBody,
-        @Part("discount_type") discount_type: RequestBody,
-        @Part("tax_id") tax_id: RequestBody,
-        @Part("advance_balance") advance_balance: RequestBody,
-        @Part("final_total") final_total: RequestBody,
-        @Part("products[0][product_id]") product_id: RequestBody,
-        @Part("products[0][variation_id]") variation_id: RequestBody,
-        @Part("products[0][quantity]") quantity: RequestBody,
-        @Part("products[0][product_unit_id]") product_unit_id: RequestBody,
-        @Part("products[0][sub_unit_id]") sub_unit_id: RequestBody,
-        @Part("products[0][purchase_price]") purchase_price: RequestBody,
-        @Part("products[0][purchase_line_tax_id]") purchase_line_tax_id: RequestBody,
-        @Part("products[0][purchase_price_inc_tax]") purchase_price_inc_tax: RequestBody,
-        @Part("products[0][default_sell_price]") default_sell_price: RequestBody,
-        @Part("payment[0][amount]") paymentamount: RequestBody,
-        @Part("payment[0][paid_on]") paymentpaid_on: RequestBody,
-        @Part("payment[0][method]") paymentmethod: RequestBody,
-        @Part("payment[0][account_id]") paymentaccount_id: RequestBody,
-        @Part("payment[0][note]") paymentnote: RequestBody
+        @Part("data") data: RequestBody
     ): Response<JsonObject>
 
     @Multipart
     @POST(ADD_EXPENSE)
     suspend fun add_expense(
         @Header("Authorization") token: String,
-        @Part("location_id") location_id: RequestBody,
-        @Part("expense_category_id") expense_category_id: RequestBody,
-        @Part("expense_sub_category_id") expense_sub_category_id: RequestBody,
-        @Part("ref_no") ref_no: RequestBody,
-//        @Part("transaction_date") transaction_date: RequestBody,
-        @Part("expense_for") expense_for: RequestBody,
-        @Part("contact_id") contact_id: RequestBody,
         @Part file: MultipartBody.Part,
-        @Part("tax_id") tax_id: RequestBody,
-        @Part("tax_calculation_amount") tax_calculation_amount: RequestBody,
-        @Part("recur_interval") recur_interval: RequestBody,
-        @Part("recur_interval_type") recur_interval_type: RequestBody,
-        @Part("recur_repetitions") recur_repetitions: RequestBody,
-        @Part("final_total") final_total: RequestBody,
-        @Part("additional_notes") additional_notes: RequestBody,
-        @Part("payment[0][amount]") paymentamount: RequestBody,
-        @Part("payment[0][paid_on]") paymentpaid_on: RequestBody,
-        @Part("payment[0][method]") paymentmethod: RequestBody,
-        @Part("payment[0][account_id]") paymentaccount_id: RequestBody,
-        @Part("payment[0][note]") paymentnote: RequestBody
+        @Part("data") data: RequestBody
     ): Response<JsonObject>
 }

@@ -61,7 +61,7 @@
                         android:textColor="@color/btnColor"
                         android:textSize="@dimen/_12ssp"
                         app:iconifiedByDefault="false"
-                        app:queryHint="@string/search_category" />
+                        app:queryHint="@string/search" />
                 </LinearLayout>
 
                 <View

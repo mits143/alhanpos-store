@@ -27,6 +27,12 @@
         android:label="@string/pos_payment"
         tools:layout="@layout/fragment_pos_payment">
 
+        <action
+            android:id="@+id/action_nav_pos_payment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
+
         <argument
             android:name="data"
             android:defaultValue="@null"

@@ -25,7 +25,7 @@
     <string name="category">Category</string>
     <string name="brand">Brand</string>
     <string name="purchase_order">Purchase Order</string>
-    <string name="all_sale">Sells</string>
+    <string name="all_sale">Sales</string>
     <string name="subscription">Subscription</string>
     <string name="stock_transfer">Stock Transfer</string>
     <string name="reports">Reports</string>
@@ -195,6 +195,7 @@
     <string name="purchase">Purchase</string>
     <string name="add_purchase">Add Purchase</string>
     <string name="unit_price">Unit Price</string>
+    <string name="sales_last_12_months">Sales last 12 months</string>
     <string-array name="orderStatuses">
         <item>Received</item>
         <item>Pending</item>

@@ -26,8 +26,7 @@ class PosAdapter(
                 binding.txtName.text = "$name $subSku"
                 quantity = if (quantity == 0) 1 else quantity
                 binding.txtQty.setText(quantity.toString())
-                price =
-                    (quantity.toFloat() * sellingPrice.toFloat()).toString()
+                price = (quantity!!.toFloat() * sellingPrice!!.toFloat()).toString()
                 binding.txtPrice.text = price
                 buttonClick.onClick(dataList, position)
 

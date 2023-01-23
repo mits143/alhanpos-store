@@ -30,7 +30,9 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:hint="@string/quantity"
-            android:textColor="@color/fontColor2"
+            android:inputType="number"
+            android:textColor="@color/fontColor3"
+            android:textColorHint="@color/fontColor3"
             android:textSize="@dimen/_10ssp" />
 
         <TextView

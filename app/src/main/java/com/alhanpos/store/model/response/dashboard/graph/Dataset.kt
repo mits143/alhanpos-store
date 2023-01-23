@@ -6,5 +6,5 @@ data class Dataset(
     val specialDatasets: List<String>,
     val type: String,
     val undefinedColor: String,
-    val values: List<Int>
+    val values: List<Double>
 )

@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddStockTransferBinding
+import com.alhanpos.store.model.request.stockTransfer.Product
+import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
 import com.alhanpos.store.model.response.product.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
@@ -75,32 +77,55 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
                 binding.edtShippingDetails.requestFocus()
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(binding.edtShippingCharges.text.toString().trim())) {
-                binding.edtShippingCharges.error = "Shipping charges cannot be empty"
-                binding.edtShippingCharges.requestFocus()
-                return@setOnClickListener
+            if (posList.isNotEmpty()) {
+                var finalAmt = "0"
+                var products = arrayListOf<Product>()
+                posList.forEach {
+                    products.add(
+                        Product(
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            it.productId.toString(),
+                            "",
+                            it.price.toString(),
+                            "",
+                            it.quantity.toString(),
+                            "",
+                            it.sellingPrice.toString(),
+                            it.variationId.toString()
+                        )
+                    )
+                    finalAmt += it.price
+                }
+
+                val jsonObject = StockTransferRequest(
+                    "",
+                    "0.00",
+                    "percentage",
+                    finalAmt,
+                    location_ID_FROM,
+                    0,
+                    products,
+                    binding.edtRefNO.text.toString().trim(),
+                    binding.edtShippingCharges.text.toString().trim(),
+                    binding.edtShippingDetails.text.toString().trim(),
+                    binding.spinStatus.selectedItem.toString().trim(),
+                    "",
+                    "",
+                    binding.edtDate.text.toString().trim(),
+                    location_ID_TO.toInt(),
+                )
+                viewModel.addUpdateStockTransfer(
+                    "Bearer " + prefs.accessToken,
+                    jsonObject
+                )
+            } else {
+                showToast("Please select product for stock transfer")
             }
-            viewModel.addUpdateStockTransfer(
-                "Bearer " + prefs.accessToken,
-                binding.edtDate.text.toString().trim(),
-                binding.edtRefNO.text.toString().trim(),
-                binding.spinStatus.selectedItem.toString().trim(),
-                "0",
-                location_ID_TO,
-                binding.edtShippingCharges.text.toString().trim(),
-                location_ID_FROM,
-                "",
-                posList[0].productId,
-                posList[0].variationId,
-                posList[0].enableStock,
-                posList[0].quantity.toString(),
-                "1",
-                "1",
-                "1",
-                posList[0].sellingPrice,
-                posList[0].price,
-                ""
-            )
         }
     }
 
@@ -206,12 +231,12 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
                             binding.animationView.visibility = View.GONE
                             productDataList.clear()
                             productList.clear()
-                            productDataList.addAll(it)
-                            it.forEach {
+                            productDataList.addAll(it.data)
+                            it.data.forEach {
                                 productList.add(
                                     AddStockTransferViewModel.product(
-                                        it.name,
-                                        it.subSku
+                                        it.name!!,
+                                        it.subSku!!
                                     )
                                 )
                             }
@@ -241,6 +266,7 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
                         binding.edtShippingDetails.setText("")
                         binding.edtShippingCharges.setText("")
                         posList.clear()
+                        adapter.notifyDataSetChanged()
                     }
                 }
                 Status.ERROR -> {

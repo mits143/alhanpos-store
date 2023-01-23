@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddStockAdjustmentBinding
+import com.alhanpos.store.model.request.stockAdjustment.Product
+import com.alhanpos.store.model.request.stockAdjustment.StockAdjustmentRequest
 import com.alhanpos.store.model.response.product.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
@@ -41,13 +43,12 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
 
-        val date =
-            OnDateSetListener { view, year, month, day ->
-                myCalendar[Calendar.YEAR] = year
-                myCalendar[Calendar.MONTH] = month
-                myCalendar[Calendar.DAY_OF_MONTH] = day
-                updateLabel()
-            }
+        val date = OnDateSetListener { view, year, month, day ->
+            myCalendar[Calendar.YEAR] = year
+            myCalendar[Calendar.MONTH] = month
+            myCalendar[Calendar.DAY_OF_MONTH] = day
+            updateLabel()
+        }
         binding.edtDate.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
@@ -79,27 +80,40 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                 binding.edtReason.requestFocus()
                 return@setOnClickListener
             }
-            viewModel.addUpdateStockAdjustment(
-                "Bearer " + prefs.accessToken,
-                location_ID,
-                binding.edtRefNO.text.toString().trim(),
-                binding.edtDate.text.toString().trim(),
-                binding.edtAdjustmentType.selectedItem.toString().trim(),
-                "",
-                "0",
-                binding.edtAmtRecovered.text.toString().trim(),
-                binding.edtReason.text.toString().trim(),
-                "",
-                posList[0].productId,
-                posList[0].variationId,
-                posList[0].enableStock,
-                posList[0].quantity.toString(),
-                "1",
-                "1",
-                "1",
-                posList[0].sellingPrice,
-                posList[0].price,
-            )
+            if (posList.isNotEmpty()) {
+                var finalAmt = ""
+                var products = arrayListOf<Product>()
+                posList.forEach {
+                    val product = Product(
+                        it.enableStock.toString(),
+                        "1",
+                        it.price.toString(),
+                        it.productId.toString(),
+                        it.quantity.toString(),
+                        it.sellingPrice.toString(),
+                        it.variationId.toString(),
+                    )
+                    products.add(product)
+                    finalAmt += it.price
+                }
+
+                val jsonObject = StockAdjustmentRequest(
+                    binding.edtReason.text.toString().trim(),
+                    1,
+                    finalAmt,
+                    location_ID,
+                    products,
+                    binding.edtRefNO.text.toString().trim(),
+                    "",
+                    binding.edtDate.text.toString().trim(),
+                    binding.edtAmtRecovered.text.toString().trim()
+                )
+                viewModel.addUpdateStockAdjustment(
+                    "Bearer " + prefs.accessToken, jsonObject
+                )
+            } else {
+                showToast("Please select product for stock transfer")
+            }
         }
     }
 
@@ -165,8 +179,7 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                         it.data.forEach {
                             locationList.add(
                                 AddStockAdjustmentViewModel.Common(
-                                    it.name,
-                                    it.id.toString()
+                                    it.name, it.id.toString()
                                 )
                             )
                         }
@@ -191,12 +204,11 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                             binding.animationView.visibility = View.GONE
                             productDataList.clear()
                             productList.clear()
-                            productDataList.addAll(it)
-                            it.forEach {
+                            productDataList.addAll(it.data)
+                            it.data.forEach {
                                 productList.add(
                                     AddStockAdjustmentViewModel.product(
-                                        it.name,
-                                        it.subSku
+                                        it.name!!, it.subSku!!
                                     )
                                 )
                             }
@@ -225,6 +237,8 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                         binding.edtDate.setText("")
                         binding.edtAmtRecovered.setText("")
                         binding.edtReason.setText("")
+                        posList.clear()
+                        adapter.notifyDataSetChanged()
                     }
                 }
                 Status.ERROR -> {

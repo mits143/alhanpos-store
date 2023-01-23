@@ -39,16 +39,18 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
 
-        if (productList.isNotEmpty())
-            setProductData(productList)
+        if (productList.isNotEmpty()) setProductData(productList)
 
         binding.txtProceed.setOnClickListener {
-            val action =
-                PosFragmentDirections.actionNavPosToNavPosPayment(
-                    ProductListResponse(),
-                    binding.txtTotal.text.toString().trim()
+            if (posList.isNotEmpty()) {
+                val productListResponse = ProductListResponse(posList)
+                val action = PosFragmentDirections.actionNavPosToNavPosPayment(
+                    productListResponse, binding.txtTotal.text.toString().trim()
                 )
-            findNavController().navigate(action)
+                findNavController().navigate(action)
+            } else {
+                showToast("Please select atleast one product")
+            }
         }
     }
 
@@ -152,9 +154,9 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
                             binding.animationView.visibility = View.GONE
                             productDataList.clear()
                             productList.clear()
-                            productDataList.addAll(it)
-                            it.forEach {
-                                productList.add(PosViewModel.product(it.name, it.subSku))
+                            productDataList.addAll(it.data)
+                            it.data.forEach {
+                                productList.add(PosViewModel.product(it.name!!, it.subSku!!))
                             }
                             setProductData(productList)
                         }
@@ -173,7 +175,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick {
     override fun onClick(dataList: ArrayList<ProductListResponseItem>, position: Int) {
         var total = 0f
         for (i in 0 until dataList.size) {
-            total += (dataList[i].sellingPrice.toFloat() * dataList[i].quantity.toFloat())
+            total += (dataList[i].sellingPrice!!.toFloat() * dataList[i].quantity.toFloat())
         }
 
         totalItems = dataList.size.toString()

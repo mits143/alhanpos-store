@@ -131,55 +131,19 @@ class AddExpenseViewModel(
 
     fun addUpdateExpense(
         token: String,
-        location_id: RequestBody,
-        expense_category_id: RequestBody,
-        expense_sub_category_id: RequestBody,
-        ref_no: RequestBody,
-//        transaction_date: RequestBody,
-        expense_for: RequestBody,
-        contact_id: RequestBody,
         document: MultipartBody.Part,
-        tax_id: RequestBody,
-        tax_calculation_amount: RequestBody,
-        recur_interval: RequestBody,
-        recur_interval_type: RequestBody,
-        recur_repetitions: RequestBody,
-        final_total: RequestBody,
-        additional_notes: RequestBody,
-        paymentamount: RequestBody,
-        paymentpaid_on: RequestBody,
-        paymentmethod: RequestBody,
-        paymentaccount_id: RequestBody,
-        paymentnote: RequestBody,
+        data: RequestBody
     ) {
         viewModelScope.launch {
             setMsg.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.add_expense(
                     token,
-                    location_id,
-                    expense_category_id,
-                    expense_sub_category_id,
-                    ref_no,
-//                    transaction_date,
-                    expense_for,
-                    contact_id,
                     document,
-                    tax_id,
-                    tax_calculation_amount,
-                    recur_interval,
-                    recur_interval_type,
-                    recur_repetitions,
-                    final_total,
-                    additional_notes,
-                    paymentamount,
-                    paymentpaid_on,
-                    paymentmethod,
-                    paymentaccount_id,
-                    paymentnote
+                    data
                 ).let {
                     if (it.isSuccessful) {
-                        if (it.body()?.get("success")?.asInt!! == 1)
+                        if (it.body()?.get("success")?.asBoolean!!)
                             setMsg.postValue(Resource.success(it.body()?.get("msg")?.asString))
                         else
                             setMsg.postValue(

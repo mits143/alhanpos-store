@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alhanpos.store.R
 import com.alhanpos.store.databinding.FragmentPosPaymentBinding
@@ -17,6 +18,7 @@ import com.alhanpos.store.model.request.payment.Product
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AddPosViewModel
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,7 +39,7 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
     var accountID = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.txtTotalItems.text = args.data?.size.toString()
+        binding.txtTotalItems.text = args.data?.data?.size.toString()
         binding.txtTotal.text = args.total
 
         binding.edtAmount.addTextChangedListener(object : TextWatcher {
@@ -74,6 +76,11 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
             }
         })
         binding.txtProceed.setOnClickListener {
+            if (binding.edtAmount.text.toString().trim().isEmpty()) {
+                binding.edtAmount.error = "Amount cannot be empty"
+                binding.edtAmount.requestFocus()
+                return@setOnClickListener
+            }
             setPayment()
         }
         setObserver()
@@ -106,10 +113,10 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
         val currentDateandTime: String = sdf.format(Date())
         val payments: ArrayList<Payment> = arrayListOf()
         val products: ArrayList<Product> = arrayListOf()
-        for (i in 0 until args.data?.size!!) {
+        for (i in 0 until args.data?.data?.size!!) {
             val payment = Payment(
                 accountID,
-                args.data?.get(i)?.sellingPrice.toString(),
+                args.data?.data?.get(i)?.sellingPrice.toString(),
                 "",
                 "",
                 "",
@@ -126,7 +133,7 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
 
             payments.add(payment)
         }
-        for (i in 0 until args.data?.size!!) {
+        for (i in 0 until args.data?.data?.size!!) {
             val product = Product(
                 "1",
                 "",
@@ -134,16 +141,16 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
                 "",
                 "fixed",
                 "",
-                args.data?.get(i)?.productId.toString(),
-                args.data?.get(i)?.type!!,
+                args.data?.data?.get(i)?.productId.toString(),
+                args.data?.data?.get(i)?.type!!,
                 "1",
-                args.data?.get(i)?.quantity.toString(),
+                args.data?.data?.get(i)?.quantity.toString(),
                 "",
                 "1",
                 "",
-                args.data?.get(i)?.sellingPrice.toString(),
-                args.data?.get(i)?.sellingPrice.toString(),
-                args.data?.get(i)?.variationId.toString()
+                args.data?.data?.get(i)?.sellingPrice.toString(),
+                args.data?.data?.get(i)?.sellingPrice.toString(),
+                args.data?.data?.get(i)?.variationId.toString()
             )
 
             products.add(product)
@@ -200,6 +207,8 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
             "",
             ""
         )
+        val json = Gson().toJson(paymentRequest)
+        println(json.toString())
         viewModel.fetchPaymentData("Bearer " + prefs.accessToken, paymentRequest)
     }
 
@@ -258,7 +267,13 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
                 Status.SUCCESS -> {
                     binding.animationView.visibility = View.GONE
                     it.data?.let {
+                        binding.edtAmount.setText("")
+                        binding.edtNote.setText("")
+                        binding.edtSellNote.setText("")
+                        binding.edtStaffNote.setText("")
                         showToast(it.get("msg").asString)
+                        val action = PosPaymentFragmentDirections.actionNavPosPaymentToNavHome()
+                        findNavController().navigate(action)
                     }
                 }
                 Status.ERROR -> {

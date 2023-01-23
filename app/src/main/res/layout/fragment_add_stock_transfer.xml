@@ -328,31 +328,16 @@
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="5"
+                                android:inputType="number"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
+
                                 android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
                     </LinearLayout>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txtProceed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_12sdp"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="@drawable/btn_bkg"
-                        android:focusable="true"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:gravity="center"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/save"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@+id/cvProductInfo" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -401,8 +386,15 @@
                             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                 android:id="@+id/spinnerProduct"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_35sdp"
-                                android:background="@null" />
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="@string/select_product"
+                                android:maxLines="1"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/fontColor2"
+                                android:textColorHint="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
                         </FrameLayout>
 
                     </LinearLayout>
@@ -485,6 +477,23 @@
                                 tools:listitem="@layout/item_add_stock_search" />
                         </LinearLayout>
                     </HorizontalScrollView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txtProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/btn_bkg"
+                        android:focusable="true"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/save"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintTop_toBottomOf="@+id/cvProductInfo" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

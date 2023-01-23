@@ -22,6 +22,8 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
 
     private val viewModel: AddProductViewModel by viewModel()
 
+    private val args: AddProductFragmentArgs by navArgs()
+
     var unitList: ArrayList<AddProductViewModel.Common> = ArrayList()
     var categoryList: ArrayList<AddProductViewModel.Common> = ArrayList()
     var brandList: ArrayList<AddProductViewModel.Common> = ArrayList()
@@ -32,6 +34,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+
         binding.txtProceed.setOnClickListener {
             addProduct()
         }
@@ -87,6 +90,26 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
         if (TextUtils.isEmpty(binding.edtProductName.text.toString().trim())) {
             binding.edtProductName.error = "Product name cannot be empty"
             binding.edtProductName.requestFocus()
+            return
+        }
+        if (TextUtils.isEmpty(binding.spinSKU.text.toString().trim())) {
+            binding.spinSKU.error = "SKU cannot be empty"
+            binding.spinSKU.requestFocus()
+            return
+        }
+        if (TextUtils.isEmpty(binding.spinQuantity.text.toString().trim())) {
+            binding.spinQuantity.error = "Quantity cannot be empty"
+            binding.spinQuantity.requestFocus()
+            return
+        }
+        if (TextUtils.isEmpty(binding.spinTax.text.toString().trim())) {
+            binding.spinTax.error = "Tax cannot be empty"
+            binding.spinTax.requestFocus()
+            return
+        }
+        if (TextUtils.isEmpty(binding.spinPrice.text.toString().trim())) {
+            binding.spinPrice.error = "Price cannot be empty"
+            binding.spinPrice.requestFocus()
             return
         }
         viewModel.addUpdateProduct(
@@ -164,7 +187,7 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>() {
                 Status.SUCCESS -> {
                     binding.animationView.visibility = View.GONE
                     it.data?.let {
-                        it.forEach {
+                        it.data.forEach {
                             brandList.add(
                                 AddProductViewModel.Common(
                                     it.name!!, it.id.toString()

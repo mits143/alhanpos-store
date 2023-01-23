@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.widget.NestedScrollView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.SellsAdapter
@@ -29,6 +30,8 @@ class AllSellFragment : BaseFragment<FragmentAllSellBinding>(), SellsAdapter.But
     private var page = 1
 
     private var term = ""
+    private var isLoading = false
+    private var isLastPage = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
@@ -43,19 +46,18 @@ class AllSellFragment : BaseFragment<FragmentAllSellBinding>(), SellsAdapter.But
         adapter = SellsAdapter(arrayListOf(), this)
         binding.rVCategory.adapter = adapter
 
-        binding.nestedScrollView.viewTreeObserver.addOnScrollChangedListener {
-            val view =
-                binding.nestedScrollView.getChildAt(binding.nestedScrollView.childCount - 1) as View
-            val diff: Int =
-                view.bottom - (binding.nestedScrollView.height + binding.nestedScrollView
-                    .scrollY)
-            if (diff == 0) {
-                page = page.plus(1)
-                viewModel.fetchSells(
-                    "Bearer " + prefs.accessToken,
-                    term,
-                    page.toString()
-                )
+        binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            val nestedScrollView = checkNotNull(v) {
+                return@setOnScrollChangeListener
+            }
+            val lastChild = nestedScrollView.getChildAt(nestedScrollView.childCount - 1)
+            if (lastChild != null) {
+                if ((scrollY >= (lastChild.measuredHeight - nestedScrollView.measuredHeight)) && scrollY > oldScrollY && !isLoading && !isLastPage) {
+                    page = page.plus(1)
+                    viewModel.fetchSells(
+                        "Bearer " + prefs.accessToken, term, page.toString()
+                    )
+                }
             }
         }
     }
@@ -71,9 +73,9 @@ class AllSellFragment : BaseFragment<FragmentAllSellBinding>(), SellsAdapter.But
                     binding.animationView.visibility = View.GONE
                     it.data?.let {
                         if (page == 1) {
-                            adapter.addData(it)
+                            adapter.addData(it.data)
                         } else {
-                            adapter.loadMore(it)
+                            adapter.loadMore(it.data)
                         }
                     }
                 }

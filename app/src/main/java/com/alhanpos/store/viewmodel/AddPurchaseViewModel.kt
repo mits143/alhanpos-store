@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alhanpos.store.model.response.contact.ContactListResponse
 import com.alhanpos.store.model.response.location.LocationResponse
+import com.alhanpos.store.model.response.product.ProductListResponse
 import com.alhanpos.store.repo.MainRepository
 import com.alhanpos.store.util.NetworkHelper
 import com.alhanpos.store.util.Resource
@@ -30,6 +31,10 @@ class AddPurchaseViewModel(
     val getContactData: LiveData<Resource<ContactListResponse>>
         get() = setContactData
 
+    private val setProductData = MutableLiveData<Resource<ProductListResponse>>()
+    val getProductData: LiveData<Resource<ProductListResponse>>
+        get() = setProductData
+
 
     fun fetchLocation(
         token: String
@@ -38,7 +43,7 @@ class AddPurchaseViewModel(
             setLocationData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.location(
-                    token,"", ""
+                    token, "", ""
                 ).let {
                     if (it.isSuccessful) {
                         setLocationData.postValue(Resource.success(it.body()))
@@ -60,7 +65,7 @@ class AddPurchaseViewModel(
             setContactData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.supplierList(
-                    token,"", ""
+                    token, "", ""
                 ).let {
                     if (it.isSuccessful) {
                         setContactData.postValue(Resource.success(it.body()))
@@ -75,73 +80,42 @@ class AddPurchaseViewModel(
         }
     }
 
+    fun fetchProduct(
+        token: String,
+    ) {
+        viewModelScope.launch {
+            setProductData.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                mainRepository.productList(
+                    token, "", ""
+                ).let {
+                    if (it.isSuccessful) {
+                        setProductData.postValue(Resource.success(it.body()))
+                    } else setProductData.postValue(
+                        Resource.error(
+                            it.message(), null
+                        )
+                    )
+                }
+            } else setProductData.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
     fun addUpdatePurchase(
         token: String,
-        contact_id: RequestBody,
-        ref_no: RequestBody,
-        transaction_date: RequestBody,
-        status: RequestBody,
-        location_id: RequestBody,
-        pay_term_number: RequestBody,
-        pay_term_type: RequestBody,
-        file: MultipartBody.Part,
-        shipping_details: RequestBody,
-        shipping_charges: RequestBody,
-        discount_type: RequestBody,
-        tax_id: RequestBody,
-        advance_balance: RequestBody,
-        final_total: RequestBody,
-        product_id: RequestBody,
-        variation_id: RequestBody,
-        quantity: RequestBody,
-        product_unit_id: RequestBody,
-        sub_unit_id: RequestBody,
-        purchase_price: RequestBody,
-        purchase_line_tax_id: RequestBody,
-        purchase_price_inc_tax: RequestBody,
-        default_sell_price: RequestBody,
-        paymentamount: RequestBody,
-        paymentpaid_on: RequestBody,
-        paymentmethod: RequestBody,
-        paymentaccount_id: RequestBody,
-        paymentnote: RequestBody
+        document: MultipartBody.Part,
+        data: RequestBody
     ) {
         viewModelScope.launch {
             setMsg.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.add_purchase(
                     token,
-                    contact_id,
-                    ref_no,
-                    transaction_date,
-                    status,
-                    location_id,
-                    pay_term_number,
-                    pay_term_type,
-                    file,
-                    shipping_details,
-                    shipping_charges,
-                    discount_type,
-                    tax_id,
-                    advance_balance,
-                    final_total,
-                    product_id,
-                    variation_id,
-                    quantity,
-                    product_unit_id,
-                    sub_unit_id,
-                    purchase_price,
-                    purchase_line_tax_id,
-                    purchase_price_inc_tax,
-                    default_sell_price,
-                    paymentamount,
-                    paymentpaid_on,
-                    paymentmethod,
-                    paymentaccount_id,
-                    paymentnote
+                    document,
+                    data
                 ).let {
                     if (it.isSuccessful) {
-                        if (it.body()?.get("success")?.asInt!! == 1)
+                        if (it.body()?.get("success")?.asBoolean!!)
                             setMsg.postValue(Resource.success(it.body()?.get("msg")?.asString))
                         else
                             setMsg.postValue(

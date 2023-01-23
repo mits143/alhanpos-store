@@ -59,11 +59,11 @@ class AddContactFragment : BaseFragment<FragmentAddContactBinding>() {
                 binding.edtAdvanceBal.requestFocus()
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(binding.edtTotalDue.text.toString().trim())) {
-                binding.edtTotalDue.error = "Total Due cannot be empty"
-                binding.edtTotalDue.requestFocus()
-                return@setOnClickListener
-            }
+//            if (TextUtils.isEmpty(binding.edtTotalDue.text.toString().trim())) {
+//                binding.edtTotalDue.error = "Total Due cannot be empty"
+//                binding.edtTotalDue.requestFocus()
+//                return@setOnClickListener
+//            }
             viewModel.addUpdateCustomer(
                 "Bearer " + prefs.accessToken,
                 binding.edtName.text.toString().trim(),
@@ -71,7 +71,7 @@ class AddContactFragment : BaseFragment<FragmentAddContactBinding>() {
                 binding.edtMobile.text.toString().trim(),
                 binding.edtAdvanceBal.text.toString().trim(),
                 args.data?.id.toString(),
-                binding.edtTotalDue.text.toString().trim()
+                "0"
             )
         }
     }

@@ -22,10 +22,9 @@ class ProductAdapter(
             with(dataList[position]) {
                 binding.txtProduct.text = this.name
                 binding.txtSKU.text = this.subSku
-                binding.txtQuantity.text = this.qtyAvailable?:""
-//                if (this.brand != null) {
-//                    binding.txtBrand.text = this.brand.name
-//                }
+                binding.txtQuantity.text = this.qtyAvailable ?: ""
+                binding.txtBrand.text = this.brand
+                binding.txtCategory.text = this.category
                 binding.imgEdit.setOnClickListener {
                     buttonClick.onClick(this)
                 }

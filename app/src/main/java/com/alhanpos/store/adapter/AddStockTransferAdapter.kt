@@ -30,7 +30,7 @@ class AddStockTransferAdapter(
                 quantity = if (quantity == 0) 1 else quantity
                 binding.txtQty.setText(quantity.toString())
                 binding.txtPrice.text = sellingPrice
-                price = (quantity.toFloat() * sellingPrice.toFloat()).toString()
+                price = (quantity.toFloat() * sellingPrice!!.toFloat()).toString()
                 binding.txtTotal.text = price
                 buttonClick.onClick(dataList, position)
 

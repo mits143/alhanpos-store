@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.widget.NestedScrollView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.SupplierAdapter
 import com.alhanpos.store.databinding.FragmentContactBinding
@@ -28,6 +29,8 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
     private var page = 1
 
     private var term = ""
+    private var isLoading = false
+    private var isLastPage = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
@@ -46,26 +49,25 @@ class SupplierFragment : BaseFragment<FragmentContactBinding>(), SupplierAdapter
         binding.rVCategory.adapter = adapter
         binding.rVCategory.layoutManager = layoutManager
 
-        binding.nestedScrollView.viewTreeObserver.addOnScrollChangedListener {
-            val view =
-                binding.nestedScrollView.getChildAt(binding.nestedScrollView.childCount - 1) as View
-            val diff: Int =
-                view.bottom - (binding.nestedScrollView.height + binding.nestedScrollView
-                    .scrollY)
-            if (diff == 0) {
-                page = page.plus(1)
-                viewModel.fetchContact(
-                    "Bearer " + prefs.accessToken,
-                    term,
-                    page.toString()
-                )
+        binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            val nestedScrollView = checkNotNull(v) {
+                return@setOnScrollChangeListener
+            }
+            val lastChild = nestedScrollView.getChildAt(nestedScrollView.childCount - 1)
+            if (lastChild != null) {
+                if ((scrollY >= (lastChild.measuredHeight - nestedScrollView.measuredHeight)) && scrollY > oldScrollY && !isLoading && !isLastPage) {
+                    page = page.plus(1)
+                    viewModel.fetchSupplier(
+                        "Bearer " + prefs.accessToken, term, page.toString()
+                    )
+                }
             }
         }
     }
 
     private fun setObserver() {
 
-        viewModel.fetchSupplier("Bearer " + prefs.accessToken, "", "")
+        viewModel.fetchSupplier("Bearer " + prefs.accessToken, "", page.toString())
         viewModel.getContactData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {

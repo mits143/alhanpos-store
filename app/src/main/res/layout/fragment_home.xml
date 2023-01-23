@@ -357,7 +357,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="@string/sales_last_30_days"
+                        android:text="@string/sales_last_12_months"
                         android:textAllCaps="true"
                         android:textColor="@color/btnColor"
                         android:textSize="@dimen/_14sdp"

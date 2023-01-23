@@ -3,40 +3,51 @@ package com.alhanpos.store.fragment
 import android.app.DatePickerDialog
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.alhanpos.store.R
+import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddPurchaseOrderBinding
+import com.alhanpos.store.model.request.purchase.Product
+import com.alhanpos.store.model.request.purchase.PurchaseRequest
+import com.alhanpos.store.model.response.product.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Callback
-import com.alhanpos.store.util.FileUtils
 import com.alhanpos.store.util.FileUtils.getPath
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AddPurchaseViewModel
+import com.alhanpos.store.viewmodel.AddStockTransferViewModel
+import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.MultipartBody.Part.Companion.createFormData
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>() {
+class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>(),
+    AddStockTransferAdapter.ButtonClick {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddPurchaseOrderBinding =
         FragmentAddPurchaseOrderBinding::inflate
 
     private val viewModel: AddPurchaseViewModel by viewModel()
     private var locationList: ArrayList<AddPurchaseViewModel.Common> = arrayListOf()
+    private var productDataList: ArrayList<ProductListResponseItem> = arrayListOf()
+    var productList: ArrayList<AddStockTransferViewModel.product> = ArrayList()
+    private var posList: ArrayList<ProductListResponseItem> = arrayListOf()
+    lateinit var adapter: AddStockTransferAdapter
     private var location_ID = "0"
     private var supplier_ID = "0"
     private var file: File? = null
+    var sku = ""
 
 
     val myCalendar = Calendar.getInstance()
@@ -45,13 +56,12 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
         setObserver()
         callbacks()
 
-        val date =
-            DatePickerDialog.OnDateSetListener { view, year, month, day ->
-                myCalendar[Calendar.YEAR] = year
-                myCalendar[Calendar.MONTH] = month
-                myCalendar[Calendar.DAY_OF_MONTH] = day
-                updateLabel()
-            }
+        val date = DatePickerDialog.OnDateSetListener { view, year, month, day ->
+            myCalendar[Calendar.YEAR] = year
+            myCalendar[Calendar.MONTH] = month
+            myCalendar[Calendar.DAY_OF_MONTH] = day
+            updateLabel()
+        }
         binding.edtDate.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
@@ -67,93 +77,84 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
         }
 
         binding.txtProceed.setOnClickListener {
-//            if (TextUtils.isEmpty(binding.edtBrandName.text.toString().trim())) {
-//                binding.edtBrandName.error = "Category name cannot be empty"
-//                binding.edtBrandName.requestFocus()
-//                return@setOnClickListener
-//            }
+            if (TextUtils.isEmpty(binding.edtRefNO.text.toString().trim())) {
+                binding.edtRefNO.error = "Reference number cannot be empty"
+                binding.edtRefNO.requestFocus()
+                return@setOnClickListener
+            }
+            if (TextUtils.isEmpty(binding.edtDate.text.toString().trim())) {
+                binding.edtDate.error = "Date cannot be empty"
+                binding.edtDate.requestFocus()
+                return@setOnClickListener
+            }
+            if (TextUtils.isEmpty(binding.edtTerm.text.toString().trim())) {
+                binding.edtTerm.error = "Term cannot be empty"
+                binding.edtTerm.requestFocus()
+                return@setOnClickListener
+            }
+            if (TextUtils.isEmpty(binding.edtShippingDetails.text.toString().trim())) {
+                binding.edtShippingDetails.error = "Shipping Details cannot be empty"
+                binding.edtShippingDetails.requestFocus()
+                return@setOnClickListener
+            }
 
-            val contact_id = supplier_ID.toRequestBody(MultipartBody.FORM)
-            val ref_no = binding.edtRefNO.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val transaction_date =
-                binding.edtDate.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val status =
-                binding.spinStatus.selectedItem.toString().trim().toRequestBody(MultipartBody.FORM)
-            val location_id = location_ID.toRequestBody(MultipartBody.FORM)
-            val pay_term_number =
-                binding.edtTerm.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val pay_term_type =
-                binding.spinTerm.selectedItem.toString().trim().toRequestBody(MultipartBody.FORM)
+            if (posList.isNotEmpty()) {
+                val products = arrayListOf<Product>()
+                var finalAmt = "0"
+                posList.forEach {
+                    products.add(
+                        Product(
+                            "",
+                            "",
+                            it.sellingPrice.toString(),
+                            "",
+                            "",
+                            "",
+                            "",
+                            it.productId.toString(),
+                            "1",
+                            "3",
+                            "10",
+                            "11.00",
+                            it.quantity.toString(),
+                            "1",
+                            it.variationId.toString()
+                        )
+                    )
+                    finalAmt += it.price
+                }
 
-            val final_total =
-                "0".toRequestBody(MultipartBody.FORM)
-
-            val requestFile = file!!.asRequestBody(FileUtils.MIME_TYPE_IMAGE.toMediaTypeOrNull())
-            val document = MultipartBody.Part.createFormData(
-                "document", file?.name, requestFile
-            )
-            val shipping_details: RequestBody =
-                binding.edtShippingDetails.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val shipping_charges: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-
-            val product_id: RequestBody =
-               "0".toRequestBody(MultipartBody.FORM)
-            val variation_id: RequestBody =
-                "0".toRequestBody(MultipartBody.FORM)
-            val quantity: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val product_unit_id: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val sub_unit_id: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val purchase_price: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val purchase_line_tax_id: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val purchase_price_inc_tax: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val default_sell_price: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val paymentamount: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val paymentpaid_on: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val paymentmethod: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val paymentaccount_id: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-            val paymentnote: RequestBody =
-                binding.edtShippingCharges.text.toString().trim().toRequestBody(MultipartBody.FORM)
-
-//            viewModel.addUpdatePurchase(
-//                "Bearer " + prefs.accessToken,
-//                contact_id,
-//                ref_no,
-//                transaction_date,
-//                status,
-//                location_id,
-//                pay_term_number,
-//                pay_term_type,
-//                document,
-//                shipping_details,
-//                shipping_charges,
-//                final_total,
-//                product_id,
-//                variation_id,
-//                quantity,
-//                product_unit_id,
-//                sub_unit_id,
-//                purchase_price,
-//                purchase_line_tax_id,
-//                purchase_price_inc_tax,
-//                default_sell_price,
-//                paymentamount,
-//                paymentpaid_on,
-//                paymentmethod,
-//                paymentaccount_id,
-//                paymentnote
-//            )
+                val jsonData = PurchaseRequest(
+//                    "0.00",
+                    supplier_ID,
+                    "0.00",
+                    "percentage",
+                    1,
+                    40,
+                    "1",
+                    1,
+                    finalAmt,
+                    binding.edtTerm.text.toString().trim().toInt(),
+                    0,
+                    products,
+                    binding.edtRefNO.text.toString().trim(),
+                    binding.edtShippingCharges.text.toString().trim(),
+                    binding.edtShippingDetails.text.toString().trim(),
+                    binding.spinStatus.selectedItem.toString().trim(),
+                    "0.10",
+                    "3",
+                    binding.edtDate.text.toString().trim()
+                )
+                val json = Gson().toJson(jsonData)
+                val data = RequestBody.create(MultipartBody.FORM, json)
+                val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), file!!)
+                val document = createFormData("document", file!!.name, requestBody)
+                viewModel.addUpdatePurchase(
+                    "Bearer " + prefs.accessToken, document, data
+                )
+            } else {
+                showToast("Please select product for purchase order")
+            }
         }
     }
 
@@ -187,8 +188,39 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
         }
     }
 
+    private fun setProductData(productList: ArrayList<AddStockTransferViewModel.product>) {
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, productList)
+        binding.spinnerProduct.threshold = 2
+        binding.spinnerProduct.setAdapter(adapter)
+        binding.spinnerProduct.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, long ->
+                sku = (adapter.getItem(position) as AddStockTransferViewModel.product).sku
+                if (productDataList.isNotEmpty() && sku.isNotEmpty()) {
+                    for (i in productDataList.indices) {
+                        if (TextUtils.equals(productDataList[i].subSku, sku)) {
+                            if (!productDataList[i].isAdded) {
+                                productDataList[i].isAdded = true
+                                posList.add(productDataList[i])
+                            } else {
+                                showToast("Product already added")
+                            }
+                        }
+                    }
+                    setPosData(posList)
+                    binding.spinnerProduct.setText("")
+                }
+            }
+    }
+
+    private fun setPosData(posList: ArrayList<ProductListResponseItem>) {
+        adapter = AddStockTransferAdapter(posList, this)
+        binding.rVCategory.adapter = adapter
+    }
+
     private fun setObserver() {
         viewModel.fetchSupplier("Bearer " + prefs.accessToken)
+        viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
         viewModel.getContactData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -233,12 +265,43 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                         it.data.forEach {
                             locationList.add(
                                 AddPurchaseViewModel.Common(
-                                    it.name,
-                                    it.id.toString()
+                                    it.name, it.id.toString()
                                 )
                             )
                         }
                         setLocationData(locationList)
+                    }
+                }
+                Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
+                    showToast(it.message)
+                }
+            }
+        }
+
+        viewModel.getProductData.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    if (it.data != null) {
+                        it.data.let {
+                            binding.animationView.visibility = View.GONE
+                            productDataList.clear()
+                            productList.clear()
+                            productDataList.addAll(it.data)
+                            it.data.forEach {
+                                productList.add(
+                                    AddStockTransferViewModel.product(
+                                        it.name!!, it.subSku!!
+                                    )
+                                )
+                            }
+                            setProductData(productList)
+                        }
+                    } else {
+                        showToast("No data available")
                     }
                 }
                 Status.ERROR -> {
@@ -262,6 +325,8 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                         binding.edtTerm.setText("")
                         binding.edtShippingDetails.setText("")
                         binding.edtShippingCharges.setText("")
+                        posList.clear()
+                        adapter.notifyDataSetChanged()
                     }
                 }
                 Status.ERROR -> {
@@ -303,5 +368,8 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
         val myFormat = "MM/dd/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         binding.edtDate.setText(dateFormat.format(myCalendar.time))
+    }
+
+    override fun onClick(data: ArrayList<ProductListResponseItem>, position: Int) {
     }
 }

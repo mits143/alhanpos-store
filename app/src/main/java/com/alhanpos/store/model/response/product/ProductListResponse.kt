@@ -1,4 +1,8 @@
 package com.alhanpos.store.model.response.product
 
+import com.google.gson.annotations.SerializedName
 
-class ProductListResponse : ArrayList<ProductListResponseItem>()
+data class ProductListResponse(
+    @SerializedName("data")
+    val `data`: ArrayList<ProductListResponseItem>
+) : java.io.Serializable

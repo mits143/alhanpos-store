@@ -33,7 +33,7 @@ class AddBrandFragment : BaseFragment<FragmentAddBrandBinding>() {
 
         binding.txtProceed.setOnClickListener {
             if (TextUtils.isEmpty(binding.edtBrandName.text.toString().trim())) {
-                binding.edtBrandName.error = "Category name cannot be empty"
+                binding.edtBrandName.error = "Brand name cannot be empty"
                 binding.edtBrandName.requestFocus()
                 return@setOnClickListener
             }

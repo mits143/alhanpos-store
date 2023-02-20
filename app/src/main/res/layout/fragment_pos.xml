@@ -152,7 +152,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@drawable/border">
+                            android:background="@drawable/border"
+                            android:visibility="gone">
 
                             <ImageView
                                 android:id="@+id/imgScan"
@@ -179,14 +180,27 @@
                                 android:padding="@dimen/_8sdp"
                                 android:textColor="@color/fontColor2"
                                 android:textColorHint="@color/fontColor2"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_10ssp"
+                                android:visibility="gone" />
+
+                            <androidx.appcompat.widget.SearchView
+                                android:id="@+id/searchView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/btnColor"
+                                android:textSize="@dimen/_12ssp"
+                                app:iconifiedByDefault="false"
+                                app:queryHint="@string/search" />
                         </FrameLayout>
 
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:background="@drawable/border">
+                            android:background="@drawable/border"
+                            android:visibility="gone">
 
                             <ImageView
                                 android:id="@+id/imgAdd1"
@@ -205,7 +219,7 @@
                 android:id="@+id/cvProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_minus20sdp"
+                android:layout_marginTop="@dimen/_minus15sdp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
@@ -218,8 +232,9 @@
                     android:nestedScrollingEnabled="false"
                     android:overScrollMode="never"
                     android:padding="@dimen/_5sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_pos" />
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3"
+                    tools:listitem="@layout/item_pos_new" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -292,7 +307,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="match_parent"

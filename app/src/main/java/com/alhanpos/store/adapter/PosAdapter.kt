@@ -1,11 +1,11 @@
 package com.alhanpos.store.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alhanpos.store.databinding.ItemPosBinding
+import com.alhanpos.store.databinding.ItemPosNewBinding
 import com.alhanpos.store.model.response.product.ProductListResponseItem
-
 
 class PosAdapter(
     var dataList: ArrayList<ProductListResponseItem>,
@@ -13,22 +13,29 @@ class PosAdapter(
 ) : RecyclerView.Adapter<PosAdapter.ViewHolder>() {
     var x = 0f
 
-    inner class ViewHolder(val binding: ItemPosBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemPosNewBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemPosBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemPosNewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(dataList[position]) {
-                binding.txtName.text = "$name $subSku"
-                quantity = if (quantity == 0) 1 else quantity
-                binding.txtQty.setText(quantity.toString())
-                price = (quantity!!.toFloat() * sellingPrice!!.toFloat()).toString()
-                binding.txtPrice.text = price
-                buttonClick.onClick(dataList, position)
+                binding.txtProduct.text = this.name
+                binding.txtSKU.text = this.sellingPrice
+
+                if (isAdded) {
+                    binding.view.visibility = View.VISIBLE
+                    binding.txtQty.visibility = View.VISIBLE
+                } else {
+                    binding.view.visibility = View.GONE
+                    binding.txtQty.visibility = View.GONE
+                }
+                itemView.setOnClickListener {
+                    buttonClick.onClick(this, position)
+                }
 
                 /*binding.txtQty.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
@@ -58,16 +65,16 @@ class PosAdapter(
                     }
                 })*/
 
-                binding.imgDecrease.setOnClickListener {
-                    if (quantity == 1)
-                        return@setOnClickListener
-                    quantity = (quantity.minus(1))
-                    notifyItemChanged(absoluteAdapterPosition)
-                }
-                binding.imgIncrease.setOnClickListener {
-                    quantity = (quantity.plus(1))
-                    notifyItemChanged(absoluteAdapterPosition)
-                }
+//                binding.imgDecrease.setOnClickListener {
+//                    if (quantity == 1)
+//                        return@setOnClickListener
+//                    quantity = (quantity.minus(1))
+//                    notifyItemChanged(absoluteAdapterPosition)
+//                }
+//                binding.imgIncrease.setOnClickListener {
+//                    quantity = (quantity.plus(1))
+//                    notifyItemChanged(absoluteAdapterPosition)
+//                }
             }
         }
     }
@@ -85,7 +92,7 @@ class PosAdapter(
     }
 
     interface ButtonClick {
-        fun onClick(data: ArrayList<ProductListResponseItem>, position: Int)
+        fun onClick(data: ProductListResponseItem, position: Int)
     }
 
 

@@ -40,7 +40,11 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.txtTotalItems.text = args.data?.data?.size.toString()
-        binding.txtTotal.text = args.total
+        var total = ""
+        args.data?.data?.forEach {
+            total += it.sellingPrice
+        }
+        binding.txtTotal.text = total
 
         binding.edtAmount.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

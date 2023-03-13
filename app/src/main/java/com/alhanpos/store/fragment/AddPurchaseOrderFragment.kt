@@ -1,5 +1,6 @@
 package com.alhanpos.store.fragment
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.net.Uri
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Callback
 import com.alhanpos.store.util.FileUtils.getPath
 import com.alhanpos.store.util.Status
+import com.alhanpos.store.viewmodel.AddExpenseViewModel
 import com.alhanpos.store.viewmodel.AddPurchaseViewModel
 import com.alhanpos.store.viewmodel.AddStockTransferViewModel
 import com.google.gson.Gson
@@ -43,8 +45,11 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
     private var productDataList: ArrayList<ProductListResponseItem> = arrayListOf()
     var productList: ArrayList<AddStockTransferViewModel.product> = ArrayList()
     private var posList: ArrayList<ProductListResponseItem> = arrayListOf()
+    private var paymentAccountList: ArrayList<AddExpenseViewModel.Common> = arrayListOf()
+    private var paymentMethodList: ArrayList<String> = arrayListOf()
     lateinit var adapter: AddStockTransferAdapter
     private var location_ID = "0"
+    private var accountID = "0"
     private var supplier_ID = "0"
     private var file: File? = null
     var sku = ""
@@ -60,12 +65,29 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
             myCalendar[Calendar.YEAR] = year
             myCalendar[Calendar.MONTH] = month
             myCalendar[Calendar.DAY_OF_MONTH] = day
-            updateLabel()
+            updateLabel(false)
         }
+
+        val paidOn = DatePickerDialog.OnDateSetListener { view, year, month, day ->
+            myCalendar[Calendar.YEAR] = year
+            myCalendar[Calendar.MONTH] = month
+            myCalendar[Calendar.DAY_OF_MONTH] = day
+            updateLabel(true)
+        }
+
         binding.edtDate.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
                 date,
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+        binding.edtPaidOn.setOnClickListener {
+            DatePickerDialog(
+                requireContext(),
+                paidOn,
                 myCalendar.get(Calendar.YEAR),
                 myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)
@@ -92,11 +114,6 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                 binding.edtTerm.requestFocus()
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(binding.edtShippingDetails.text.toString().trim())) {
-                binding.edtShippingDetails.error = "Shipping Details cannot be empty"
-                binding.edtShippingDetails.requestFocus()
-                return@setOnClickListener
-            }
 
             if (posList.isNotEmpty()) {
                 val products = arrayListOf<Product>()
@@ -105,12 +122,12 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                     products.add(
                         Product(
                             "",
-                            "",
+                            binding.edtAmt.text.toString().trim(),
                             it.sellingPrice.toString(),
+                            binding.spinnerPaymentMethod.selectedItem.toString().trim(),
                             "",
-                            "",
-                            "",
-                            "",
+                            binding.edtPaymenNote.text.toString().trim(),
+                            binding.edtPaidOn.text.toString().trim(),
                             it.productId.toString(),
                             "1",
                             "3",
@@ -127,8 +144,8 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                 val jsonData = PurchaseRequest(
 //                    "0.00",
                     supplier_ID,
-                    "0.00",
-                    "percentage",
+                    binding.edtDiscountAmt.text.toString().trim(),
+                    binding.edtDiscountType.selectedItem.toString().trim(),
                     1,
                     40,
                     "1",
@@ -216,11 +233,80 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
     private fun setPosData(posList: ArrayList<ProductListResponseItem>) {
         adapter = AddStockTransferAdapter(posList, this)
         binding.rVCategory.adapter = adapter
+
+    }
+
+    private fun setPaymentMethodData(paymentMethodList: ArrayList<String>) {
+        val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, paymentMethodList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerPaymentMethod.adapter = adapter
+    }
+
+    private fun setPaymentAccountData(paymentAccountList: ArrayList<AddExpenseViewModel.Common>) {
+        val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, paymentAccountList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerPaymentAccount.adapter = adapter
+        binding.spinnerPaymentAccount.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>, view: View?, position: Int, id: Long
+                ) {
+                    accountID = (adapter.getItem(position) as AddExpenseViewModel.Common).id
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
     }
 
     private fun setObserver() {
         viewModel.fetchSupplier("Bearer " + prefs.accessToken)
         viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
+        viewModel.fetchPaymentAccountData("Bearer " + prefs.accessToken!!)
+        viewModel.fetchPaymentMethodData("Bearer " + prefs.accessToken!!)
+        viewModel.getPaymentAccountData.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> {
+                    it.data?.let {
+                        paymentAccountList.clear()
+                        it.data.forEach {
+                            paymentAccountList.add(
+                                AddExpenseViewModel.Common(
+                                    it.name, it.id.toString()
+                                )
+                            )
+                        }
+                        setPaymentAccountData(paymentAccountList)
+                    }
+                }
+                Status.ERROR -> {
+                    showToast(it.message)
+                }
+            }
+        }
+        viewModel.getPaymentMethodData.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.animationView.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    binding.animationView.visibility = View.GONE
+                    it.data?.let {
+                        paymentMethodList.clear()
+                        paymentMethodList.add(it.cash)
+                        paymentMethodList.add(it.card)
+                        paymentMethodList.add(it.cheque)
+                        paymentMethodList.add(it.bankTransfer)
+                        setPaymentMethodData(paymentMethodList)
+                    }
+                }
+                Status.ERROR -> {
+                    binding.animationView.visibility = View.GONE
+                    showToast(it.message)
+                }
+            }
+        }
         viewModel.getContactData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -364,12 +450,22 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
         })
     }
 
-    private fun updateLabel() {
+    private fun updateLabel(isPaidOn: Boolean) {
         val myFormat = "MM/dd/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-        binding.edtDate.setText(dateFormat.format(myCalendar.time))
+        if (isPaidOn)
+            binding.edtPaidOn.setText(dateFormat.format(myCalendar.time))
+        else
+            binding.edtDate.setText(dateFormat.format(myCalendar.time))
     }
 
     override fun onClick(data: ArrayList<ProductListResponseItem>, position: Int) {
+        productDataList.forEach { outer ->
+            data.forEach { inner ->
+                if (outer.productId.equals(inner.productId) && outer.isAdded)
+                    outer.isAdded = false
+            }
+        }
     }
+
 }

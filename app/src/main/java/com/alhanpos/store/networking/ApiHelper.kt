@@ -14,6 +14,7 @@ import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.method.PaymentMethodResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.purchase.PurchaseResponse
 import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
 import com.alhanpos.store.model.response.sell.SellResponse
 import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
@@ -148,6 +149,10 @@ interface ApiHelper {
     suspend fun purchaseorders(
         token: String, term: String, page: String
     ): Response<PurchaseOrderResponse>
+
+    suspend fun purchase(
+        token: String, term: String, page: String
+    ): Response<PurchaseResponse>
 
     suspend fun stockadjustments(
         token: String, term: String, page: String

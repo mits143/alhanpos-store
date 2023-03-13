@@ -284,5 +284,11 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
     }
 
     override fun onClick(data: ArrayList<ProductListResponseItem>, position: Int) {
+        productDataList.forEach { outer ->
+            data.forEach { inner ->
+                if (outer.productId.equals(inner.productId) && outer.isAdded)
+                    outer.isAdded = false
+            }
+        }
     }
 }

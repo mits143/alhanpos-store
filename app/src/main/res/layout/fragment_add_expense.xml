@@ -10,11 +10,11 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-78dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -183,8 +183,8 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/reference_no"
                                 android:imeOptions="actionNext"
-                                android:maxLines="1"
                                 android:inputType="text"
+                                android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
@@ -369,7 +369,7 @@
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
-                                android:entries="@array/expcat"
+                                android:entries="@array/purchase_tax"
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/applicable_tax"
                                 android:imeOptions="actionNext"
@@ -447,6 +447,138 @@
                             android:textColorHint="@color/fontColor3"
                             android:textSize="@dimen/_10ssp" />
                     </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvRecurring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintTop_toBottomOf="@+id/cvAddPurchaseOrder">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/recurring"
+                        android:textAllCaps="true"
+                        android:textColor="@color/btnColor"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/recurring_interval"
+                                android:textColor="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <EditText
+                                android:id="@+id/edtRecurringInterval"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/amount"
+                                android:imeOptions="actionNext"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/no_of_repetitions"
+                                android:textColor="@color/fontColor2"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <EditText
+                                android:id="@+id/edtNoOfRep"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:background="@drawable/border"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/no_of_repetitions"
+                                android:imeOptions="actionDone"
+                                android:maxLines="1"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/fontColor3"
+                                android:textColorHint="@color/fontColor3"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvAddPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintTop_toBottomOf="@+id/cvRecurring">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/add_payment"
+                        android:textAllCaps="true"
+                        android:textColor="@color/btnColor"
+                        android:textSize="@dimen/_12ssp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -477,8 +609,8 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/amount"
                                 android:imeOptions="actionNext"
-                                android:maxLines="1"
                                 android:inputType="numberDecimal"
+                                android:maxLines="1"
                                 android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
@@ -509,6 +641,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/paid_on"
                                 android:imeOptions="actionDone"
@@ -622,138 +756,25 @@
                             android:textColorHint="@color/fontColor3"
                             android:textSize="@dimen/_10ssp" />
                     </LinearLayout>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txtProceed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_12sdp"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="@drawable/btn_bkg"
-                        android:focusable="true"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:gravity="center"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/save"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvScanAddProduct"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtProceed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_10sdp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintTop_toBottomOf="@+id/cvAddPurchaseOrder">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/scan_for_add_product"
-                        android:textAllCaps="true"
-                        android:textColor="@color/btnColor"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:orientation="horizontal">
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@drawable/border">
-
-                            <ImageView
-                                android:id="@+id/imgScan"
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="@dimen/_35sdp"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/ic_center_focus_weak_24px" />
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/border">
-
-                            <Spinner
-                                android:id="@+id/spinnerProduct"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_35sdp" />
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:background="@drawable/border">
-
-                            <ImageView
-                                android:id="@+id/imgAdd1"
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="@dimen/_35sdp"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/group_3012" />
-                        </FrameLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvProductInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:visibility="gone"
-                app:cardBackgroundColor="#f3f3f3"
-                app:cardCornerRadius="@dimen/_10sdp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintTop_toBottomOf="@+id/cvScanAddProduct">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp">
-
-                    <com.alhanpos.store.util.TextViewDrawableSize
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/ic_arrow_drop_down_24px_side"
-                        android:fontFamily="@font/poppins_medium"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/product_information"
-                        android:textAllCaps="true"
-                        android:textColor="@color/btnColor"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@drawable/btn_bkg"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/save"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@+id/cvAddPaymentMethod" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

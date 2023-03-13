@@ -336,6 +336,7 @@
                                 android:background="@drawable/border"
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/amount"
+                                android:inputType="numberDecimal"
                                 android:padding="@dimen/_8sdp"
                                 android:textColor="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />

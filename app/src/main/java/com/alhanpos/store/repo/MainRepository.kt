@@ -6,6 +6,7 @@ import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.expenses.ExpensesResponse
+import com.alhanpos.store.model.response.purchase.PurchaseResponse
 import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
 import com.alhanpos.store.model.response.sell.SellResponse
 import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
@@ -159,6 +160,12 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun purchaseorders(
         token: String, term: String, page: String
     ): Response<PurchaseOrderResponse> = apiHelper.purchaseorders(
+        token, term, page
+    )
+
+    suspend fun purchase(
+        token: String, term: String, page: String
+    ): Response<PurchaseResponse> = apiHelper.purchase(
         token, term, page
     )
 

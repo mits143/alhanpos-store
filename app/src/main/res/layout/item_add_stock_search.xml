@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:textColor="@color/fontColor2"
             android:textSize="@dimen/_10ssp" />
 
-        <EditText
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/txtQty"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
@@ -68,7 +69,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/bkg1"
                 android:backgroundTint="@color/deleteColor"
-                android:drawableLeft="@drawable/ic_delete_24px"
+                android:drawableStart="@drawable/ic_delete_24px"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/poppins_regular"
                 android:padding="5dp"

@@ -41,7 +41,6 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
         }
         setAllData()
     }
-
     private fun setAllData() {
         val layoutManager = GridAutofitLayoutManager(requireContext(), 400)
         adapter = ProductAdapter(arrayListOf(), this)

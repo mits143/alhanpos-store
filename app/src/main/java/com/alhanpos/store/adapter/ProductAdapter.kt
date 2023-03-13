@@ -25,6 +25,7 @@ class ProductAdapter(
                 binding.txtQuantity.text = this.qtyAvailable ?: ""
                 binding.txtBrand.text = this.brand
                 binding.txtCategory.text = this.category
+                binding.txtPrice.text = this.sellingPrice
                 binding.imgEdit.setOnClickListener {
                     buttonClick.onClick(this)
                 }

@@ -178,6 +178,38 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/llPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="#F7F6FE"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Price"
+                    android:textColor="@color/fontColor3"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="ج.م 20.00"
+                    android:textColor="@color/fontColor2"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

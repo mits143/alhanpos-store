@@ -32,7 +32,11 @@ class AddStockTransferAdapter(
                 binding.txtPrice.text = sellingPrice
                 price = (quantity.toFloat() * sellingPrice!!.toFloat()).toString()
                 binding.txtTotal.text = price
-                buttonClick.onClick(dataList, position)
+                binding.txtDelete.setOnClickListener {
+                    buttonClick.onClick(dataList, position)
+                    binding.txtQty.clearFocus()
+                    removeItem(position)
+                }
 
                 binding.txtQty.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
@@ -83,5 +87,9 @@ class AddStockTransferAdapter(
         fun onClick(data: ArrayList<ProductListResponseItem>, position: Int)
     }
 
-
+    fun removeItem(position: Int) {
+        this.dataList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount - position)
+    }
 }

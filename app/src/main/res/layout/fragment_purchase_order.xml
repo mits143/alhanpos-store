@@ -33,7 +33,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"
-                    android:text="@string/all_purchase_orders"
+                    android:text="@string/purchase"
                     android:textAllCaps="true"
                     android:textColor="@color/btnColor"
                     android:textSize="@dimen/_12ssp" />
@@ -166,7 +166,8 @@
                                 android:paddingHorizontal="@dimen/_10sdp"
                                 android:text="@string/action"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_10ssp"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:layout_width="@dimen/_100sdp"
@@ -186,7 +187,8 @@
                                 android:paddingHorizontal="@dimen/_10sdp"
                                 android:text="@string/quantity_remaining"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_10ssp"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:layout_width="@dimen/_100sdp"
@@ -196,7 +198,8 @@
                                 android:paddingHorizontal="@dimen/_10sdp"
                                 android:text="@string/shipping_status"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_10ssp"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:layout_width="@dimen/_100sdp"

@@ -14,6 +14,7 @@ import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.method.PaymentMethodResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.purchase.PurchaseResponse
 import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
 import com.alhanpos.store.model.response.sell.SellResponse
 import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
@@ -193,6 +194,14 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         term: String,
         page: String
     ): Response<PurchaseOrderResponse> = apiService.purchaseorders(
+        token, term, page
+    )
+
+    override suspend fun purchase(
+        token: String,
+        term: String,
+        page: String
+    ): Response<PurchaseResponse> = apiService.purchase(
         token, term, page
     )
 

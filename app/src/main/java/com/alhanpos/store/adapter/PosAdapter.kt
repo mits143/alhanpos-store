@@ -94,6 +94,4 @@ class PosAdapter(
     interface ButtonClick {
         fun onClick(data: ProductListResponseItem, position: Int)
     }
-
-
 }

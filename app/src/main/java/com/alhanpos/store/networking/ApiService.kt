@@ -14,6 +14,7 @@ import com.alhanpos.store.model.response.location.LocationResponse
 import com.alhanpos.store.model.response.login.LoginResponse
 import com.alhanpos.store.model.response.method.PaymentMethodResponse
 import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.purchase.PurchaseResponse
 import com.alhanpos.store.model.response.purchaseorder.PurchaseOrderResponse
 import com.alhanpos.store.model.response.sell.SellResponse
 import com.alhanpos.store.model.response.stockadjustment.StockAdjustmentResponse
@@ -43,6 +44,7 @@ import com.alhanpos.store.util.Constants.LOGIN
 import com.alhanpos.store.util.Constants.PAYMENT_ACCOUNTS
 import com.alhanpos.store.util.Constants.PAYMENT_METHODS
 import com.alhanpos.store.util.Constants.PRODUCTLIST
+import com.alhanpos.store.util.Constants.PURCHASE
 import com.alhanpos.store.util.Constants.PURCHASEORDERS
 import com.alhanpos.store.util.Constants.SELLS
 import com.alhanpos.store.util.Constants.STOCKADJUSTMENTS
@@ -250,6 +252,13 @@ interface ApiService {
         @Query("term") term: String,
         @Query("page") page: String
     ): Response<PurchaseOrderResponse>
+
+    @GET(PURCHASE)
+    suspend fun purchase(
+        @Header("Authorization") token: String,
+        @Query("term") term: String,
+        @Query("page") page: String
+    ): Response<PurchaseResponse>
 
     @GET(STOCKADJUSTMENTS)
     suspend fun stockadjustments(

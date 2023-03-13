@@ -53,7 +53,14 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
             myCalendar[Calendar.YEAR] = year
             myCalendar[Calendar.MONTH] = month
             myCalendar[Calendar.DAY_OF_MONTH] = day
-            updateLabel()
+            updateLabel(false)
+        }
+
+        val paidOn = DatePickerDialog.OnDateSetListener { view, year, month, day ->
+            myCalendar[Calendar.YEAR] = year
+            myCalendar[Calendar.MONTH] = month
+            myCalendar[Calendar.DAY_OF_MONTH] = day
+            updateLabel(true)
         }
         binding.edtDate.setOnClickListener {
             DatePickerDialog(
@@ -68,6 +75,15 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
             DatePickerDialog(
                 requireContext(),
                 date,
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+        binding.edtPaidOn.setOnClickListener {
+            DatePickerDialog(
+                requireContext(),
+                paidOn,
                 myCalendar.get(Calendar.YEAR),
                 myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)
@@ -138,9 +154,9 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
                 "0",
                 location_ID.toInt(),
                 payments,
-                "",
+                binding.edtRecurringInterval.text.toString().trim(),
                 "days",
-                "",
+                binding.edtNoOfRep.text.toString().trim(),
                 binding.edtRefNO.text.toString().trim(),
 //                "",
                 "",
@@ -371,10 +387,12 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
         })
     }
 
-    private fun updateLabel() {
+    private fun updateLabel(isPaidOn: Boolean) {
         val myFormat = "MM/dd/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-        binding.edtDate.setText(dateFormat.format(myCalendar.time))
-        binding.edtPaidOn.setText(dateFormat.format(myCalendar.time))
+        if (isPaidOn)
+            binding.edtPaidOn.setText(dateFormat.format(myCalendar.time))
+        else
+            binding.edtDate.setText(dateFormat.format(myCalendar.time))
     }
 }

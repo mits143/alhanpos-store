@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemPurchaseOrderBinding
-import com.alhanpos.store.model.response.purchaseorder.Data
+import com.alhanpos.store.model.response.purchase.PurchaseResponse.Data
 
 class PurchaseOrderAdapter(
     var dataList: ArrayList<Data>,
@@ -27,10 +27,9 @@ class PurchaseOrderAdapter(
                 binding.txtRefNo.text = this.refNo
                 binding.txtLocation.text = this.locationName
                 binding.txtSupplier.text = this.supplierBusinessName
-//                binding.txtAction.text = this.a
                 binding.txtStatus.text = this.status
-                binding.txtQuantityRemaining.text = this.poQtyRemaining
-                binding.txtShippingStatus.text = this.shippingStatus
+//                binding.txtQuantityRemaining.text = this.poQtyRemaining
+//                binding.txtShippingStatus.text = this.shippingStatus
             }
         }
     }

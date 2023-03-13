@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.PurchaseOrderAdapter
 import com.alhanpos.store.databinding.FragmentPurchaseOrderBinding
-import com.alhanpos.store.model.response.purchaseorder.Data
+import com.alhanpos.store.model.response.purchase.PurchaseResponse.Data
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.PurchaseOrderViewModel
@@ -54,7 +54,7 @@ class PurchaseOrderFragment : BaseFragment<FragmentPurchaseOrderBinding>(),
             if (lastChild != null) {
                 if ((scrollY >= (lastChild.measuredHeight - nestedScrollView.measuredHeight)) && scrollY > oldScrollY && !isLoading && !isLastPage) {
                     page = page.plus(1)
-                    viewModel.fetchPurchaseOrder(
+                    viewModel.fetchPurchase(
                         "Bearer " + prefs.accessToken, term, page.toString()
                     )
                 }
@@ -64,8 +64,8 @@ class PurchaseOrderFragment : BaseFragment<FragmentPurchaseOrderBinding>(),
     }
 
     private fun setObserver() {
-        viewModel.fetchPurchaseOrder("Bearer " + prefs.accessToken, "", page.toString())
-        viewModel.getPurchaseOrderData.observe(this) {
+        viewModel.fetchPurchase("Bearer " + prefs.accessToken, "", page.toString())
+        viewModel.getPurchaseData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     binding.animationView.visibility = View.VISIBLE

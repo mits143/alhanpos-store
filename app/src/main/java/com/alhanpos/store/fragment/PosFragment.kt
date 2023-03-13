@@ -28,6 +28,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     private var locationList: ArrayList<String> = arrayListOf()
     private var contactList: ArrayList<String> = arrayListOf()
     private var productDataList: ArrayList<ProductListResponseItem> = arrayListOf()
+    private var productDataListTemp: ArrayList<ProductListResponseItem> = arrayListOf()
     var productList: ArrayList<PosViewModel.product> = ArrayList()
 
     private var posList: ArrayList<ProductListResponseItem> = arrayListOf()
@@ -39,12 +40,15 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
 
-//        if (productList.isNotEmpty()) setProductData(productList)
-
         binding.searchView.setOnQueryTextListener(this)
         binding.txtProceed.setOnClickListener {
             if (productDataList.isNotEmpty()) {
-                val productListResponse = ProductListResponse(productDataList)
+                productDataListTemp= arrayListOf()
+                productDataList.forEach {
+                    if (it.isAdded)
+                        productDataListTemp.add(it)
+                }
+                val productListResponse = ProductListResponse(productDataListTemp)
                 val action = PosFragmentDirections.actionNavPosToNavPosPayment(
                     productListResponse
                 )

@@ -196,6 +196,13 @@
     <string name="add_purchase">Add Purchase</string>
     <string name="unit_price">Unit Price</string>
     <string name="sales_last_12_months">Sales last 12 months</string>
+    <string name="add_payment">Add Payment</string>
+    <string name="recurring_interval">Recurring Interval</string>
+    <string name="no_of_repetitions">No. of Repetitions</string>
+    <string name="discount">Discount</string>
+    <string name="additional_notes">Additional Notes</string>
+    <string name="discount_type">Discount Type</string>
+    <string name="purchase_tax">Purchase Tax</string>
     <string-array name="orderStatuses">
         <item>Received</item>
         <item>Pending</item>
@@ -204,6 +211,15 @@
     <string-array name="term">
         <item>Days</item>
         <item>Months</item>
+    </string-array>
+    <string-array name="discount">
+        <item>None</item>
+        <item>Fixed</item>
+        <item>Percentage</item>
+    </string-array>
+    <string-array name="purchase_tax">
+        <item>None</item>
+        <item>Added Tax</item>
     </string-array>
     <string-array name="status">
         <item>Pending</item>

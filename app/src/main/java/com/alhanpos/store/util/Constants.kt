@@ -31,6 +31,7 @@ object Constants {
     const val ADD_CUSTOMER = "api/customer/add"
     const val ADD_STOCKTRANSFER = "api/stocktransfer/add"
     const val ADD_STOCKADJUSTMENT = "api/stockadjustment/add"
+    const val PURCHASE = "api/purchase"
     const val ADD_PURCHASE = "api/purchase/add"
     const val ADD_EXPENSE = "api/expense/add"
 }

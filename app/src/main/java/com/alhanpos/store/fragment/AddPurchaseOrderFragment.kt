@@ -318,10 +318,10 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
 //                        adapter.addData(it.data)
                         val dataList = arrayListOf<AddPurchaseViewModel.Common>()
                         for (i in it.data.indices) {
-                            if (!it.data[i].supplier_business_name.isNullOrEmpty()) {
+                            if (!it.data[i].name.isNullOrEmpty()) {
                                 dataList.add(
                                     AddPurchaseViewModel.Common(
-                                        it.data[i].supplier_business_name!!,
+                                        it.data[i].name!!,
                                         it.data[i].id.toString()
                                     )
                                 )

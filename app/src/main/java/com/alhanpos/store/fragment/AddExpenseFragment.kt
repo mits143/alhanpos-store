@@ -74,7 +74,7 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
         binding.edtPaidOn.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
-                date,
+                paidOn,
                 myCalendar.get(Calendar.YEAR),
                 myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)

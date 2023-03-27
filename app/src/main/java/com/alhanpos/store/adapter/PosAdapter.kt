@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemPosNewBinding
-import com.alhanpos.store.model.response.product.ProductListResponseItem
+import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 
 class PosAdapter(
     var dataList: ArrayList<ProductListResponseItem>,

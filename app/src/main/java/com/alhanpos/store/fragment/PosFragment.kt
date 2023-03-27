@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.PosAdapter
 import com.alhanpos.store.databinding.FragmentPosBinding
 import com.alhanpos.store.model.response.product.ProductListResponse
-import com.alhanpos.store.model.response.product.ProductListResponseItem
+import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.PosViewModel
@@ -191,15 +191,4 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
         viewModel.fetchProduct("Bearer " + prefs.accessToken!!, newText!!)
         return false
     }
-
-//    override fun onClick(dataList: ArrayList<ProductListResponseItem>, position: Int) {
-//        var total = 0f
-//        for (i in 0 until dataList.size) {
-//            total += (dataList[i].sellingPrice!!.toFloat() * dataList[i].quantity.toFloat())
-//        }
-//
-//        totalItems = dataList.size.toString()
-//        binding.txtSubTotal.text = total.toString()
-//        binding.txtTotal.text = total.toString()
-//    }
 }

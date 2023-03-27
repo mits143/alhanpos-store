@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alhanpos.store.databinding.ItemProductBinding
-import com.alhanpos.store.model.response.product.ProductListResponseItem
+import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 
 class ProductAdapter(
     var dataList: ArrayList<ProductListResponseItem>, var buttonClick: ButtonClick

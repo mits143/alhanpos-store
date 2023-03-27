@@ -15,7 +15,8 @@ import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddPurchaseOrderBinding
 import com.alhanpos.store.model.request.purchase.Product
 import com.alhanpos.store.model.request.purchase.PurchaseRequest
-import com.alhanpos.store.model.response.product.ProductListResponseItem
+import com.alhanpos.store.model.response.product.ProductListResponse
+import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Callback
 import com.alhanpos.store.util.FileUtils.getPath

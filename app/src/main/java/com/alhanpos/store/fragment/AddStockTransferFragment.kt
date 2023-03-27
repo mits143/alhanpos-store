@@ -14,7 +14,7 @@ import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddStockTransferBinding
 import com.alhanpos.store.model.request.stockTransfer.Product
 import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
-import com.alhanpos.store.model.response.product.ProductListResponseItem
+import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AddStockTransferViewModel

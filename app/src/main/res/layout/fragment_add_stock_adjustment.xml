@@ -235,15 +235,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:background="@drawable/border"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <ImageView
                                 android:id="@+id/imgScan"
                                 android:layout_width="@dimen/_50sdp"
                                 android:layout_height="@dimen/_35sdp"
                                 android:padding="@dimen/_10sdp"
-                                android:src="@drawable/as"
-                                app:tint="@color/btnColor" />
+                                android:src="@drawable/ic_center_focus_weak_24px" />
                         </FrameLayout>
 
                         <FrameLayout
@@ -260,7 +259,7 @@
                                 android:fontFamily="@font/poppins_regular"
                                 android:hint="@string/select_product"
                                 android:maxLines="1"
-                                android:padding="@dimen/_8sdp"
+                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor2"
                                 android:textColorHint="@color/fontColor2"
                                 android:textSize="@dimen/_10ssp" />

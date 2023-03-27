@@ -233,4 +233,10 @@
         <item>Normal</item>
         <item>Abnormal</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="invoice_no">Invoice No</string>
+    <string name="seller">Seller</string>
+    <string name="client_id">Client ID</string>
+    <string name="cash">Cash</string>
 </resources>

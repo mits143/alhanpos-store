@@ -37,10 +37,11 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
     private var paymentMethodList: ArrayList<String> = arrayListOf()
 
     var accountID = ""
+    var total = 0f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.txtTotalItems.text = args.data?.data?.size.toString()
-        var total = 0f
+
         args.data?.data?.forEach {
             total += it.sellingPrice!!.toFloat()
         }
@@ -169,7 +170,7 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
             "",
             "",
             "percentage",
-            args.total,
+            total.toString(),
             0,
             "",
             "",
@@ -275,7 +276,8 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
                         binding.edtSellNote.setText("")
                         binding.edtStaffNote.setText("")
                         showToast(it.get("msg").asString)
-                        val action = PosPaymentFragmentDirections.actionNavPosPaymentToNavHome()
+                        val action =
+                            PosPaymentFragmentDirections.actionNavPosPaymentToNavPosDetail()
                         findNavController().navigate(action)
                     }
                 }

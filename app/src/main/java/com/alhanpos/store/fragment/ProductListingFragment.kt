@@ -9,7 +9,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.adapter.ProductAdapter
 import com.alhanpos.store.databinding.FragmentAllProductBinding
-import com.alhanpos.store.model.response.product.ProductListResponseItem
+import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.GridAutofitLayoutManager
 import com.alhanpos.store.util.Status

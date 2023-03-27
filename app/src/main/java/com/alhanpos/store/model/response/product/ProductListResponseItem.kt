@@ -1,3 +1,4 @@
+/*
 package com.alhanpos.store.model.response.product
 
 
@@ -34,4 +35,4 @@ data class ProductListResponseItem(
     var isAdded: Boolean,
     var quantity: Int,
     var price: String?
-) : java.io.Serializable
+) : java.io.Serializable*/

@@ -76,7 +76,6 @@
                                 android:hint="@string/business_location"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -111,7 +110,6 @@
                                 android:hint="@string/expense_category"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -150,7 +148,6 @@
                                 android:hint="@string/sub_category"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -259,7 +256,6 @@
                                 android:hint="@string/expense_for"
                                 android:imeOptions="actionDone"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -298,7 +294,6 @@
                                 android:hint="@string/expense_for_contact"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -374,7 +369,6 @@
                                 android:hint="@string/applicable_tax"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -685,7 +679,6 @@
                                 android:hint="@string/payment_method"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -718,7 +711,6 @@
                                 android:hint="@string/payment_account"
                                 android:imeOptions="actionDone"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />

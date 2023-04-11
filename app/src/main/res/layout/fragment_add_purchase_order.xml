@@ -77,7 +77,6 @@
                                 android:hint="@string/supplier"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -186,7 +185,6 @@
                                 android:hint="@string/purchase_status"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -224,7 +222,6 @@
                                 android:hint="@string/business_location"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -295,7 +292,7 @@
                                 <EditText
                                     android:id="@+id/edtDoc"
                                     android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
                                     android:focusable="false"
@@ -324,7 +321,6 @@
                                     android:fontFamily="@font/poppins_medium"
                                     android:imeOptions="actionNext"
                                     android:maxLines="1"
-                                    android:padding="@dimen/_10sdp"
                                     android:textColor="@color/fontColor3"
                                     android:textColorHint="@color/fontColor3"
                                     android:textSize="@dimen/_10ssp"
@@ -641,7 +637,6 @@
                                 android:hint="@string/payment_method"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -715,7 +710,6 @@
                                 android:hint="@string/payment_method"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -748,7 +742,6 @@
                                 android:hint="@string/payment_account"
                                 android:imeOptions="actionDone"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -920,7 +913,6 @@
                                 android:hint="@string/payment_method"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -953,7 +945,6 @@
                                 android:hint="@string/payment_account"
                                 android:imeOptions="actionDone"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />

@@ -76,7 +76,6 @@
                                 android:hint="@string/business_location"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -186,7 +185,6 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />

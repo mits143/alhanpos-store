@@ -4,11 +4,15 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.alhanpos.store.R
 import com.alhanpos.store.adapter.PosDetailAdapter
 import com.alhanpos.store.databinding.FragmentPosDetailBinding
 import com.alhanpos.store.model.response.DetailResponse
@@ -30,6 +34,14 @@ class PosDetailFragment : BaseFragment<FragmentPosDetailBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setObserver()
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.nav_home)
+                }
+            })
     }
 
     private fun showDetails(it: DetailResponse) {
@@ -80,6 +92,16 @@ class PosDetailFragment : BaseFragment<FragmentPosDetailBinding>() {
                     showToast(it.message)
                 }
             }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.getItemId()) {
+            android.R.id.home -> {
+                showToast("Hello")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

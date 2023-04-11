@@ -168,8 +168,15 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>() {
             )
             val json = Gson().toJson(jsonData)
             val data = RequestBody.create(MultipartBody.FORM, json)
-            val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), file!!)
-            val document = MultipartBody.Part.createFormData("document", file!!.name, requestBody)
+            val document: MultipartBody.Part
+            if (file != null) {
+                val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), file!!)
+                document = MultipartBody.Part.createFormData("document", file!!.name, requestBody)
+
+            } else {
+                val attachmentEmpty = RequestBody.create("text/plain".toMediaTypeOrNull(), "")
+                document = MultipartBody.Part.createFormData("document", "", attachmentEmpty)
+            }
 
             viewModel.addUpdateExpense(
                 "Bearer " + prefs.accessToken, document, data

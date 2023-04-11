@@ -170,8 +170,15 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                 )
                 val json = Gson().toJson(jsonData)
                 val data = RequestBody.create(MultipartBody.FORM, json)
-                val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), file!!)
-                val document = createFormData("document", file!!.name, requestBody)
+                val document: MultipartBody.Part
+                if (file != null) {
+                    val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), file!!)
+                    document = createFormData("document", file!!.name, requestBody)
+
+                } else {
+                    val attachmentEmpty = RequestBody.create("text/plain".toMediaTypeOrNull(), "")
+                    document = createFormData("document", "", attachmentEmpty)
+                }
                 viewModel.addUpdatePurchase(
                     "Bearer " + prefs.accessToken, document, data
                 )
@@ -327,8 +334,7 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                             if (!it.data[i].name.isNullOrEmpty()) {
                                 dataList.add(
                                     AddPurchaseViewModel.Common(
-                                        it.data[i].name!!,
-                                        it.data[i].id.toString()
+                                        it.data[i].name!!, it.data[i].id.toString()
                                     )
                                 )
                             }
@@ -393,8 +399,7 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                             if (productDataList.size == 1) {
                                 posList.addAll(productDataList)
                                 setPosData(posList)
-                            } else
-                                setProductData(productList)
+                            } else setProductData(productList)
                         }
                     } else {
                         showToast("No data available")
@@ -451,8 +456,7 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
             }
 
             override fun permissionGranted() {
-                if (type == 1)
-                    selectImage()
+                if (type == 1) selectImage()
                 else {
                     val action =
                         AddPurchaseOrderFragmentDirections.actionNavAddPurchaseOrderToNavScanner()
@@ -469,17 +473,14 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
     private fun updateLabel(isPaidOn: Boolean) {
         val myFormat = "MM/dd/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-        if (isPaidOn)
-            binding.edtPaidOn.setText(dateFormat.format(myCalendar.time))
-        else
-            binding.edtDate.setText(dateFormat.format(myCalendar.time))
+        if (isPaidOn) binding.edtPaidOn.setText(dateFormat.format(myCalendar.time))
+        else binding.edtDate.setText(dateFormat.format(myCalendar.time))
     }
 
     override fun onClick(data: ArrayList<ProductListResponseItem>, position: Int) {
         productDataList.forEach { outer ->
             data.forEach { inner ->
-                if (outer.productId.equals(inner.productId) && outer.isAdded)
-                    outer.isAdded = false
+                if (outer.productId.equals(inner.productId) && outer.isAdded) outer.isAdded = false
             }
         }
     }

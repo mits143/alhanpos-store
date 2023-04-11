@@ -142,7 +142,7 @@
                             <Spinner
                                 android:id="@+id/spinStatus"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_35sdp"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:background="@drawable/border"
                                 android:entries="@array/status"
@@ -150,7 +150,6 @@
                                 android:hint="@string/category"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -220,7 +219,6 @@
                                 android:hint="@string/location_from"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />
@@ -255,7 +253,6 @@
                                 android:imeOptions="actionDone"
                                 android:inputType="text"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_10ssp" />

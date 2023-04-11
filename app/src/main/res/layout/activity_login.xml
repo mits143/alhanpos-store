@@ -64,6 +64,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:hint="@string/enter_password"
                 android:imeOptions="actionDone"
+                android:inputType="textPassword"
                 android:textColor="@color/dashColor"
                 android:textColorHint="@color/dashColor"
                 android:textSize="@dimen/_12ssp" />

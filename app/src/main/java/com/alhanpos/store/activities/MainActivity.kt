@@ -102,6 +102,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
             R.id.nav_add_supplier -> hideBottomNavigation()
             R.id.nav_add_product -> hideBottomNavigation()
             R.id.nav_scanner -> hideBottomNavigation()
+            R.id.nav_pos_detail -> hideBottomNavigation()
             else -> showBottomNavigationView()
         }
     }

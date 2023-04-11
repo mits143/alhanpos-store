@@ -181,7 +181,6 @@
                                 android:hint="@string/unit"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_11ssp" />
@@ -219,7 +218,6 @@
                                 android:hint="@string/brand"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_11ssp" />
@@ -253,7 +251,6 @@
                                 android:hint="@string/category"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
-                                android:padding="@dimen/_10sdp"
                                 android:textColor="@color/fontColor3"
                                 android:textColorHint="@color/fontColor3"
                                 android:textSize="@dimen/_11ssp" />

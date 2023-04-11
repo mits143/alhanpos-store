@@ -1,5 +1,6 @@
 package com.alhanpos.store.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.alhanpos.store.databinding.FragmentPosBinding
 import com.alhanpos.store.model.response.product.ProductListResponse
 import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
+import com.alhanpos.store.util.Callback
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.PosViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,20 +32,16 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     private var productDataList: ArrayList<ProductListResponseItem> = arrayListOf()
     private var productDataListTemp: ArrayList<ProductListResponseItem> = arrayListOf()
     var productList: ArrayList<PosViewModel.product> = ArrayList()
-
-    private var posList: ArrayList<ProductListResponseItem> = arrayListOf()
     lateinit var adapter: PosAdapter
 
-    var sku = ""
-    var totalItems = ""
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        callbacks()
         setObserver()
 
         binding.searchView.setOnQueryTextListener(this)
         binding.txtProceed.setOnClickListener {
             if (productDataList.isNotEmpty()) {
-                productDataListTemp= arrayListOf()
+                productDataListTemp = arrayListOf()
                 productDataList.forEach {
                     if (it.isAdded)
                         productDataListTemp.add(it)
@@ -56,6 +54,10 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
             } else {
                 showToast("Please select atleast one product")
             }
+        }
+
+        binding.flScan.setOnClickListener {
+            getPermission()
         }
     }
 
@@ -75,31 +77,6 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
         binding.spinnerType.setText(contactList[0])
     }
 
-//    private fun setProductData(productList: ArrayList<PosViewModel.product>) {
-//        val adapter =
-//            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, productList)
-//        binding.spinnerProduct.threshold = 2
-//        binding.spinnerProduct.setAdapter(adapter)
-//        binding.spinnerProduct.onItemClickListener =
-//            AdapterView.OnItemClickListener { parent, view, position, long ->
-//                sku = (adapter.getItem(position) as PosViewModel.product).sku
-//                if (productDataList.isNotEmpty() && sku.isNotEmpty()) {
-//                    for (i in productDataList.indices) {
-//                        if (TextUtils.equals(productDataList[i].subSku, sku)) {
-//                            if (!productDataList[i].isAdded) {
-//                                productDataList[i].isAdded = true
-//                                posList.add(productDataList[i])
-//                            } else {
-//                                showToast("Product already added")
-//                            }
-//                        }
-//                    }
-////                    setPosData(posList)
-//                    binding.spinnerProduct.setText("")
-//                }
-//            }
-//    }
-
     private fun setPosData(posList: ArrayList<ProductListResponseItem>) {
         adapter = PosAdapter(posList, this)
         binding.rvProduct.adapter = adapter
@@ -108,7 +85,7 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     private fun setObserver() {
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
         viewModel.fetchContact("Bearer " + prefs.accessToken!!)
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, "")
+        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, "", prefs.sku.toString())
 
         viewModel.getLocationData.observe(this) {
             when (it.status) {
@@ -158,13 +135,8 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
                         it.data.let {
                             binding.animationView.visibility = View.GONE
                             productDataList.clear()
-//                            productList.clear()
                             productDataList.addAll(it.data)
-//                            it.data.forEach {
-//                                productList.add(PosViewModel.product(it.name!!, it.subSku!!))
-//                            }
                             setPosData(productDataList)
-//                            setProductData(productList)
                         }
                     } else {
                         showToast("No data available")
@@ -178,6 +150,28 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
         }
     }
 
+    private fun callbacks() {
+        setUpListener(object : Callback {
+            override fun captureImageData(uri: Uri?) {
+            }
+
+            override fun browseImageData(uri: Uri?) {
+            }
+
+            override fun pdfData(uri: Uri?) {
+            }
+
+            override fun permissionGranted() {
+                val action = PosFragmentDirections.actionNavPosToNavScanner()
+                findNavController().navigate(action)
+            }
+
+            override fun permissionNotGranted() {
+            }
+
+        })
+    }
+
     override fun onClick(dataList: ProductListResponseItem, position: Int) {
         dataList.isAdded = !dataList.isAdded
         adapter.notifyDataSetChanged()
@@ -188,7 +182,12 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, newText!!)
+        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString(), newText!!)
         return false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        prefs.sku = ""
     }
 }

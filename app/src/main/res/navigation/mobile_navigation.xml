@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_nav_pos_to_nav_pos_payment"
             app:destination="@id/nav_pos_payment" />
+        <action
+            android:id="@+id/action_nav_pos_to_nav_scanner"
+            app:destination="@id/nav_scanner" />
     </fragment>
 
     <fragment
@@ -127,7 +130,12 @@
         android:id="@+id/nav_add_purchase_order"
         android:name="com.alhanpos.store.fragment.AddPurchaseOrderFragment"
         android:label="@string/add_purchase_order"
-        tools:layout="@layout/fragment_add_purchase_order" />
+        tools:layout="@layout/fragment_add_purchase_order">
+
+        <action
+            android:id="@+id/action_nav_add_purchase_order_to_nav_scanner"
+            app:destination="@id/nav_scanner" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_all_sale"
@@ -167,7 +175,12 @@
         android:id="@+id/nav_add_stock_transfer"
         android:name="com.alhanpos.store.fragment.AddStockTransferFragment"
         android:label="@string/add_stock_transfer"
-        tools:layout="@layout/fragment_add_stock_transfer" />
+        tools:layout="@layout/fragment_add_stock_transfer">
+
+        <action
+            android:id="@+id/action_nav_add_stock_transfer_to_nav_scanner"
+            app:destination="@id/nav_scanner" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_reports"
@@ -267,7 +280,12 @@
         android:id="@+id/nav_add_stock_adjustment"
         android:name="com.alhanpos.store.fragment.AddStockAdjustmentFragment"
         android:label="@string/stock_adjustment"
-        tools:layout="@layout/fragment_add_stock_adjustment" />
+        tools:layout="@layout/fragment_add_stock_adjustment">
+
+        <action
+            android:id="@+id/action_nav_add_stock_adjustment_to_nav_scanner"
+            app:destination="@id/nav_scanner" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_expenses"
@@ -337,10 +355,15 @@
             app:popUpToInclusive="true" />
 
         <argument
-            android:name="data"
-            android:defaultValue="@null"
-            app:argType="com.alhanpos.store.model.response.contact.ContactData"
-            app:nullable="true" />
+            android:name="transactionID"
+            app:argType="string"
+            app:nullable="false"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_scanner"
+        android:name="com.alhanpos.store.fragment.ScannerFragment"
+        android:label="Scanner"
+        tools:layout="@layout/fragment_scanner" />
 
 </navigation>

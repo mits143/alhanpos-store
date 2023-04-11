@@ -3,6 +3,7 @@ package com.alhanpos.store.networking
 import com.alhanpos.store.model.request.payment.PaymentRequest
 import com.alhanpos.store.model.request.stockAdjustment.StockAdjustmentRequest
 import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
+import com.alhanpos.store.model.response.DetailResponse
 import com.alhanpos.store.model.response.account.PaymentAccountResponse
 import com.alhanpos.store.model.response.brand.BrandResponse
 import com.alhanpos.store.model.response.category.CategoryResponse
@@ -67,8 +68,9 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun productList(
         token: String,
         term: String,
+        sku: String,
         page: String
-    ): Response<ProductListResponse> = apiService.productList(token, term, page)
+    ): Response<ProductListResponse> = apiService.productList(token, term, sku, page)
 
     override suspend fun categoryList(
         token: String,
@@ -264,6 +266,14 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         token,
         document,
         data
+    )
+
+    override suspend fun invoice(
+        token: String,
+        transaction_id: String
+    ): Response<DetailResponse> = apiService.invoice(
+        token,
+        transaction_id
     )
 
 }

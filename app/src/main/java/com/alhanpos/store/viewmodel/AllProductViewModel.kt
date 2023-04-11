@@ -22,6 +22,7 @@ class AllProductViewModel(
     fun fetchProduct(
         token: String,
         term: String,
+        sku: String,
         page: String
     ) {
         viewModelScope.launch {
@@ -30,6 +31,7 @@ class AllProductViewModel(
                 mainRepository.productList(
                     token,
                     term,
+                    sku,
                     page
                 ).let {
                     if (it.isSuccessful) {

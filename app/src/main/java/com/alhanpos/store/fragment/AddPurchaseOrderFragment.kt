@@ -1,6 +1,5 @@
 package com.alhanpos.store.fragment
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.net.Uri
 import android.os.Bundle
@@ -10,12 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddPurchaseOrderBinding
 import com.alhanpos.store.model.request.purchase.Product
 import com.alhanpos.store.model.request.purchase.PurchaseRequest
-import com.alhanpos.store.model.response.product.ProductListResponse
 import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
 import com.alhanpos.store.util.Callback
@@ -54,7 +53,7 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
     private var supplier_ID = "0"
     private var file: File? = null
     var sku = ""
-
+    var type = 0
 
     val myCalendar = Calendar.getInstance()
 
@@ -96,6 +95,12 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
         }
 
         binding.edtDoc.setOnClickListener {
+            type = 1
+            getPermission()
+        }
+
+        binding.flScan.setOnClickListener {
+            type = 2
             getPermission()
         }
 
@@ -261,7 +266,7 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
 
     private fun setObserver() {
         viewModel.fetchSupplier("Bearer " + prefs.accessToken)
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
+        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
         viewModel.fetchPaymentAccountData("Bearer " + prefs.accessToken!!)
         viewModel.fetchPaymentMethodData("Bearer " + prefs.accessToken!!)
         viewModel.getPaymentAccountData.observe(this) {
@@ -385,7 +390,11 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                                     )
                                 )
                             }
-                            setProductData(productList)
+                            if (productDataList.size == 1) {
+                                posList.addAll(productDataList)
+                                setPosData(posList)
+                            } else
+                                setProductData(productList)
                         }
                     } else {
                         showToast("No data available")
@@ -442,7 +451,13 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
             }
 
             override fun permissionGranted() {
-                selectImage()
+                if (type == 1)
+                    selectImage()
+                else {
+                    val action =
+                        AddPurchaseOrderFragmentDirections.actionNavAddPurchaseOrderToNavScanner()
+                    findNavController().navigate(action)
+                }
             }
 
             override fun permissionNotGranted() {
@@ -467,6 +482,11 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
                     outer.isAdded = false
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        prefs.sku = ""
     }
 
 }

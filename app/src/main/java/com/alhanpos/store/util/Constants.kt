@@ -34,4 +34,5 @@ object Constants {
     const val PURCHASE = "api/purchase"
     const val ADD_PURCHASE = "api/purchase/add"
     const val ADD_EXPENSE = "api/expense/add"
+    const val INVOICE = "api/invoice"
 }

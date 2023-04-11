@@ -74,4 +74,7 @@ val viewModelModule = module {
     viewModel {
         AddPurchaseViewModel(get(), get())
     }
+    viewModel {
+        PosDetailViewModel(get(), get())
+    }
 }

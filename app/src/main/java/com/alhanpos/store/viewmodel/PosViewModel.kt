@@ -92,12 +92,13 @@ class PosViewModel(
     fun fetchProduct(
         token: String,
         term: String,
+        sku: String
     ) {
         viewModelScope.launch {
             setProductData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.productList(
-                    token, term, ""
+                    token, term, sku, ""
                 ).let {
                     if (it.isSuccessful) {
                         setProductData.postValue(Resource.success(it.body()))

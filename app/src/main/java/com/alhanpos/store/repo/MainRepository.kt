@@ -3,6 +3,7 @@ package com.alhanpos.store.repo
 import com.alhanpos.store.model.request.payment.PaymentRequest
 import com.alhanpos.store.model.request.stockAdjustment.StockAdjustmentRequest
 import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
+import com.alhanpos.store.model.response.DetailResponse
 import com.alhanpos.store.model.response.dashboard.DashboardResponse
 import com.alhanpos.store.model.response.dashboard.graph.DashboardGraphResponse
 import com.alhanpos.store.model.response.expenses.ExpensesResponse
@@ -50,8 +51,8 @@ class MainRepository(private val apiHelper: ApiHelper) {
     ) = apiHelper.supplierList(token, term, page)
 
     suspend fun productList(
-        token: String, term: String, page: String
-    ) = apiHelper.productList(token, term, page)
+        token: String, term: String, sku: String, page: String
+    ) = apiHelper.productList(token, term, sku, page)
 
     suspend fun categoryList(
         token: String, term: String, page: String
@@ -200,22 +201,20 @@ class MainRepository(private val apiHelper: ApiHelper) {
     )
 
     suspend fun add_purchase(
-        token: String,
-        document: MultipartBody.Part,
-        data: RequestBody
+        token: String, document: MultipartBody.Part, data: RequestBody
     ): Response<JsonObject> = apiHelper.add_purchase(
-        token,
-        document,
-        data
+        token, document, data
     )
 
     suspend fun add_expense(
-        token: String,
-        document: MultipartBody.Part,
-        data: RequestBody
+        token: String, document: MultipartBody.Part, data: RequestBody
     ): Response<JsonObject> = apiHelper.add_expense(
-        token,
-        document,
-        data
+        token, document, data
+    )
+
+    suspend fun invoice(
+        token: String, transaction_id: String
+    ): Response<DetailResponse> = apiHelper.invoice(
+        token, transaction_id
     )
 }

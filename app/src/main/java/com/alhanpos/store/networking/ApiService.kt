@@ -3,6 +3,7 @@ package com.alhanpos.store.networking
 import com.alhanpos.store.model.request.payment.PaymentRequest
 import com.alhanpos.store.model.request.stockAdjustment.StockAdjustmentRequest
 import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
+import com.alhanpos.store.model.response.DetailResponse
 import com.alhanpos.store.model.response.account.PaymentAccountResponse
 import com.alhanpos.store.model.response.brand.BrandResponse
 import com.alhanpos.store.model.response.category.CategoryResponse
@@ -39,6 +40,7 @@ import com.alhanpos.store.util.Constants.DELETEBRAND
 import com.alhanpos.store.util.Constants.DELETECATEGORY
 import com.alhanpos.store.util.Constants.EXPENSES
 import com.alhanpos.store.util.Constants.FINALIZEPAYMENT
+import com.alhanpos.store.util.Constants.INVOICE
 import com.alhanpos.store.util.Constants.LOCATION
 import com.alhanpos.store.util.Constants.LOGIN
 import com.alhanpos.store.util.Constants.PAYMENT_ACCOUNTS
@@ -110,6 +112,7 @@ interface ApiService {
     suspend fun productList(
         @Header("Authorization") token: String,
         @Query("term") term: String,
+        @Query("sku") sku: String,
         @Query("page") page: String
     ): Response<ProductListResponse>
 
@@ -299,4 +302,11 @@ interface ApiService {
         @Part file: MultipartBody.Part,
         @Part("data") data: RequestBody
     ): Response<JsonObject>
+
+    @FormUrlEncoded
+    @POST(INVOICE)
+    suspend fun invoice(
+        @Header("Authorization") token: String,
+        @Field(value = "transaction_id", encoded = false) transaction_id: String,
+    ): Response<DetailResponse>
 }

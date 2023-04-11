@@ -277,7 +277,7 @@ class PosPaymentFragment : BaseFragment<FragmentPosPaymentBinding>() {
                         binding.edtStaffNote.setText("")
                         showToast(it.get("msg").asString)
                         val action =
-                            PosPaymentFragmentDirections.actionNavPosPaymentToNavPosDetail()
+                            PosPaymentFragmentDirections.actionNavPosPaymentToNavPosDetail(it.get("transaction_id").asString)
                         findNavController().navigate(action)
                     }
                 }

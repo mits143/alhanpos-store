@@ -3,6 +3,7 @@ package com.alhanpos.store.networking
 import com.alhanpos.store.model.request.payment.PaymentRequest
 import com.alhanpos.store.model.request.stockAdjustment.StockAdjustmentRequest
 import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
+import com.alhanpos.store.model.response.DetailResponse
 import com.alhanpos.store.model.response.account.PaymentAccountResponse
 import com.alhanpos.store.model.response.brand.BrandResponse
 import com.alhanpos.store.model.response.category.CategoryResponse
@@ -57,7 +58,7 @@ interface ApiHelper {
     ): Response<ContactListResponse>
 
     suspend fun productList(
-        token: String, term: String, page: String
+        token: String, term: String, sku: String, page: String
     ): Response<ProductListResponse>
 
     suspend fun categoryList(
@@ -183,4 +184,8 @@ interface ApiHelper {
     suspend fun add_expense(
         token: String, document: MultipartBody.Part, data: RequestBody
     ): Response<JsonObject>
+
+    suspend fun invoice(
+        token: String, invoice: String
+    ): Response<DetailResponse>
 }

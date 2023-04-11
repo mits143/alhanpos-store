@@ -136,12 +136,13 @@ class AddPurchaseViewModel(
 
     fun fetchProduct(
         token: String,
+        sku: String,
     ) {
         viewModelScope.launch {
             setProductData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.productList(
-                    token, "", ""
+                    token, "", sku,  ""
                 ).let {
                     if (it.isSuccessful) {
                         setProductData.postValue(Resource.success(it.body()))

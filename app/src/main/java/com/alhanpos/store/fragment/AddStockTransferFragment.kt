@@ -2,6 +2,7 @@ package com.alhanpos.store.fragment
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddStockTransferBinding
@@ -16,6 +18,7 @@ import com.alhanpos.store.model.request.stockTransfer.Product
 import com.alhanpos.store.model.request.stockTransfer.StockTransferRequest
 import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
+import com.alhanpos.store.util.Callback
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AddStockTransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -42,15 +45,19 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
     var sku = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        callbacks()
         setObserver()
 
-        val date =
-            OnDateSetListener { view, year, month, day ->
-                myCalendar[Calendar.YEAR] = year
-                myCalendar[Calendar.MONTH] = month
-                myCalendar[Calendar.DAY_OF_MONTH] = day
-                updateLabel()
-            }
+        binding.flScan.setOnClickListener {
+            getPermission()
+        }
+
+        val date = OnDateSetListener { view, year, month, day ->
+            myCalendar[Calendar.YEAR] = year
+            myCalendar[Calendar.MONTH] = month
+            myCalendar[Calendar.DAY_OF_MONTH] = day
+            updateLabel()
+        }
         binding.edtDate.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
@@ -120,8 +127,7 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
                     location_ID_TO.toInt(),
                 )
                 viewModel.addUpdateStockTransfer(
-                    "Bearer " + prefs.accessToken,
-                    jsonObject
+                    "Bearer " + prefs.accessToken, jsonObject
                 )
             } else {
                 showToast("Please select product for stock transfer")
@@ -191,7 +197,7 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
 
     private fun setObserver() {
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
+        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
 
         viewModel.getLocationData.observe(this) {
             when (it.status) {
@@ -205,8 +211,7 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
                         it.data.forEach {
                             locationList.add(
                                 AddStockTransferViewModel.Common(
-                                    it.name,
-                                    it.id.toString()
+                                    it.name, it.id.toString()
                                 )
                             )
                         }
@@ -232,15 +237,18 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
                             productDataList.clear()
                             productList.clear()
                             productDataList.addAll(it.data)
-                            it.data.forEach {
+                            productDataList.forEach {
                                 productList.add(
                                     AddStockTransferViewModel.product(
-                                        it.name!!,
-                                        it.subSku!!
+                                        it.name!!, it.subSku!!
                                     )
                                 )
                             }
-                            setProductData(productList)
+                            if (productDataList.size == 1) {
+                                posList.addAll(productDataList)
+                                setPosData(posList)
+                            } else
+                                setProductData(productList)
                         }
                     } else {
                         showToast("No data available")
@@ -286,9 +294,36 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
     override fun onClick(data: ArrayList<ProductListResponseItem>, position: Int) {
         productDataList.forEach { outer ->
             data.forEach { inner ->
-                if (outer.productId.equals(inner.productId) && outer.isAdded)
-                    outer.isAdded = false
+                if (outer.productId.equals(inner.productId) && outer.isAdded) outer.isAdded = false
             }
         }
+    }
+
+    private fun callbacks() {
+        setUpListener(object : Callback {
+            override fun captureImageData(uri: Uri?) {
+            }
+
+            override fun browseImageData(uri: Uri?) {
+            }
+
+            override fun pdfData(uri: Uri?) {
+            }
+
+            override fun permissionGranted() {
+                val action =
+                    AddStockTransferFragmentDirections.actionNavAddStockTransferToNavScanner()
+                findNavController().navigate(action)
+            }
+
+            override fun permissionNotGranted() {
+            }
+
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        prefs.sku = ""
     }
 }

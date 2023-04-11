@@ -41,6 +41,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
         }
         setAllData()
     }
+
     private fun setAllData() {
         val layoutManager = GridAutofitLayoutManager(requireContext(), 400)
         adapter = ProductAdapter(arrayListOf(), this)
@@ -56,7 +57,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
                 if ((scrollY >= (lastChild.measuredHeight - nestedScrollView.measuredHeight)) && scrollY > oldScrollY && !isLoading && !isLastPage) {
                     page = page.plus(1)
                     viewModel.fetchProduct(
-                        "Bearer " + prefs.accessToken, term, page.toString()
+                        "Bearer " + prefs.accessToken, term, "", page.toString()
                     )
                 }
             }
@@ -64,7 +65,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
     }
 
     private fun setObserver() {
-        viewModel.fetchProduct("Bearer " + prefs.accessToken, "", page.toString())
+        viewModel.fetchProduct("Bearer " + prefs.accessToken, "", "", page.toString())
         viewModel.getProductData.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
@@ -105,7 +106,7 @@ class ProductListingFragment : BaseFragment<FragmentAllProductBinding>(),
     override fun onQueryTextChange(newText: String?): Boolean {
         term = newText!!
         page = 1
-        viewModel.fetchProduct("Bearer " + prefs.accessToken, term, page.toString())
+        viewModel.fetchProduct("Bearer " + prefs.accessToken, term, "", page.toString())
         return false
     }
 }

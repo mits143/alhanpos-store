@@ -2,6 +2,7 @@ package com.alhanpos.store.fragment
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
+import com.alhanpos.store.App
 import com.alhanpos.store.R
 import com.alhanpos.store.adapter.AddStockTransferAdapter
 import com.alhanpos.store.databinding.FragmentAddStockAdjustmentBinding
@@ -16,6 +19,7 @@ import com.alhanpos.store.model.request.stockAdjustment.Product
 import com.alhanpos.store.model.request.stockAdjustment.StockAdjustmentRequest
 import com.alhanpos.store.model.response.product.ProductListResponse.ProductListResponseItem
 import com.alhanpos.store.prefs
+import com.alhanpos.store.util.Callback
 import com.alhanpos.store.util.Status
 import com.alhanpos.store.viewmodel.AddStockAdjustmentViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,7 +45,12 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
     private var location_ID = "0"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        callbacks()
         setObserver()
+
+        binding.flScan.setOnClickListener {
+            getPermission()
+        }
 
         val date = OnDateSetListener { view, year, month, day ->
             myCalendar[Calendar.YEAR] = year
@@ -164,7 +173,7 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
     }
 
     private fun setObserver() {
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!)
+        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
 
         viewModel.getLocationData.observe(this) {
@@ -212,7 +221,11 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                                     )
                                 )
                             }
-                            setProductData(productList)
+                            if (productDataList.size == 1) {
+                                posList.addAll(productDataList)
+                                setPosData(posList)
+                            } else
+                                setProductData(productList)
                         }
                     } else {
                         showToast("No data available")
@@ -262,5 +275,32 @@ class AddStockAdjustmentFragment : BaseFragment<FragmentAddStockAdjustmentBindin
                     outer.isAdded = false
             }
         }
+    }
+
+    private fun callbacks() {
+        setUpListener(object : Callback {
+            override fun captureImageData(uri: Uri?) {
+            }
+
+            override fun browseImageData(uri: Uri?) {
+            }
+
+            override fun pdfData(uri: Uri?) {
+            }
+
+            override fun permissionGranted() {
+                val action = AddStockAdjustmentFragmentDirections.actionNavAddStockAdjustmentToNavScanner()
+                findNavController().navigate(action)
+            }
+
+            override fun permissionNotGranted() {
+            }
+
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        prefs.sku = ""
     }
 }

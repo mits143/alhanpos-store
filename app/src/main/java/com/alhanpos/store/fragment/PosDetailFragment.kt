@@ -1,7 +1,9 @@
 package com.alhanpos.store.fragment
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -13,6 +15,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alhanpos.store.R
+import com.alhanpos.store.activities.MainActivity
 import com.alhanpos.store.adapter.PosDetailAdapter
 import com.alhanpos.store.databinding.FragmentPosDetailBinding
 import com.alhanpos.store.model.response.DetailResponse
@@ -46,8 +49,14 @@ class PosDetailFragment : BaseFragment<FragmentPosDetailBinding>() {
 
     private fun showDetails(it: DetailResponse) {
         binding.txtLocation.text = it.transaction.locationName
-        binding.txtAddress.text =
-            it.transaction.address.toString() + "\n" + it.transaction.contact.toString() + ", " + it.transaction.website.toString()
+//        binding.txtAddress.text =
+//            it.transaction.address + "\n" + it.transaction.contact + ", " + it.transaction.website
+
+        binding.txtAddress.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(it.transaction.address + "<br>" + it.transaction.contact + ", " + it.transaction.website, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            Html.fromHtml(it.transaction.address + "<br>" + it.transaction.contact + ", " + it.transaction.website)
+        }
         binding.txtInvoiceValue.text = it.transaction.invoiceNo
         binding.txtDateValue.text = it.transaction.transactionDate
         binding.txtSellerValue.text = it.transaction.salesPerson
@@ -96,7 +105,7 @@ class PosDetailFragment : BaseFragment<FragmentPosDetailBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.getItemId()) {
+        return when (item.itemId) {
             android.R.id.home -> {
                 showToast("Hello")
                 true

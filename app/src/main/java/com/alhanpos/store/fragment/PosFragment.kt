@@ -46,6 +46,9 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
                     if (it.isAdded)
                         productDataListTemp.add(it)
                 }
+            }
+
+            if (productDataListTemp.isNotEmpty()){
                 val productListResponse = ProductListResponse(productDataListTemp)
                 val action = PosFragmentDirections.actionNavPosToNavPosPayment(
                     productListResponse

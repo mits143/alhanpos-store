@@ -73,5 +73,16 @@
         app:itemIconTint="@color/bnv_nav_item_foreground"
         app:itemTextColor="@color/bnv_nav_item_foreground"
         app:menu="@menu/activity_main_drawer"
-        app:subheaderColor="@color/black" />
+        app:subheaderColor="@color/black">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/_minus5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/logout"
+            app:cornerRadius="0dp" />
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

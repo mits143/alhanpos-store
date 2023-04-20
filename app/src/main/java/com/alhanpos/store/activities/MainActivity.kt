@@ -1,5 +1,6 @@
 package com.alhanpos.store.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -15,6 +16,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alhanpos.store.R
 import com.alhanpos.store.databinding.ActivityMainBinding
+import com.alhanpos.store.prefs
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(),
@@ -59,6 +61,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.setupWithNavController(navController)
         binding.bottomNavView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(this)
+
+        binding.btnLogout.setOnClickListener {
+            prefs.accessToken = ""
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            finish()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

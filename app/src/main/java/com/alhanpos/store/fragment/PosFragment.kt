@@ -43,12 +43,11 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
             if (productDataList.isNotEmpty()) {
                 productDataListTemp = arrayListOf()
                 productDataList.forEach {
-                    if (it.isAdded)
-                        productDataListTemp.add(it)
+                    if (it.isAdded) productDataListTemp.add(it)
                 }
             }
 
-            if (productDataListTemp.isNotEmpty()){
+            if (productDataListTemp.isNotEmpty()) {
                 val productListResponse = ProductListResponse(productDataListTemp)
                 val action = PosFragmentDirections.actionNavPosToNavPosPayment(
                     productListResponse
@@ -88,7 +87,11 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     private fun setObserver() {
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
         viewModel.fetchContact("Bearer " + prefs.accessToken!!)
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, "", prefs.sku.toString())
+        if (prefs.getArrayList().isNotEmpty()) {
+            setPosData(prefs.getArrayList())
+        } else {
+            viewModel.fetchProduct("Bearer " + prefs.accessToken!!, "", prefs.sku.toString())
+        }
 
         viewModel.getLocationData.observe(this) {
             when (it.status) {
@@ -185,12 +188,20 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString(), newText!!)
+        if (newText.toString().isNotEmpty())
+            viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString(), newText!!)
         return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (prefs.getArrayList().isNotEmpty()) {
+            setPosData(prefs.getArrayList())
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        prefs.sku = ""
+        prefs.saveArrayList(arrayListOf())
     }
 }

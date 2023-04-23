@@ -77,4 +77,7 @@ val viewModelModule = module {
     viewModel {
         PosDetailViewModel(get(), get())
     }
+    viewModel {
+        ScannerViewModel(get(), get())
+    }
 }

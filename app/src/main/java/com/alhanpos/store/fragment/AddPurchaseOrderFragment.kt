@@ -273,6 +273,11 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
 
     private fun setObserver() {
         viewModel.fetchSupplier("Bearer " + prefs.accessToken)
+        if (prefs.getArrayList().isNotEmpty()) {
+            setPosData(prefs.getArrayList())
+        } else {
+            viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
+        }
         viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
         viewModel.fetchPaymentAccountData("Bearer " + prefs.accessToken!!)
         viewModel.fetchPaymentMethodData("Bearer " + prefs.accessToken!!)
@@ -485,9 +490,16 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (prefs.getArrayList().isNotEmpty()) {
+            setPosData(prefs.getArrayList())
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        prefs.sku = ""
+        prefs.saveArrayList(arrayListOf())
     }
 
 }

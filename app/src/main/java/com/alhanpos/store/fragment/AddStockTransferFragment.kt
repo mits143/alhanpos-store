@@ -197,7 +197,11 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
 
     private fun setObserver() {
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
-        viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
+        if (prefs.getArrayList().isNotEmpty()) {
+            setPosData(prefs.getArrayList())
+        } else {
+            viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
+        }
 
         viewModel.getLocationData.observe(this) {
             when (it.status) {
@@ -322,8 +326,15 @@ class AddStockTransferFragment : BaseFragment<FragmentAddStockTransferBinding>()
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (prefs.getArrayList().isNotEmpty()) {
+            setPosData(prefs.getArrayList())
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        prefs.sku = ""
+        prefs.saveArrayList(arrayListOf())
     }
 }

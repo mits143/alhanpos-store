@@ -25,13 +25,13 @@ class Prefs(context: Context) {
         set(value) = preferences.edit().putString(SKU, value).apply()
 
     fun saveArrayList(list: ArrayList<ProductListResponse.ProductListResponseItem>) {
-        val json = gson.toJson(list)
+        val json = Gson().toJson(list)
         preferences.edit().putString(LIST, json).apply()
     }
 
     fun getArrayList(): ArrayList<ProductListResponse.ProductListResponseItem> {
-        val json = preferences.getString(LIST, null)
+        val json = preferences.getString(LIST, arrayListOf<String>().toString())
         val type = object : TypeToken<ArrayList<ProductListResponse.ProductListResponseItem>>() {}.type
-        return gson.fromJson(json, type)
+        return Gson().fromJson(json, type)
     }
 }

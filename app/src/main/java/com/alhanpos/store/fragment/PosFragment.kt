@@ -88,7 +88,9 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
         viewModel.fetchLocation("Bearer " + prefs.accessToken!!)
         viewModel.fetchContact("Bearer " + prefs.accessToken!!)
         if (prefs.getArrayList().isNotEmpty()) {
-            setPosData(prefs.getArrayList())
+            productDataList.clear()
+            productDataList = prefs.getArrayList()
+            setPosData(productDataList)
         } else {
             viewModel.fetchProduct("Bearer " + prefs.accessToken!!, "", prefs.sku.toString())
         }
@@ -196,7 +198,8 @@ class PosFragment : BaseFragment<FragmentPosBinding>(), PosAdapter.ButtonClick,
     override fun onResume() {
         super.onResume()
         if (prefs.getArrayList().isNotEmpty()) {
-            setPosData(prefs.getArrayList())
+            productDataList = prefs.getArrayList()
+            setPosData(productDataList)
         }
     }
 

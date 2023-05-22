@@ -17,6 +17,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun onViewBindingCreated(savedInstanceState: Bundle?) {
         lifecycleScope.launch {
+            prefs.saveArrayList(arrayListOf())
             delay(2000)
             moveToNextScreen()
         }

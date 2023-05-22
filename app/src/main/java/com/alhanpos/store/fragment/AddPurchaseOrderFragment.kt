@@ -274,7 +274,8 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
     private fun setObserver() {
         viewModel.fetchSupplier("Bearer " + prefs.accessToken)
         if (prefs.getArrayList().isNotEmpty()) {
-            setPosData(prefs.getArrayList())
+            posList = prefs.getArrayList()
+            setPosData(posList)
         } else {
             viewModel.fetchProduct("Bearer " + prefs.accessToken!!, prefs.sku.toString())
         }
@@ -493,7 +494,8 @@ class AddPurchaseOrderFragment : BaseFragment<FragmentAddPurchaseOrderBinding>()
     override fun onResume() {
         super.onResume()
         if (prefs.getArrayList().isNotEmpty()) {
-            setPosData(prefs.getArrayList())
+            posList = prefs.getArrayList()
+            setPosData(posList)
         }
     }
 
